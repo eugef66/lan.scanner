@@ -1,0 +1,14 @@
+[
+    {
+        "ip": "192.168.1.31",
+        "MAC": "aa-aa-aa-aa-aa-aa",
+        "host": "PI",
+        "mmanufacture": "Raspbbery"
+    },
+    {
+        "ip": "192.168.1.1",
+        "MAC": "aa-aa-aa-aa-aa-aa",
+        "host": "gatweay",
+        "mmanufacture": "TP-Link"
+    }
+]
