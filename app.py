@@ -32,12 +32,25 @@ for i in range(startIP,256):
     pingResponse = os.system("ping -c1 -w2 "+ ip + " > /dev/null 2>&1")
     if pingResponse == 0:
         mac = get_mac(ip)
-        device={"ip":ip,"MAC":mac}
+        device={"ip":ip,"mac":mac}
         odevices.append(device)
     print (ip + " " + mac + " ")
 
 with open('db.json','w') as db_file:
     db=json.load(db_file)
+    
+    for device in db
+
+
+    for odevice in odevices:
+        mac = odevice["mac"]
+        device = db[mac]
+        if device==null:
+            device={"ip":odevice["ip"],"description":"","vendor":"","status":1}
+        if device["vendor"]=="":
+            device["vendor"]=get_vendor(mac)
+        device["status"]=1
+
     #sync db with odevices
     #if mac!="":
         #    vendor = get_vendor(mac)

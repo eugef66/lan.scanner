@@ -1,196 +1,194 @@
-[
-    {
+{
+    "D8:EB:97:22:E6:4B": {
         "description": "TrendNet Router",
         "ip": "192.168.1.02",
-        "MAC": "D8:EB:97:22:E6:4B",
         "vendor": "",
-        "status":1
+        "status": 0
     },
-    {
+    "00:0f:66:b2:de:25": {
         "description": "Linksys_Switch",
         "ip": "192.168.1.03",
-        "MAC": "00:0f:66:b2:de:25",
         "vendor": "",
-        "status":1
+        "status": 0
     },
-    {
+    "48:43:DD:56:D5:C7": {
         "description": "FireTV_Kitchen",
         "ip": "192.168.1.06",
-        "MAC": "48:43:DD:56:D5:C7",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "00:22:58:70:a0:f7": {
         "description": "BRW00225870A0F7",
         "ip": "192.168.1.07",
-        "MAC": "00:22:58:70:a0:f7",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "28:0d:fc:e2:f8:a9": {
         "description": "PS3",
         "ip": "192.168.1.08",
-        "MAC": "28:0d:fc:e2:f8:a9",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "D8:28:C9:36:A7:2A": {
         "description": "GE Refregerator",
         "ip": "192.168.1.09",
-        "MAC": "D8:28:C9:36:A7:2A",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "60:eb:69:e7:ed:fc": {
         "description": "Lenovo_LAN",
         "ip": "192.168.1.10",
-        "MAC": "60:eb:69:e7:ed:fc",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "9c:ad:ef:60:8e:5e": {
         "description": "OBi200",
         "ip": "192.168.1.11",
-        "MAC": "9c:ad:ef:60:8e:5e",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "00:0d:c5:ce:6e:48": {
         "description": "Slingbox",
         "ip": "192.168.1.12",
-        "MAC": "00:0d:c5:ce:6e:48",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "d8:31:34:62:52:6d": {
         "description": "Roku_Premier_Ultra",
         "ip": "192.168.1.13",
-        "MAC": "d8:31:34:62:52:6d",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "40:d2:8a:ef:4c:24": {
         "description": "WiiU",
         "ip": "192.168.1.14",
-        "MAC": "40:d2:8a:ef:4c:24",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "3c:8c:f8:a1:86:9a": {
         "description": "TRENDnet_Security",
         "ip": "192.168.1.15",
-        "MAC": "3c:8c:f8:a1:86:9a",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "00:12:fb:a1:1d:03": {
         "description": "TV_Family_Room_LAN",
         "ip": "192.168.1.17",
-        "MAC": "00:12:fb:a1:1d:03",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "dc:68:eb:67:67:3c": {
         "description": "Nintendo_Switch",
         "ip": "192.168.1.18",
-        "MAC": "dc:68:eb:67:67:3c",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "5c:af:06:91:14:9d": {
         "description": "Rons_Phone",
         "ip": "192.168.1.20",
-        "MAC": "5c:af:06:91:14:9d",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "68:c6:3a:8b:79:b1": {
         "description": "Sonoff_Switch",
         "ip": "192.168.1.21",
-        "MAC": "68:c6:3a:8b:79:b1",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "7c:bb:8a:c4:55:86": {
         "description": "Nintendo_3DS",
         "ip": "192.168.1.22",
-        "MAC": "7c:bb:8a:c4:55:86",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "88:66:a5:92:22:5b": {
         "description": "Eugene_iPhone",
         "ip": "192.168.1.23",
-        "MAC": "88:66:a5:92:22:5b",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "28:98:7b:dc:f7:e5": {
         "description": "Galaxy_Tab_Picture_Frame",
         "ip": "192.168.1.24",
-        "MAC": "28:98:7b:dc:f7:e5",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "94:10:3e:2d:cf:fd": {
         "description": "wemo",
         "ip": "192.168.1.26",
-        "MAC": "94:10:3e:2d:cf:fd",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "a0:d7:95:11:88:c9": {
         "description": "Eugene_IPhone",
         "ip": "192.168.1.27",
-        "MAC": "a0:d7:95:11:88:c9",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "f8:3f:51:32:3a:e6": {
         "description": "TV_Living_Room",
         "ip": "192.168.1.28",
-        "MAC": "f8:3f:51:32:3a:e6",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "00:0d:4b:cc:73:71": {
         "description": "Roku_bedroom",
         "ip": "192.168.1.29",
-        "MAC": "00:0d:4b:cc:73:71",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "46:40:F2:AC:E4:3F": {
         "description": "Yulias-iPhone",
         "ip": "192.168.1.30",
-        "MAC": "46:40:F2:AC:E4:3F",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "b8:27:eb:8e:72:8e": {
         "description": "RPI3B_Plus",
         "ip": "192.168.1.31",
-        "MAC": "b8:27:eb:8e:72:8e",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "94:b8:6d:b9:8d:d6": {
         "description": "ACER-NITRO-WIFI",
         "ip": "192.168.1.32",
-        "MAC": "94:b8:6d:b9:8d:d6",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "98:28:a6:0b:fe:19": {
         "description": "ACER-NITRO-LAN",
         "ip": "192.168.1.33",
-        "MAC": "98:28:a6:0b:fe:19",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "b8:27:eb:21:87:75": {
         "description": "RPI3B",
         "ip": "192.168.1.34",
-        "MAC": "b8:27:eb:21:87:75",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "30:fd:38:b0:f6:d5": {
         "description": "Google-Home-Mini",
         "ip": "192.168.1.35",
-        "MAC": "30:fd:38:b0:f6:d5",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "34:48:ED:30:B2:A9": {
         "description": "Work_Laptop",
         "ip": "192.168.1.36",
-        "MAC": "34:48:ED:30:B2:A9",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "e8:2a:44:63:4e:3b": {
         "description": "Rons-Laptop-WIFI",
         "ip": "192.168.1.37",
-        "MAC": "e8:2a:44:63:4e:3b",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     },
-    {
+    "98:29:a6:3a:b8:97": {
         "description": "Rons-Laptop-LAN",
         "ip": "192.168.1.38",
-        "MAC": "98:29:a6:3a:b8:97",
-        "vendor": ""
+        "vendor": "",
+        "status": 0
     }
-]
+}
