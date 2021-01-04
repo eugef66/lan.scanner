@@ -23,7 +23,7 @@ def get_vendor(mac):
     return vendor.decode("utf-8") 
 
 startIP = 1
-odevices = []
+odevices = {}
 
 print ("Online Devices\n=========================\n")
 for i in range(startIP,256):
@@ -32,29 +32,27 @@ for i in range(startIP,256):
     pingResponse = os.system("ping -c1 -w2 "+ ip + " > /dev/null 2>&1")
     if pingResponse == 0:
         mac = get_mac(ip)
-        device={"ip":ip,"mac":mac}
-        odevices.append(device)
+        odevices[mac]=ip
     print (ip + " " + mac + " ")
 
 with open('db.json','w') as db_file:
     db=json.load(db_file)
+
+
+    #insert missing
+    for mac in odevices:
+        print(mac + ":" + odevices[mac])
     
-    for device in db
-
-
-    for odevice in odevices:
-        mac = odevice["mac"]
-        device = db[mac]
-        if device==null:
-            device={"ip":odevice["ip"],"description":"","vendor":"","status":1}
-        if device["vendor"]=="":
-            device["vendor"]=get_vendor(mac)
-        device["status"]=1
-
-    #sync db with odevices
-    #if mac!="":
-        #    vendor = get_vendor(mac)
-    # Replace with loop through cache file and update attributes or create new - DO NOT OVERWRITE
+    # Update
+    for device in db:
+        mac = device["mac"]
+        if odevices[mac]!=null:
+            device["status"]=1
+            device["ip"]=odevices[mac]
+            if device["vendor"]=="":
+                device["vendor"]=get_vendor(mac)
+        else
+            device["status"]=0
     #json.dump(db,db_file)
     print("Finished")
     
