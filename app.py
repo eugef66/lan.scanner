@@ -2,6 +2,7 @@ import requests, time, os, subprocess, re, json
 from subprocess import Popen, PIPE
 
 
+
 def get_mac(ip):
     mac=""
     try:
@@ -21,26 +22,26 @@ def get_vendor(mac):
     time.sleep(1)
     return vendor.decode("utf-8") 
 
-
+startIP = 1
 odevices = []
-for i in range(148,256):
-    
+
+print ("Online Devices\n=========================\n")
+for i in range(startIP,256):
     ip = "192.168.1." +str(i)
     mac=""
-    vendor=""
-    online = "offline"
     pingResponse = os.system("ping -c1 -w2 "+ ip + " > /dev/null 2>&1")
     if pingResponse == 0:
-        online="online"
         mac = get_mac(ip)
-        if mac!="":
-            vendor = get_vendor(mac)
-        device={"ip":ip,"MAC":mac,"vendor":vendor}
+        device={"ip":ip,"MAC":mac}
         odevices.append(device)
-    print (ip + " " + mac + " " + vendor + " " + online)
+    print (ip + " " + mac + " ")
 
-with open('cache.json','w') as cache_file:
+with open('db.json','w') as db_file:
+    db=json.load(db_file)
+    #sync db with odevices
+    #if mac!="":
+        #    vendor = get_vendor(mac)
     # Replace with loop through cache file and update attributes or create new - DO NOT OVERWRITE
-    json.dump(odevices,cache_file)
+    #json.dump(db,db_file)
     print("Finished")
     
