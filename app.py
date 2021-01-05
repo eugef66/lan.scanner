@@ -29,7 +29,7 @@ def get_vendor(mac):
     time.sleep(1)
     return vendor.decode("utf-8") 
 
-startIP = 100
+startIP = 1
 odevices = {}
 
 print ("Scan Started\n=========================\n")
@@ -42,7 +42,7 @@ for i in range(startIP,256):
         mac = get_mac(ip)
         odevices[mac.upper()]=ip
         status=1
-    print (ip + " " + mac + " "+ ("online" if status==1 else "offline"))
+    print (ip + " " + (mac if status==1 else "offline"))
 
 with open('db.json','r') as db_file:
     db=json.load(db_file)
