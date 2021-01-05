@@ -1,5 +1,0 @@
-ping -c 1 192.168.1.31
-arp -a
-
-import urllib.request
-contents = urllib.request.urlopen("http://example.com/foo/bar").read()
