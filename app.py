@@ -1,16 +1,23 @@
-import requests, time, os, subprocess, re, json
+import requests, time, os, subprocess, re, json,getmac
 from subprocess import Popen, PIPE
+from getmac import get_mac_address
 
 
 
 def get_mac(ip):
-    mac=""
     try:
-        pid = Popen(["arp","-n", ip ],stdout=PIPE)
-        mout = str(pid.communicate()[0])
-        mac = re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})", mout).groups()[0]
-    finally:
+        mac=getmac.get_mac_address(ip=ip, network_request=True)
+        mac=mac.upper()
         return mac
+    except:
+        return getmac.get_mac_address()
+    #mac=""
+    #try:
+        #pid = Popen(["arp","-n", ip ],stdout=PIPE)
+        #mout = str(pid.communicate()[0])
+        #mac = re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})", mout).groups()[0]
+    #finally:
+    #    return mac
 
 def get_vendor(mac):
     vendor=""
@@ -22,37 +29,42 @@ def get_vendor(mac):
     time.sleep(1)
     return vendor.decode("utf-8") 
 
-startIP = 1
+startIP = 100
 odevices = {}
 
-print ("Online Devices\n=========================\n")
+print ("Scan Started\n=========================\n")
 for i in range(startIP,256):
     ip = "192.168.1." +str(i)
     mac=""
-    pingResponse = os.system("ping -c1 -w2 "+ ip + " > /dev/null 2>&1")
+    status = 0
+    pingResponse = os.system("ping -c1 -w1 "+ ip + " > /dev/null 2>&1")
     if pingResponse == 0:
         mac = get_mac(ip)
-        odevices[mac]=ip
-    print (ip + " " + mac + " ")
+        odevices[mac.upper()]=ip
+        status=1
+    print (ip + " " + mac + " "+ ("online" if status==1 else "offline"))
 
-with open('db.json','w') as db_file:
+with open('db.json','r') as db_file:
     db=json.load(db_file)
 
 
     #insert missing
     for mac in odevices:
-        print(mac + ":" + odevices[mac])
+        if mac not in db:
+            db[mac]={"ip":odevices[mac],"description":"","vendor":"","status":1,"host":""}
+            print("creating new " + mac + ":" + odevices[mac])
     
     # Update
-    for device in db:
-        mac = device["mac"]
-        if odevices[mac]!=null:
+    for mac in db:
+        device=db[mac]
+        if mac in odevices:
             device["status"]=1
             device["ip"]=odevices[mac]
             if device["vendor"]=="":
                 device["vendor"]=get_vendor(mac)
-        else
+        else:
             device["status"]=0
-    #json.dump(db,db_file)
-    print("Finished")
+with open ("db.json","w") as db_file:
+    json.dump(db,db_file)
+print("Finished")
     
