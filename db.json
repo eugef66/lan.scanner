@@ -213,5 +213,20 @@
         "vendor": "Dell Inc.",
         "status": 1,
         "host": ""
+    },
+    "F8:04:2E:2E:16:A5": {
+        "ip": "192.168.1.77",
+        "description": "????",
+        "vendor": "SAMSUNG ELECTRO-MECHANICS(THAILAND)",
+        "status": 1,
+        "host": ""
+    }
+    ,
+    "F0:AD:4E:0E:A1:89": {
+        "ip": "192.168.1.16",
+        "description": "Garage Door Opener",
+        "vendor": "Globalscale Technologies, Inc.",
+        "status": 1,
+        "host": ""
     }
 }
