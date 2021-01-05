@@ -1,8 +1,10 @@
-import requests, time, os, subprocess, re, json,getmac
+import requests, time, os, subprocess, re, json,getmac, sys, signal
 from subprocess import Popen, PIPE
 from getmac import get_mac_address
 
-
+def exit_app(sig, frame):
+    print ("Exiting application")
+    sys.exit(0)
 
 def get_mac(ip):
     try:
@@ -21,23 +23,34 @@ def get_mac(ip):
 
 def get_vendor(mac):
     vendor=""
-    # https://api.macvendors.com/d8:eb:97:22:e6:4b
-    url = "https://api.macvendors.com/" + mac
-    mlr = requests.get(url)
-    if mlr.status_code==200:
-        vendor = mlr.content 
-    time.sleep(1)
-    return vendor.decode("utf-8") 
+    try:
+        # https://api.macvendors.com/d8:eb:97:22:e6:4b
+        url = "https://api.macvendors.com/" + mac
+        mlr = requests.get(url)
+        if mlr.status_code==200:
+            vendor = mlr.content 
+        time.sleep(1)
+        return vendor.decode("utf-8")
+    except:
+        return "(Vendor Lookup Error)"
+
+signal.signal(signal.SIGINT,exit_app)
 
 startIP = 1
-odevices = {}
+endIP = 255
+if len(sys.argv)>1:
+    startIP=int(sys.argv[1])
+if len(sys.argv)>2:
+    endIP=int(sys.argv[2])
+#print (str(sys.argv))
 
-print ("Scan Started\n=========================\n")
-for i in range(startIP,256):
+odevices = {}
+print ("Scan Started 192.168.1." + str(startIP) + " - 192.168.1."+ str(endIP) +"\n=========================\n")
+for i in range(startIP,(endIP+1)):
     ip = "192.168.1." +str(i)
     mac=""
     status = 0
-    pingResponse = os.system("ping -c1 -w1 "+ ip + " > /dev/null 2>&1")
+    pingResponse = os.system("ping -c1 "+ ip + " > /dev/null 2>&1")
     if pingResponse == 0:
         mac = get_mac(ip)
         odevices[mac.upper()]=ip
@@ -49,7 +62,9 @@ with open('db.json','r') as db_file:
 
 
     #insert missing
+    print ("Scan Finished\nOnline Devices")
     for mac in odevices:
+        print (mac + " @ " + odevices[mac])
         if mac not in db:
             db[mac]={"ip":odevices[mac],"description":"","vendor":"","status":1,"host":""}
             print("creating new " + mac + ":" + odevices[mac])
@@ -66,5 +81,5 @@ with open('db.json','r') as db_file:
             device["status"]=0
 with open ("db.json","w") as db_file:
     json.dump(db,db_file)
-print("Finished")
+print("db.json updated")
     
