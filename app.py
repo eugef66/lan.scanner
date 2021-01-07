@@ -34,6 +34,17 @@ def get_vendor(mac):
     except:
         return "(Vendor Lookup Error)"
 
+def refresh_vendors():
+    with open('db.json','r') as db_file:
+        db=json.load(db_file)
+        for mac in db:
+            device = db[mac]
+            device["vendor"]=get_vendor(mac)
+    with open ("db.json","w") as db_file:
+    json.dump(db,db_file)
+    print ("Vendors refreshed")
+    
+
 signal.signal(signal.SIGINT,exit_app)
 
 startIP = 1
