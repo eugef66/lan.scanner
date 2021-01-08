@@ -41,7 +41,7 @@ def refresh_vendors():
             device = db[mac]
             device["vendor"]=get_vendor(mac)
     with open ("db.json","w") as db_file:
-        db_file.write(json.dump(db,indent=4))
+        db_file.write(json.dumps(db,indent=4))
     print ("Vendors refreshed")
     
 if __name__=='__main__':
@@ -93,6 +93,6 @@ with open('db.json','r') as db_file:
         else:
             device["status"]=0
 with open ("db.json","w") as db_file:
-    db_file.write(json.dump(db,indent=4))
+    db_file.write(json.dumps(db,indent=4))
 print("db.json updated")
     
