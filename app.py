@@ -1,25 +1,25 @@
-import requests, time, os, subprocess, re, json,getmac, sys, signal
+import requests, time, os, subprocess, re, json,sys, signal #,getmac
 from subprocess import Popen, PIPE
-from getmac import get_mac_address
+#from getmac import get_mac_address
 
 def exit_app(sig, frame):
     print ("Exiting application")
     sys.exit(0)
 
 def get_mac(ip):
+    # try:
+    #     mac=getmac.get_mac_address(ip=ip, network_request=True)
+    #     mac=mac.upper()
+    #     return mac
+    # except:
+    #     return getmac.get_mac_address()
+    mac=""
     try:
-        mac=getmac.get_mac_address(ip=ip, network_request=True)
-        mac=mac.upper()
-        return mac
-    except:
-        return getmac.get_mac_address()
-    #mac=""
-    #try:
-        #pid = Popen(["arp","-n", ip ],stdout=PIPE)
-        #mout = str(pid.communicate()[0])
-        #mac = re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})", mout).groups()[0]
-    #finally:
-    #    return mac
+        pid = Popen(["arp","-n", ip ],stdout=PIPE)
+        mout = str(pid.communicate()[0])
+        mac = re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})", mout).groups()[0]
+    finally:
+       return mac
 
 def get_vendor(mac):
     vendor=""
