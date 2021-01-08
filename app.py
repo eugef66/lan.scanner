@@ -41,7 +41,7 @@ def refresh_vendors():
             device = db[mac]
             device["vendor"]=get_vendor(mac)
     with open ("db.json","w") as db_file:
-        json.dump(db,db_file)
+        db_file.write(json.dump(db,indent=4)
     print ("Vendors refreshed")
     
 
@@ -61,7 +61,7 @@ for i in range(startIP,(endIP+1)):
     ip = "192.168.1." +str(i)
     mac=""
     status = 0
-    pingResponse = os.system("ping -c1 "+ ip + " > /dev/null 2>&1")
+    pingResponse = os.system("ping -c1 -w1"+ ip + " > /dev/null 2>&1")
     if pingResponse == 0:
         mac = get_mac(ip)
         odevices[mac.upper()]=ip
@@ -91,6 +91,6 @@ with open('db.json','r') as db_file:
         else:
             device["status"]=0
 with open ("db.json","w") as db_file:
-    json.dump(db,db_file)
+    db_file.write(json.dump(db,indent=4)
 print("db.json updated")
     
