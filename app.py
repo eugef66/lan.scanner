@@ -47,7 +47,6 @@ def refresh_vendors():
 if __name__=='__main__':
     print("__main__")
 
-nano 
 signal.signal(signal.SIGINT,exit_app)
 
 startIP = 1
