@@ -41,7 +41,7 @@ def refresh_vendors():
             device = db[mac]
             device["vendor"]=get_vendor(mac)
     with open ("db.json","w") as db_file:
-    json.dump(db,db_file)
+        json.dump(db,db_file)
     print ("Vendors refreshed")
     
 
