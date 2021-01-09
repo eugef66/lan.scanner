@@ -63,7 +63,7 @@ for i in range(startIP,(endIP+1)):
     ip = "192.168.1." +str(i)
     mac=""
     status = 0
-    pingResponse = os.system("ping -c1 -w1"+ ip + " > /dev/null 2>&1")
+    pingResponse = os.system("ping -c1 -w1 "+ ip + " > /dev/null 2>&1")
     if pingResponse == 0:
         mac = get_mac(ip)
         odevices[mac.upper()]=ip

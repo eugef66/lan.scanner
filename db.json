@@ -1,220 +1,220 @@
 {
-    "F0:AD:4E:0E:A1:89": {
-        "vendor": "",
-        "description": "GarageDoorOpenner",
-        "status": 0,
-        "ip": "192.168.1.16"
-    },
-    "DC:68:EB:67:67:3C": {
-        "vendor": "",
-        "description": "Nintendo_Switch",
-        "status": 0,
-        "ip": "192.168.1.18"
-    },
-    "48:43:DD:56:D5:C7": {
-        "vendor": "Amazon Technologies Inc.",
-        "description": "FireTV_Kitchen",
-        "status": 1,
-        "ip": "192.168.1.6"
-    },
-    "00:0D:4B:CC:73:70": {
-        "vendor": "Roku, Inc.",
-        "description": "Roku_bedroom",
-        "status": 1,
-        "ip": "192.168.1.29"
-    },
-    "94:B8:6D:B9:8D:D6": {
-        "vendor": "Intel Corporate",
-        "description": "ACER-NITRO-WIFI",
-        "status": 1,
-        "ip": "192.168.1.32"
-    },
-    "98:29:A6:3A:B8:97": {
-        "vendor": "COMPAL INFORMATION (KUNSHAN) CO., LTD. ",
-        "description": "Rons-Laptop-LAN",
-        "status": 1,
-        "ip": "192.168.1.38"
-    },
-    "88:66:A5:92:22:5B": {
-        "vendor": "",
-        "description": "Eugene_iPhone",
-        "status": 0,
-        "ip": "192.168.1.23"
-    },
-    "46:40:F2:AC:E4:3F": {
-        "vendor": "(Vendor Lookup Error)",
-        "description": "Yulias-iPhone",
-        "status": 1,
-        "ip": "192.168.1.30"
-    },
-    "F8:04:2E:2E:16:A5": {
-        "vendor": "",
-        "description": "TV_Kitchen",
-        "status": 0,
-        "ip": "192.168.1.17"
-    },
-    "98:28:A6:0B:FE:19": {
-        "vendor": "COMPAL INFORMATION (KUNSHAN) CO., LTD. ",
-        "description": "ACER-NITRO-LAN",
-        "status": 1,
-        "ip": "192.168.1.33"
-    },
     "5C:26:0A:24:52:85": {
-        "vendor": "Dell Inc.",
-        "host": "",
-        "ip": "192.168.1.173",
-        "status": 1,
+        "status": 0, 
+        "ip": "192.168.1.173", 
+        "host": "", 
+        "vendor": "Dell Inc.", 
         "description": ""
-    },
-    "00:0D:C5:CE:6E:48": {
-        "vendor": "EchoStar Global B.V. ",
-        "description": "Slingbox",
-        "status": 1,
-        "ip": "192.168.1.12"
-    },
-    "40:D2:8A:EF:4C:24": {
-        "vendor": "",
-        "description": "WiiU",
-        "status": 0,
-        "ip": "192.168.1.14"
-    },
-    "B8:27:EB:21:87:75": {
-        "vendor": "",
-        "description": "RPI3B",
-        "status": 0,
-        "ip": "192.168.1.34"
-    },
-    "E8:2A:44:63:4E:3B": {
-        "vendor": "",
-        "description": "Rons-Laptop-WIFI",
-        "status": 0,
-        "ip": "192.168.1.37"
-    },
-    "60:EB:69:E7:ED:FC": {
-        "vendor": "",
-        "description": "Lenovo_LAN",
-        "status": 0,
-        "ip": "192.168.1.10"
-    },
-    "34:48:ED:30:B2:A9": {
-        "vendor": "Dell Inc.",
-        "description": "Work_Laptop",
-        "status": 1,
-        "ip": "192.168.1.36"
-    },
-    "D8:EB:97:22:E6:4B": {
-        "vendor": "TRENDnet, Inc.",
-        "description": "TrendNet Router",
-        "status": 1,
-        "ip": "192.168.1.2"
-    },
-    "98:B8:BA:13:0B:BE": {
-        "vendor": "",
-        "description": "Rons_Phone",
-        "status": 0,
-        "ip": "192.168.1.20"
-    },
-    "00:22:58:70:A0:F7": {
-        "vendor": "Taiyo Yuden Co., Ltd.",
-        "description": "BRW00225870A0F7",
-        "status": 1,
-        "ip": "192.168.1.7"
-    },
-    "30:FD:38:B0:F6:D5": {
-        "vendor": "Google, Inc.",
-        "description": "Google-Home-Mini",
-        "status": 1,
-        "ip": "192.168.1.35"
-    },
-    "28:98:7B:DC:F7:E5": {
-        "vendor": "Samsung Electronics Co.,Ltd",
-        "description": "Galaxy_Tab_Picture_Frame",
-        "status": 1,
-        "ip": "192.168.1.24"
-    },
-    "A0:D7:95:11:88:C9": {
-        "vendor": "",
-        "description": "Eugene_IPhone",
-        "status": 0,
-        "ip": "192.168.1.27"
-    },
-    "3C:8C:F8:A1:86:9A": {
-        "vendor": "TRENDnet, Inc.",
-        "description": "TRENDnet_Security",
-        "status": 1,
-        "ip": "192.168.1.15"
-    },
-    "7C:BB:8A:C4:55:86": {
-        "vendor": "",
-        "description": "Nintendo_3DS",
-        "status": 0,
-        "ip": "192.168.1.22"
-    },
-    "F8:3F:51:32:3A:E6": {
-        "vendor": "",
-        "description": "TV_Living_Room",
-        "status": 0,
-        "ip": "192.168.1.28"
-    },
-    "28:0D:FC:E2:F8:A9": {
-        "vendor": "",
-        "description": "PS3",
-        "status": 0,
-        "ip": "192.168.1.08"
-    },
-    "9C:AD:EF:60:8E:5E": {
-        "vendor": "Obihai Technology, Inc.",
-        "description": "OBi200",
-        "status": 1,
-        "ip": "192.168.1.11"
-    },
+    }, 
     "7C:8B:CA:9D:65:C8": {
-        "vendor": "TP-LINK TECHNOLOGIES CO.,LTD.",
-        "host": "",
-        "ip": "192.168.1.1",
-        "status": 1,
+        "status": 1, 
+        "ip": "192.168.1.1", 
+        "host": "", 
+        "vendor": "TP-LINK TECHNOLOGIES CO.,LTD.", 
         "description": ""
-    },
-    "68:C6:3A:8B:79:B1": {
-        "vendor": "Espressif Inc.",
-        "description": "Sonoff_Switch",
-        "status": 1,
-        "ip": "192.168.1.21"
-    },
-    "B8:27:EB:8E:72:8E": {
-        "vendor": "Raspberry Pi Foundation",
-        "description": "RPI3B_Plus",
-        "status": 1,
-        "ip": "192.168.1.31"
-    },
-    "00:0F:66:B2:DE:25": {
-        "vendor": "Cisco-Linksys, LLC",
-        "description": "Linksys_Switch",
-        "status": 1,
-        "ip": "192.168.1.3"
-    },
-    "D8:28:C9:36:A7:2A": {
-        "vendor": "",
-        "description": "GE Refregerator",
-        "status": 0,
-        "ip": "192.168.1.09"
-    },
+    }, 
     "2C:4C:C6:0D:D6:44": {
-        "vendor": "",
-        "description": "Nespresso_CoffeMachine",
-        "status": 0,
-        "ip": "192.168.1.19"
-    },
+        "status": 0, 
+        "ip": "192.168.1.19", 
+        "vendor": "", 
+        "description": "Nespresso_CoffeMachine"
+    }, 
+    "A0:D7:95:11:88:C9": {
+        "status": 0, 
+        "ip": "192.168.1.27", 
+        "vendor": "", 
+        "description": "Eugene_IPhone"
+    }, 
+    "D8:EB:97:22:E6:4B": {
+        "status": 1, 
+        "ip": "192.168.1.2", 
+        "vendor": "TRENDnet, Inc.", 
+        "description": "TrendNet Router"
+    }, 
+    "98:B8:BA:13:0B:BE": {
+        "status": 0, 
+        "ip": "192.168.1.20", 
+        "vendor": "", 
+        "description": "Rons_Phone"
+    }, 
+    "F8:04:2E:2E:16:A5": {
+        "status": 0, 
+        "ip": "192.168.1.17", 
+        "vendor": "", 
+        "description": "TV_Kitchen"
+    }, 
+    "94:B8:6D:B9:8D:D6": {
+        "status": 0, 
+        "ip": "192.168.1.32", 
+        "vendor": "Intel Corporate", 
+        "description": "ACER-NITRO-WIFI"
+    }, 
     "94:10:3E:2D:CF:FD": {
-        "vendor": "",
-        "description": "wemo",
-        "status": 0,
-        "ip": "192.168.1.26"
-    },
+        "status": 0, 
+        "ip": "192.168.1.26", 
+        "vendor": "", 
+        "description": "wemo"
+    }, 
+    "B8:27:EB:8E:72:8E": {
+        "status": 1, 
+        "ip": "192.168.1.31", 
+        "vendor": "Raspberry Pi Foundation", 
+        "description": "RPI3B_Plus"
+    }, 
+    "00:0F:66:B2:DE:25": {
+        "status": 1, 
+        "ip": "192.168.1.3", 
+        "vendor": "Cisco-Linksys, LLC", 
+        "description": "Linksys_Switch"
+    }, 
+    "30:FD:38:B0:F6:D5": {
+        "status": 1, 
+        "ip": "192.168.1.35", 
+        "vendor": "Google, Inc.", 
+        "description": "Google-Home-Mini"
+    }, 
+    "D8:28:C9:36:A7:2A": {
+        "status": 1, 
+        "ip": "192.168.1.9", 
+        "vendor": "General Electric Consumer and Industrial", 
+        "description": "GE Refregerator"
+    }, 
+    "40:D2:8A:EF:4C:24": {
+        "status": 0, 
+        "ip": "192.168.1.14", 
+        "vendor": "", 
+        "description": "WiiU"
+    }, 
+    "46:40:F2:AC:E4:3F": {
+        "status": 1, 
+        "ip": "192.168.1.30", 
+        "vendor": "(Vendor Lookup Error)", 
+        "description": "Yulias-iPhone"
+    }, 
+    "98:29:A6:3A:B8:97": {
+        "status": 1, 
+        "ip": "192.168.1.38", 
+        "vendor": "COMPAL INFORMATION (KUNSHAN) CO., LTD. ", 
+        "description": "Rons-Laptop-LAN"
+    }, 
+    "F8:3F:51:32:3A:E6": {
+        "status": 0, 
+        "ip": "192.168.1.28", 
+        "vendor": "", 
+        "description": "TV_Living_Room"
+    }, 
+    "F0:AD:4E:0E:A1:89": {
+        "status": 0, 
+        "ip": "192.168.1.16", 
+        "vendor": "", 
+        "description": "GarageDoorOpenner"
+    }, 
     "D8:31:34:62:52:6D": {
-        "vendor": "Roku, Inc",
-        "description": "Roku_Premier_Ultra",
-        "status": 1,
-        "ip": "192.168.1.13"
+        "status": 1, 
+        "ip": "192.168.1.13", 
+        "vendor": "Roku, Inc", 
+        "description": "Roku_Premier_Ultra"
+    }, 
+    "98:28:A6:0B:FE:19": {
+        "status": 0, 
+        "ip": "192.168.1.33", 
+        "vendor": "COMPAL INFORMATION (KUNSHAN) CO., LTD. ", 
+        "description": "ACER-NITRO-LAN"
+    }, 
+    "00:22:58:70:A0:F7": {
+        "status": 1, 
+        "ip": "192.168.1.7", 
+        "vendor": "Taiyo Yuden Co., Ltd.", 
+        "description": "BRW00225870A0F7"
+    }, 
+    "34:48:ED:30:B2:A9": {
+        "status": 0, 
+        "ip": "192.168.1.36", 
+        "vendor": "Dell Inc.", 
+        "description": "Work_Laptop"
+    }, 
+    "28:98:7B:DC:F7:E5": {
+        "status": 1, 
+        "ip": "192.168.1.24", 
+        "vendor": "Samsung Electronics Co.,Ltd", 
+        "description": "Galaxy_Tab_Picture_Frame"
+    }, 
+    "48:43:DD:56:D5:C7": {
+        "status": 0, 
+        "ip": "192.168.1.6", 
+        "vendor": "Amazon Technologies Inc.", 
+        "description": "FireTV_Kitchen"
+    }, 
+    "88:66:A5:92:22:5B": {
+        "status": 1, 
+        "ip": "192.168.1.23", 
+        "vendor": "Apple, Inc.", 
+        "description": "Eugene_iPhone"
+    }, 
+    "DC:68:EB:67:67:3C": {
+        "status": 0, 
+        "ip": "192.168.1.18", 
+        "vendor": "", 
+        "description": "Nintendo_Switch"
+    }, 
+    "3C:8C:F8:A1:86:9A": {
+        "status": 1, 
+        "ip": "192.168.1.15", 
+        "vendor": "TRENDnet, Inc.", 
+        "description": "TRENDnet_Security"
+    }, 
+    "60:EB:69:E7:ED:FC": {
+        "status": 0, 
+        "ip": "192.168.1.10", 
+        "vendor": "", 
+        "description": "Lenovo_LAN"
+    }, 
+    "00:0D:C5:CE:6E:48": {
+        "status": 1, 
+        "ip": "192.168.1.12", 
+        "vendor": "EchoStar Global B.V. ", 
+        "description": "Slingbox"
+    }, 
+    "68:C6:3A:8B:79:B1": {
+        "status": 0, 
+        "ip": "192.168.1.21", 
+        "vendor": "Espressif Inc.", 
+        "description": "Sonoff_Switch"
+    }, 
+    "B8:27:EB:21:87:75": {
+        "status": 1, 
+        "ip": "192.168.1.34", 
+        "vendor": "Raspberry Pi Foundation", 
+        "description": "RPI3B"
+    }, 
+    "00:0D:4B:CC:73:70": {
+        "status": 1, 
+        "ip": "192.168.1.29", 
+        "vendor": "Roku, Inc.", 
+        "description": "Roku_bedroom"
+    }, 
+    "28:0D:FC:E2:F8:A9": {
+        "status": 0, 
+        "ip": "192.168.1.08", 
+        "vendor": "", 
+        "description": "PS3"
+    }, 
+    "E8:2A:44:63:4E:3B": {
+        "status": 0, 
+        "ip": "192.168.1.37", 
+        "vendor": "", 
+        "description": "Rons-Laptop-WIFI"
+    }, 
+    "9C:AD:EF:60:8E:5E": {
+        "status": 1, 
+        "ip": "192.168.1.11", 
+        "vendor": "Obihai Technology, Inc.", 
+        "description": "OBi200"
+    }, 
+    "7C:BB:8A:C4:55:86": {
+        "status": 0, 
+        "ip": "192.168.1.22", 
+        "vendor": "", 
+        "description": "Nintendo_3DS"
     }
 }
