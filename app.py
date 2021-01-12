@@ -1,10 +1,7 @@
-import requests, time, os, subprocess, re, json,sys, signal ,getmac
+import requests, time, os, subprocess, re, json,sys ,getmac
 from subprocess import Popen, PIPE
 from getmac import get_mac_address
 
-def exit_app(sig, frame):
-    print ("Exiting application")
-    sys.exit(0)
 
 def get_mac(ip):
     try:
@@ -40,6 +37,7 @@ def refresh_vendors():
         for mac in db:
             device = db[mac]
             device["vendor"]=get_vendor(mac)
+            print (mac + " : " device["vendor"])
     with open ("db.json","w") as db_file:
         db_file.write(json.dumps(db,indent=4))
     print ("Vendors refreshed")
@@ -47,11 +45,18 @@ def refresh_vendors():
 if __name__=='__main__':
     print("__main__")
 
-signal.signal(signal.SIGINT,exit_app)
+
 
 startIP = 1
 endIP = 255
 if len(sys.argv)>1:
+    for key in sys.argv:
+        print (key)
+        if (key=="rv"):
+            refresh_vendors()
+            print ("Vendors refrshed")
+            sys.exit()
+        
     startIP=int(sys.argv[1])
 if len(sys.argv)>2:
     endIP=int(sys.argv[2])
@@ -59,6 +64,7 @@ if len(sys.argv)>2:
 
 odevices = {}
 print ("Scan Started 192.168.1." + str(startIP) + " - 192.168.1."+ str(endIP) +"\n=========================\n")
+
 for i in range(startIP,(endIP+1)):
     ip = "192.168.1." +str(i)
     mac=""
