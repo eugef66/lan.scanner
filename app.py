@@ -55,7 +55,7 @@ if __name__=='__main__':
             if key[i]=="-rv":
                 refresh_vendors()
                 sys.exit()
-            if key[i]="-?":
+            if key[i]=="-?":
                 print ("---Help will be displayed here----")
                 sys.exit()
             if key[i]=="-s":
