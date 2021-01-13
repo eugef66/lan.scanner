@@ -38,7 +38,7 @@ def refresh_vendors():
         for mac in db:
             device = db[mac]
             device["vendor"]=get_vendor(mac)
-            print (mac + " : " device["vendor"])
+            print (mac + " : " + device["vendor"])
     with open ("db.json","w") as db_file:
         db_file.write(json.dumps(db,indent=4))
     print ("==== Vendors refresh finished ====")
