@@ -65,7 +65,7 @@ function refrehData() {
         //console.log(mac + " - " + _data[mac]["description"]);
         var table = document.getElementById("mainTable");
         var tr = document.createElement("TR");
-        //if (_data[i]["status"] == 1) tr.classList.add("table-success");
+        if (_data[i].ip_last > 50) tr.classList.add("table-warning");
         var td = document.createElement("TD");
         if (_data[i]["status"] == 1) td.innerHTML = "<i class='bi bi-circle-fill' style='color: rgb(119, 206, 119);'></i>";
         tr.appendChild(td)
