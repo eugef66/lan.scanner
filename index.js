@@ -26,12 +26,19 @@ function load() {
 
         //Convert Dict to Array
         _data = Object.keys(_data).map(function (mac) {
+            //Get last digit of IP and convert to Number
+            var ip = _data[mac]["ip"]
+            var s = ip.lastIndexOf(".") + 1;
+            var l = ip.length;
+            var ip_last = Number(ip.substring(s, l));
+
             return {
                 "mac": mac
                 , "ip": _data[mac]["ip"]
                 , "status": _data[mac]["status"]
                 , "description": _data[mac]["description"]
                 , "vendor": _data[mac]["vendor"]
+                ,"ip_last":ip_last
             };
         }
         );
@@ -40,15 +47,8 @@ function load() {
         // Sort data array by IP
         _data = _data.sort(function (a, b) {
 
-            //Get last digit of IP and convert to Number
-            var s = a.ip.lastIndexOf(".") + 1;
-            var l = a.ip.length;
-            var aip = Number(a.ip.substring(s, l));
-            s = b.ip.lastIndexOf(".") + 1;
-            l = b.ip.length;
-            var bip = Number(b.ip.substring(s, l));
             //console.log(aip + " " + bip);
-            return (aip <= bip ? -1 : 1);
+            return (a.ip_last <= b.ip_last ? -1 : 1);
         });
         console.log(_data);
 
@@ -70,15 +70,16 @@ function refrehData() {
         if (_data[i]["status"] == 1) td.innerHTML = "<i class='bi bi-circle-fill' style='color: rgb(119, 206, 119);'></i>";
         tr.appendChild(td)
         td = document.createElement("TD");
+        td.innerHTML = _data[i].description;
+        tr.appendChild(td);
+        td = document.createElement("TD");
         td.innerHTML = _data[i].ip;
         tr.appendChild(td);
         td = document.createElement("TD");
         td.innerHTML = _data[i].mac;
         tr.appendChild(td);
         table.appendChild(tr);
-        td = document.createElement("TD");
-        td.innerHTML = _data[i].description;
-        tr.appendChild(td);
+        
         td = document.createElement("TD");
         td.innerHTML = _data[i].vendor;
         tr.appendChild(td);
