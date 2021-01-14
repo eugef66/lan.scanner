@@ -4,7 +4,7 @@
         "ip": "192.168.1.173", 
         "host": "", 
         "vendor": "Dell Inc.", 
-        "description": ""
+        "description": "DACHA-PC"
     }, 
     "7C:8B:CA:9D:65:C8": {
         "status": 1, 
@@ -80,13 +80,13 @@
         "description": "GE Refregerator"
     }, 
     "46:40:F2:AC:E4:3F": {
-        "status": 1, 
+        "status": 0, 
         "ip": "192.168.1.30", 
         "vendor": "(Vendor Lookup Error)", 
         "description": "Yulias-iPhone"
     }, 
     "98:29:A6:3A:B8:97": {
-        "status": 1, 
+        "status": 0, 
         "ip": "192.168.1.38", 
         "vendor": "COMPAL INFORMATION (KUNSHAN) CO., LTD. ", 
         "description": "Rons-Laptop-LAN"
@@ -204,6 +204,13 @@
         "ip": "192.168.1.37", 
         "vendor": "Liteon Technology Corporation", 
         "description": "Rons-Laptop-WIFI"
+    }, 
+    "00:1F:C6:8C:60:6C": {
+        "status": 1, 
+        "ip": "192.168.1.188", 
+        "host": "home-server.local", 
+        "vendor": "ASUSTek COMPUTER INC.", 
+        "description": "Home-Server PC"
     }, 
     "9C:AD:EF:60:8E:5E": {
         "status": 1, 
