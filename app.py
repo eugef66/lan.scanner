@@ -16,10 +16,8 @@ def get_mac(ip):
          mout = str(pid.communicate()[0])
          mac = re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})", mout).groups()[0]
      except:
-	# joins elements of getnode() after each 2 digits. 
-	#print ("The MAC address in formatted way is : ", end="") 
-	mac=(':'.join(['{:02x}'.format((uuid.getnode() >> ele) & 0xff) 
-	for ele in range(0,8*6,8)][::-1])) 
+         #get current machine's MAC address
+         mac=(':'.join(['{:02x}'.format((uuid.getnode() >> ele) & 0xff) for ele in range(0,8*6,8)][::-1])) 
      finally:
         return mac
 
