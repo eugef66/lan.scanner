@@ -53,7 +53,9 @@ if __name__=='__main__':
     endIP = 255
     if len(sys.argv)>1:
         i=0
+        key = sys.argv
         while i < len(sys.argv):
+            
             print (key[i])
             if key[i]=="-rv":
                 refresh_vendors()
@@ -77,12 +79,13 @@ if __name__=='__main__':
         ip = "192.168.1." +str(i)
         mac=""
         status = 0
+        percent = round((i/(endIP-startIP))*100,2)
         pingResponse = os.system("ping -c1 -w1 "+ ip + " > /dev/null 2>&1")
         if pingResponse == 0:
             mac = get_mac(ip)
             odevices[mac.upper()]=ip
             status=1
-        print (ip + " " + (mac if status==1 else "offline"))
+        print (str(percent) + "% - " + ip + " " + (mac if status==1 else "offline"))
 
     with open('db.json','r') as db_file:
         db=json.load(db_file)
