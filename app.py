@@ -53,22 +53,21 @@ if __name__=='__main__':
     endIP = 255
     if len(sys.argv)>1:
         i=0
-        key = sys.argv
         while i < len(sys.argv):
             
-            print (key[i])
-            if key[i]=="-rv":
+            print (sys.argv[i])
+            if sys.argv[i]=="-rv":
                 refresh_vendors()
                 sys.exit()
-            if key[i]=="-?":
+            if sys.argv[i]=="-?":
                 print ("---Help will be displayed here----")
                 sys.exit()
-            if key[i]=="-s":
+            if sys.argv[i]=="-s":
                 i+=1
-                startIP=int(key[i])
-            if key[i]=="-e":
+                startIP=int(sys.argv[i])
+            if sys.argv[i]=="-e":
                 i+=1
-                endIP=int(key[i])
+                endIP=int(sys.argv[i])
             
     
 
