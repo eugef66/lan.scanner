@@ -35,7 +35,7 @@ function load() {
             return {
                 "mac": mac
                 , "ip": _data[mac]["ip"]
-                , "status": _data[mac]["status"]
+                , "is_online": _data[mac]["is_online"]
                 , "description": _data[mac]["description"]
                 , "vendor": _data[mac]["vendor"]
                 ,"ip_last":ip_last
@@ -67,7 +67,7 @@ function refrehData() {
         var tr = document.createElement("TR");
         if (_data[i].ip_last > 50) tr.classList.add("table-warning");
         var td = document.createElement("TD");
-        if (_data[i]["status"] == 1) td.innerHTML = "<i class='bi bi-circle-fill' style='color: rgb(119, 206, 119);'></i>";
+        if (_data[i]["is_online"] == 1) td.innerHTML = "<i class='bi bi-circle-fill' style='color: rgb(119, 206, 119);'></i>";
         tr.appendChild(td)
         td = document.createElement("TD");
         td.innerHTML = _data[i].description;
