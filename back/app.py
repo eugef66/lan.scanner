@@ -106,7 +106,7 @@ if __name__=='__main__':
                     device["vendor"]=get_vendor(mac)
             else:
                 device["status"]=0
-    with open ("db.json","w") as db_file:
+    with open ("db.json","w+") as db_file:
         db_file.write(json.dumps(db,indent=4))
     print("db.json updated")
     
