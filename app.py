@@ -12,6 +12,7 @@ from subprocess import Popen, PIPE
 
 
 DB = None
+
 APP_PATH = os.path.dirname(os.path.abspath(__file__))
 
 if (sys.version_info > (3,0)):
@@ -34,21 +35,24 @@ def scan_new():
     if (DB==None):
         _load_db()
     
-    print ("--- Starting IP Scan --")
-    
-    for i in range(1,256):
-        ip = IP_MASK +str(i)
-        mac=""
-        is_online = False
-        
-        pingResponse = os.system("ping -c1 -w1 "+ ip + " > /dev/null 2>&1")
-        if pingResponse == 0:
-            mac = get_mac_by_ip(ip)
-            is_online=True
-            if (mac not in DB):
-                create_update_device(False,mac,ip,is_online,"",False,"")
-            else:
-                create_update_device(False,mac,ip,is_online,DB[mac]["description"],DB[mac]["alert_down"],DB[mac]["hostname"])
+    if (SCAN_METHOD=="PING"):
+        print ("--- Starting IP Scan by PING ---")
+        for i in range(1,256):
+            ip = IP_MASK +str(i)
+            mac=""
+            is_online = False
+            pingResponse = os.system("ping -c1 -w1 "+ ip + " > /dev/null 2>&1")
+            print (ip + " online" if pingResponse == 0 else " offline")
+            if pingResponse == 0:
+                mac = get_mac_by_ip(ip)
+                is_online=True
+                if (mac not in DB):
+                    create_update_device(False,mac,ip,is_online,"",False,"")
+                else:
+                    create_update_device(False,mac,ip,is_online,DB[mac]["description"],DB[mac]["alert_down"],DB[mac]["hostname"])
+    if (SCAN_METHOD=="PIHOLE_DHCP"):
+        print ("--- Starting IP Scan by PIHOLE_DHCP ---")
+        data = _load_DHCP_leases()
 
 
     _save_db()
@@ -79,13 +83,14 @@ def get_mac_by_ip(ip):
      finally:
         return mac
 
-def create_update_device(saveto_db, mac,ip,is_online,description, alert_down,hostname):
+def create_update_device(save_to_db, mac,ip,is_online,description, alert_down,hostname):
     if DB==None:
         _load_db()
     
     
     #TODO: if description or hostname is empty get from pihole
     vendor=""
+
     if (mac in DB):
         vendor = DB[mac]["vendor"]
     else:
@@ -100,7 +105,7 @@ def create_update_device(saveto_db, mac,ip,is_online,description, alert_down,hos
             }
     print ("--- Creating New Device ---")
     print (DB[mac])
-    if (saveto_db):
+    if (save_to_db):
         _save_db()
     return
 
@@ -120,6 +125,9 @@ def _save_db():
         db_file.write(json.dumps(DB,indent=4))
     return
 
+def _load_DHCP_leases():
+    dhcp_leases ={"12:34:56:78:90":{"ip":192.168.1.1}}
+    return dhcp_leases
 
 #Default process when no method argument provides
 def main():
