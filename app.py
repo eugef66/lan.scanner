@@ -6,6 +6,7 @@ import uuid
 import requests
 import subprocess
 import re
+import time
 from subprocess import Popen, PIPE
 
 
@@ -35,8 +36,19 @@ def scan_new():
     if (DB==None):
         _load_db()
     
+    if (SCAN_METHOD=="PIHOLE_NETWORK"):
+        print ("--- Starting Device Scan by PIHOLE_NETWORK ---")
+    if (SCAN_METHOD=="PIHOLE_DHCP"):
+        print ("--- Starting Device Scan by PIHOLE_DHCP ---")
+        dhcp_leases = _load_DHCP_leases()
+        for device in dhcp_leases:
+            mac = device["mac"]
+            if (mac not in DB):
+                ip = device["ip"]
+                hostname = device["hostname"]
+                create_device(False,mac,ip,False,None,None,hostname,None)
     if (SCAN_METHOD=="PING"):
-        print ("--- Starting IP Scan by PING ---")
+        print ("--- Starting Device Scan by PING ---")
         for i in range(1,256):
             ip = IP_MASK +str(i)
             mac=""
@@ -47,12 +59,10 @@ def scan_new():
                 mac = get_mac_by_ip(ip)
                 is_online=True
                 if (mac not in DB):
-                    create_update_device(False,mac,ip,is_online,"",False,"")
+                    create_device(False,mac,ip,is_online,None,False,None,None)
                 else:
-                    create_update_device(False,mac,ip,is_online,DB[mac]["description"],DB[mac]["alert_down"],DB[mac]["hostname"])
-    if (SCAN_METHOD=="PIHOLE_DHCP"):
-        print ("--- Starting IP Scan by PIHOLE_DHCP ---")
-        data = _load_DHCP_leases()
+                    update_device(False,mac,ip,is_online,DB[mac]["description"],DB[mac]["alert_down"],DB[mac]["hostname"],DB[mac]["vendor"])
+    
 
 
     _save_db()
@@ -63,6 +73,7 @@ def get_vendor_by_mac(mac):
     vendor=""
     try:
         # https://api.macvendors.com/d8:eb:97:22:e6:4b
+        time.sleep(1)
         url = "https://api.macvendors.com/" + mac
         mlr = requests.get(url)
         if mlr.status_code==200:
@@ -83,19 +94,30 @@ def get_mac_by_ip(ip):
      finally:
         return mac
 
-def create_update_device(save_to_db, mac,ip,is_online,description, alert_down,hostname):
+def create_device(save_to_db, mac,ip,is_online,description, alert_down,hostname,vendor):
+
+    if (description == None):
+        description="(from pihole)" #TODO: Get from pihole
+    if (hostname == None):
+        hostname = "(from pihole)" #TODO: Get from pihole
+    if (alert_down == None):
+        alert_down=False
+    if (is_online==None):
+        is_online=False
+    if (vendor==None):
+        vendor = get_vendor_by_mac(mac)
+    _create_update_device(save_to_db,mac,ip,is_online,description,alert_down,hostname,vendor)
+    return
+
+def update_device(save_to_db, mac,ip,is_online,description, alert_down,hostname,vendor):
+    _create_update_device(save_to_db,mac,ip,is_online,description,alert_down,hostname,vendor)
+    return
+
+# Private Util methods
+
+def _create_update_device(save_to_db, mac,ip,is_online,description, alert_down,hostname,vendor):
     if DB==None:
         _load_db()
-    
-    
-    #TODO: if description or hostname is empty get from pihole
-    vendor=""
-
-    if (mac in DB):
-        vendor = DB[mac]["vendor"]
-    else:
-        vendor = get_vendor_by_mac(mac)
-
     DB[mac]={"ip":ip,
             "is_online":is_online,
             "description":description,
@@ -108,6 +130,20 @@ def create_update_device(save_to_db, mac,ip,is_online,description, alert_down,ho
     if (save_to_db):
         _save_db()
     return
+
+def _load_pihole_network():
+    clients ={}
+    return clients
+
+def _load_DHCP_leases():
+    dhcp_leases = []
+    with open (PIHOLE_DHCP_LEASE_FILE,"r") as dhcp_file:
+       for line in dhcp_file.readlines():
+           device = line.split(' ')
+           dhcp_leases.append({"mac":device[1],"ip":device[2],"hostname":device[3]})
+    
+    return dhcp_leases
+
 
 def _load_db():
     print ("--- loading database ---")
@@ -125,9 +161,6 @@ def _save_db():
         db_file.write(json.dumps(DB,indent=4))
     return
 
-def _load_DHCP_leases():
-    dhcp_leases ={"12:34:56:78:90":{"ip":192.168.1.1}}
-    return dhcp_leases
 
 #Default process when no method argument provides
 def main():

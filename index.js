@@ -39,6 +39,7 @@ function load() {
                 , "description": _data[mac]["description"]
                 , "vendor": _data[mac]["vendor"]
                 ,"ip_last":ip_last
+                ,"hostname":_data[mac]["hostname"]
             };
         }
         );
@@ -78,11 +79,15 @@ function refrehData() {
         td = document.createElement("TD");
         td.innerHTML = _data[i].mac;
         tr.appendChild(td);
-        table.appendChild(tr);
         
+        td = document.createElement("TD");
+        td.innerHTML = _data[i].hostname;
+        tr.appendChild(td);
         td = document.createElement("TD");
         td.innerHTML = _data[i].vendor;
         tr.appendChild(td);
+
+        table.appendChild(tr);
     };
 
 
