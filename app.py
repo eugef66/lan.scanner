@@ -23,8 +23,8 @@ else:
     execfile(APP_PATH +"/app.conf")
 
 
-#Scan Devices marked "Alert Down"
-def scan_down():
+
+def scan_online_devices():
     if (DB==None):
         _load_db()
     
@@ -37,6 +37,9 @@ def scan_network():
     if (DB==None):
         _load_db()
 
+    print ( "" )
+
+
     if (PIHOLE_DHCP_ENABLED):
         print ("--- Scanning PIHOLE DHCP Leases ---")
         dhcp_leases = _load_DHCP_leases()
@@ -45,9 +48,9 @@ def scan_network():
             ip = device["ip"]
             hostname = device["hostname"]
             if (mac not in DB):    
-                create_device(False,mac,ip,False,None,None,hostname,None)
+                create_update_device(False,mac,ip,False,None,None,hostname,None)
             else:
-                update_device(False,mac,ip,None,DB[mac]["description"],DB[mac]["alert_down"],hostname,DB[mac]["vendor"])
+                create_update_device(False,mac,ip,None,DB[mac]["description"],DB[mac]["alert_down"],hostname,DB[mac]["vendor"])
 
     if (PIHOLE_ENABLED):
         print ("--- Scanning PIHOLE Network ---")
@@ -57,9 +60,9 @@ def scan_network():
             ip = device["ip"]
             vendor = device["vendor"]
             if (mac not in DB):    
-                create_device(False,mac,ip,True,None,None,None,vendor)
+                create_update_device(False,mac,ip,True,None,None,None,vendor)
             else:
-                update_device(False,mac,ip,True,DB[mac]["description"],DB[mac]["alert_down"],DB[mac]["hostname"],vendor)
+                create_update_device(False,mac,ip,True,DB[mac]["description"],DB[mac]["alert_down"],DB[mac]["hostname"],vendor)
     if (PING_ALL):
         print ("--- Pinging all IPs (1-255) ---")
         for i in range(1,256):
@@ -72,9 +75,9 @@ def scan_network():
                 mac = get_mac_by_ip(ip)
                 is_online=True
                 if (mac not in DB):
-                    create_device(False,mac,ip,is_online,None,False,None,None)
+                    create_update_device(False,mac,ip,is_online,None,False,None,None)
                 else:
-                    update_device(False,mac,ip,is_online,DB[mac]["description"],DB[mac]["alert_down"],DB[mac]["hostname"],DB[mac]["vendor"])
+                    create_update_device(False,mac,ip,is_online,DB[mac]["description"],DB[mac]["alert_down"],DB[mac]["hostname"],DB[mac]["vendor"])
     
 
 
@@ -107,30 +110,31 @@ def get_mac_by_ip(ip):
      finally:
         return mac
 
-def create_device(save_to_db, mac,ip,is_online,description, alert_down,hostname,vendor):
 
-    if (description == None):
-        description="(from pihole)" #TODO: Get from pihole
-    if (hostname == None):
-        hostname = "(from pihole)" #TODO: Get from pihole
-    if (alert_down == None):
-        alert_down=False
-    if (is_online==None):
-        is_online=False
-    if (vendor==None):
-        vendor = get_vendor_by_mac(mac)
-    _create_update_device(save_to_db,mac,ip,is_online,description,alert_down,hostname,vendor)
-    return
 
-def update_device(save_to_db, mac,ip,is_online,description, alert_down,hostname,vendor):
-    _create_update_device(save_to_db,mac,ip,is_online,description,alert_down,hostname,vendor)
-    return
+
 
 # Private Util methods
 
-def _create_update_device(save_to_db, mac,ip,is_online,description, alert_down,hostname,vendor):
+def create_update_device(save_to_db, mac,ip,is_online,description, alert_down,hostname,vendor):
     if DB==None:
         _load_db()
+    
+    if (mac not in DB):
+        if (description == None):
+            description="(from pihole)" #TODO: Get from pihole
+        if (hostname == None):
+            hostname = "(from pihole)" #TODO: Get from pihole
+        if (alert_down == None):
+            alert_down=False
+        if (is_online==None):
+            is_online=False
+        if (vendor==None):
+            vendor = get_vendor_by_mac(mac)
+        print ("--- Creating New Device ---")
+        print ("--- --- " + mac + " | " + vendor + " | " + description + " | " ip )
+        
+
     DB[mac]={"ip":ip,
             "is_online":is_online,
             "description":description,
@@ -138,11 +142,13 @@ def _create_update_device(save_to_db, mac,ip,is_online,description, alert_down,h
             "hostname":hostname,
             "alert_down":alert_down
             }
-    print ("--- Creating New Device ---")
-    print (DB[mac])
     if (save_to_db):
         _save_db()
     return
+
+def _load_arp_scan():
+    devices =[]
+    return devices
 
 def _load_pihole_network():
     clients =[]
