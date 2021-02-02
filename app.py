@@ -7,6 +7,7 @@ import requests
 import subprocess
 import re
 import time
+import sqlite3
 from subprocess import Popen, PIPE
 
 
@@ -32,23 +33,35 @@ def scan_down():
     
     return
 #Scan for new devices
-def scan_new():
+def scan_network():
     if (DB==None):
         _load_db()
-    
-    if (SCAN_METHOD=="PIHOLE_NETWORK"):
-        print ("--- Starting Device Scan by PIHOLE_NETWORK ---")
-    if (SCAN_METHOD=="PIHOLE_DHCP"):
-        print ("--- Starting Device Scan by PIHOLE_DHCP ---")
+
+    if (PIHOLE_DHCP_ENABLED):
+        print ("--- Scanning PIHOLE DHCP Leases ---")
         dhcp_leases = _load_DHCP_leases()
         for device in dhcp_leases:
             mac = device["mac"]
-            if (mac not in DB):
-                ip = device["ip"]
-                hostname = device["hostname"]
+            ip = device["ip"]
+            hostname = device["hostname"]
+            if (mac not in DB):    
                 create_device(False,mac,ip,False,None,None,hostname,None)
-    if (SCAN_METHOD=="PING"):
-        print ("--- Starting Device Scan by PING ---")
+            else:
+                update_device(False,mac,ip,None,DB[mac]["description"],DB[mac]["alert_down"],hostname,DB[mac]["vendor"])
+
+    if (PIHOLE_ENABLED):
+        print ("--- Scanning PIHOLE Network ---")
+        clients = _load_pihole_network()
+        for device in clients:
+            mac = device["mac"]
+            ip = device["ip"]
+            vendor = device["vendor"]
+            if (mac not in DB):    
+                create_device(False,mac,ip,True,None,None,None,vendor)
+            else:
+                update_device(False,mac,ip,True,DB[mac]["description"],DB[mac]["alert_down"],DB[mac]["hostname"],vendor)
+    if (PING_ALL):
+        print ("--- Pinging all IPs (1-255) ---")
         for i in range(1,256):
             ip = IP_MASK +str(i)
             mac=""
@@ -132,7 +145,16 @@ def _create_update_device(save_to_db, mac,ip,is_online,description, alert_down,h
     return
 
 def _load_pihole_network():
-    clients ={}
+    clients =[]
+    conn = sqlite3.connect(PIHOLE_NETWORK_DB)
+    cur = conn.cursor()
+    cur.execute("SELECT hwaddr, macVendor, ip FROM network n INNER JOIN network_addresses na ON n.id=na.network_id")
+    rows = cur.fetchall()
+
+    for row in rows:
+        clients.append({"mac":row[0],"vendor":row[1],"ip": row[2]})
+    
+    conn.close()
     return clients
 
 def _load_DHCP_leases():
@@ -143,6 +165,7 @@ def _load_DHCP_leases():
            dhcp_leases.append({"mac":device[1],"ip":device[2],"hostname":device[3]})
     
     return dhcp_leases
+
 
 
 def _load_db():
@@ -165,8 +188,8 @@ def _save_db():
 #Default process when no method argument provides
 def main():
     _load_db()
-    scan_down()
-    scan_new()
+    #scan_down()
+    scan_network()
 
 if __name__=='__main__':
     sys.exit(main())    
