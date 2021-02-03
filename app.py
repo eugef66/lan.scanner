@@ -31,7 +31,6 @@ def scan_network():
     if (DB==None):
         _load_db()
 
-    
     #Step 1. Scan online devices using arp-scan
 
     online_devices = _load_arp_scan()
@@ -205,8 +204,9 @@ def _load_db():
 
     global DHCP_RESERVATIONS
     global LOCAL_DNS
-    if (PIHOLE_DHCP_ENABLED):
+    if (PIHOLE_DHCP_ENABLED and os.path.exists(PIHOLE_DHCP_RES_FILE)):
         #load DHCP Reservations 
+         
         with open(PIHOLE_DHCP_RES_FILE,'r') as dres_file:
             for line in dres_file.readlines():
                 device = line.split(",")
@@ -219,13 +219,14 @@ def _load_db():
 
         
     #load Local DNS custom list
-    with open(PIHOLE_LOCAL_DNS_FILE,'r') as dres_file:
-        for line in dres_file.readlines():
-            device=line.split(" ")
-            if(len(device)>=2):
-                ip = _ip_last_number(device[0])
-                hostname = device[1].replace("\n","")
-                LOCAL_DNS[ip]=hostname
+    if (os.path.exists(PIHOLE_LOCAL_DNS_FILE)):
+        with open(PIHOLE_LOCAL_DNS_FILE,'r') as dres_file:
+            for line in dres_file.readlines():
+                device=line.split(" ")
+                if(len(device)>=2):
+                    ip = _ip_last_number(device[0])
+                    hostname = device[1].replace("\n","")
+                    LOCAL_DNS[ip]=hostname
     return
 
 def _save_db():
@@ -240,7 +241,6 @@ def _ip_last_number(ip):
 #Default process when no method argument provides
 def main():
     _load_db()
-    #scan_down()
     scan_network()
 
 if __name__=='__main__':

@@ -40,6 +40,7 @@ function load() {
                 , "vendor": _data[mac]["vendor"]
                 ,"ip_last":ip_last
                 ,"hostname":_data[mac]["hostname"]
+                ,"is_new":_data[mac]["is_new"]
             };
         }
         );
@@ -68,10 +69,19 @@ function refrehData() {
         var tr = document.createElement("TR");
         if (_data[i].ip_last > 50) tr.classList.add("table-warning");
         var td = document.createElement("TD");
-        if (_data[i]["is_online"] == 1) td.innerHTML = "<i class='bi bi-circle-fill' style='color: rgb(119, 206, 119);'></i>";
+        if (_data[i]["is_new"]) {
+            td.innerHTML = "<span class='badge badge-pill badge-warning'>New</span>";
+        }
+        if (_data[i]["is_online"]) {
+            td.innerHTML = td.innerHTML + "<span class='badge badge-pill badge-success'>On-line</span>";
+        }
+        else{
+            td.innerHTML = td.innerHTML + "<span class='badge badge-pill badge-secondary'>Off-line</span>";
+        }
+        
         tr.appendChild(td)
         td = document.createElement("TD");
-        td.innerHTML = _data[i].description;
+        td.innerHTML = "<a href='device.html'>" + _data[i].description + "</a>";
         tr.appendChild(td);
         td = document.createElement("TD");
         td.innerHTML = _data[i].ip;
