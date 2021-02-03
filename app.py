@@ -15,7 +15,8 @@ from datetime import datetime
 
 
 DB = None
-META_DATA=None
+DHCP_RESERVATIONS={}
+LOCAL_DNS={}
 
 APP_PATH = os.path.dirname(os.path.abspath(__file__))
 
@@ -66,7 +67,14 @@ def scan_network():
 
     _save_db()
     return
-
+def get_default_device_name(mac,ip):
+    mac = mac.upper()
+    ip=_ip_last_number(ip)
+    if (mac in DHCP_RESERVATIONS):
+        return DHCP_RESERVATIONS[mac]["hostname"]
+    elif (ip in LOCAL_DNS):
+        return LOCAL_DNS[ip]
+    return "(new device)"
 # Get Vendor Name by MAC
 def get_vendor_by_mac(mac):
     vendor=""
@@ -102,12 +110,13 @@ def create_update_device(save_to_db, mac,ip,is_online=None,description=None, ale
         _load_db()
     
     if (mac not in DB):
+        default_device_name = get_default_device_name(mac,ip)
         if (is_new==None):
             isnew=True
         if (description == None):
-            description="(from pihole)" #TODO: Get from pihole
+            description=default_device_name
         if (hostname == None):
-            hostname = "(from pihole)" #TODO: Get from pihole
+            hostname = get_default_device_name(mac,ip)
         if (alert_down == None):
             alert_down=False
         if (is_online==None):
@@ -194,20 +203,29 @@ def _load_db():
 
     #Load MetaData
 
-    global META_DATA
+    global DHCP_RESERVATIONS
+    global LOCAL_DNS
     if (PIHOLE_DHCP_ENABLED):
         #load DHCP Reservations 
         with open(PIHOLE_DHCP_RES_FILE,'r') as dres_file:
             for line in dres_file.readlines():
-                print(line)
+                device = line.split(",")
+                if (len(device)>=3):
+                    mac = device[0].replace("dhcp-host=","").upper()
+                    ip = device[1]
+                    hostname =device[2].replace("\n","")
+                    DHCP_RESERVATIONS[mac]={"ip":ip,"hostname":hostname}
+
 
         
     #load Local DNS custom list
     with open(PIHOLE_LOCAL_DNS_FILE,'r') as dres_file:
         for line in dres_file.readlines():
-            print(line)
-
-
+            device=line.split(" ")
+            if(len(device)>=2):
+                ip = _ip_last_number(device[0])
+                hostname = device[1].replace("\n","")
+                LOCAL_DNS[ip]=hostname
     return
 
 def _save_db():
@@ -217,7 +235,8 @@ def _save_db():
 
 def _send_down_alert(mac):
     return
-
+def _ip_last_number(ip):
+    return int(ip.split(".")[3])
 #Default process when no method argument provides
 def main():
     _load_db()
