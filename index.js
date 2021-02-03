@@ -67,21 +67,21 @@ function refrehData() {
         //console.log(mac + " - " + _data[mac]["description"]);
         var table = document.getElementById("mainTable");
         var tr = document.createElement("TR");
-        if (_data[i].ip_last > 50) tr.classList.add("table-warning");
+        if (_data[i]["is_new"]) tr.classList.add("table-warning");
         var td = document.createElement("TD");
-        if (_data[i]["is_new"]) {
-            td.innerHTML = "<span class='badge badge-pill badge-warning'>New</span>";
-        }
         if (_data[i]["is_online"]) {
-            td.innerHTML = td.innerHTML + "<span class='badge badge-pill badge-success'>On-line</span>";
+            td.innerHTML =  "<span class='badge badge-pill badge-success'>On-line</span>";
         }
         else{
-            td.innerHTML = td.innerHTML + "<span class='badge badge-pill badge-secondary'>Off-line</span>";
+            td.innerHTML = "<span class='badge badge-pill badge-secondary'>Off-line</span>";
         }
         
         tr.appendChild(td)
         td = document.createElement("TD");
-        td.innerHTML = "<a href='device.html'>" + _data[i].description + "</a>";
+        if (_data[i]["is_new"]) {
+            td.innerHTML = "<span class='badge badge-pill badge-warning'>New</span>&nbsp;";
+        }
+        td.innerHTML = td.innerHTML + "<a href='device.html'>" + _data[i].description + "</a>";
         tr.appendChild(td);
         td = document.createElement("TD");
         td.innerHTML = _data[i].ip;
