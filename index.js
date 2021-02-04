@@ -23,7 +23,6 @@ function load() {
         _data = data;
         //sort data by IP
 
-
         //Convert Dict to Array
         _data = Object.keys(_data).map(function (mac) {
             //Get last digit of IP and convert to Number
@@ -31,7 +30,6 @@ function load() {
             var s = ip.lastIndexOf(".") + 1;
             var l = ip.length;
             var ip_last = Number(ip.substring(s, l));
-
             return {
                 "mac": mac
                 , "ip": _data[mac]["ip"]
@@ -45,6 +43,22 @@ function load() {
         }
         );
 
+/*
+        $('#devices').DataTable({
+            data: _data,
+            colums:[
+                {title: 'is_online', data:"is_online"},
+                {title: 'description', data:"description"},
+                {title: 'ip'},
+                {title: 'mac'},
+                {title: 'hostname'},
+                {title: 'vendor'},
+  
+            ]
+
+
+        });
+*/
         
         // Sort data array by IP
         _data = _data.sort(function (a, b) {

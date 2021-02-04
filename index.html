@@ -8,34 +8,41 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
-    <script type="text/javascript" src="DataTables/datatables.min.js"></script>
+    
 
 
 </head>
 
 <body onload="load()">
 
-    <table class="table table-bordered table-hover mb-0 table-sm w-auto" id="devices">
-        <tbody id="mainTable">
-            <thead>
-                <tr>
+    <table id="devices" class="display" width="100%"></table>
 
-                    <th style="width: 5%">Status</td>
-                    <th style="width: 30%">Description</td>
-                    <th style="width: 15%">IP</td>
-                    <th style="width: 15%">MAC</td>
-                    <th style="width: 15%">Hostname</td>
-                    <th style="width: 35%">Vendor</td>
-                </tr>
-            </thead>
-        </tbody>
+    <table id="mainTable">
+        <thead>
+            <tr>
+                <th>Status</td>
+                <th>Description</td>
+                <th>IP</td>
+                <th>MAC</td>
+                <th>Hostname</td>
+                <th>Vendor</td>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <th>Status</td>
+                <th>Description</td>
+                <th>IP</td>
+                <th>MAC</td>
+                <th>Hostname</td>
+                <th>Vendor</td>
+            </tr>
+        </tfoot>
     </table>
+
 </body>
 <script src="index.js"></script>
-<script>
-$(document).ready(function() {
-    $('#devices').DataTable();
-} );
-</script>
+<script type="text/javascript" src="DataTables/datatables.min.js"></script>
+
 
 </html>
