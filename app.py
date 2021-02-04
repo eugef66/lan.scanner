@@ -7,8 +7,9 @@ import requests
 import subprocess
 import re
 import time
-
+import smtplib
 import sqlite3
+
 from subprocess import Popen, PIPE
 from datetime import datetime
 
@@ -88,19 +89,7 @@ def get_vendor_by_mac(mac):
     except:
         return "(Vendor Lookup Error)"
 
-"""
-def get_mac_by_ip(ip):
-     mac=""
-     try:
-         pid = Popen(["arp","-n", ip ],stdout=PIPE)
-         mout = str(pid.communicate()[0])
-         mac = re.search(r"(([a-f\d]{1,2}\:){5}[a-f\d]{1,2})", mout).groups()[0]
-     except:
-         #get current machine's MAC address
-         mac=(':'.join(['{:02x}'.format((uuid.getnode() >> ele) & 0xff) for ele in range(0,8*6,8)][::-1])) 
-     finally:
-        return mac
-"""
+
 
 
 
@@ -239,6 +228,29 @@ def _send_down_alert(mac):
 def _ip_last_number(ip):
     return int(ip.split(".")[3])
 #Default process when no method argument provides
+
+def send_email(subject, text):
+    
+    #msg = MIMEMultipart('alternative')
+    #msg['Subject'] = 'Pi.Alert Report'
+    #msg['From'] = REPORT_FROM
+    #msg['To'] = REPORT_TO
+    #msg.attach (MIMEText (pText, 'plain'))
+    #msg.attach (MIMEText (pHTML, 'html'))
+    
+	header= "To: " + EMAIL_TO + "\nFrom: " + SMTP_USERNAME + "\n" + "Subject: " + subject
+	body = text
+	
+	s = smtplib.SMTP(SMTP_SERVER,SMTP_PORT)
+	s.ehlo()
+	s.starttls()
+	s.ehlo()
+	s.login(SMTP_USERNAME,SMTP_PASSWORD)
+	#print body + "\n==================================="
+	s.sendmail(SMTP_USERNAME,EMAIL_TO,header + '\n\n' + body)	
+	s.quit()
+
+
 def main():
     _load_db()
     scan_network()
