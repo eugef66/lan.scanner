@@ -18,6 +18,9 @@ DB = None
 DHCP_RESERVATIONS = {}
 LOCAL_DNS = {}
 
+_down_devices=[]
+_new_devices=[]
+
 APP_PATH = os.path.dirname(os.path.abspath(__file__))
 
 if (sys.version_info > (3, 0)):
@@ -39,9 +42,6 @@ def scan_network():
         mac = device["mac"]
         ip = device["ip"]
         vendor = device["vendor"]
-        if (mac in DB):
-            if (DB[mac]["alert_down"]):
-                _send_down_alert(mac)
         create_update_device(False, mac=mac, ip=ip,
                              is_online=True, vendor=vendor)
 
@@ -65,6 +65,8 @@ def scan_network():
             create_update_device(False, mac=mac, ip=ip, vendor=vendor)
 
     _save_db()
+    _send_down_alert()
+    _send_new_alert()
     return
 
 
@@ -121,7 +123,7 @@ def create_update_device(save_to_db, mac, ip, is_online=None, description=None, 
         print("--- Creating New Device ---")
         print("--- --- " + mac + " | " + vendor + " | " + description + " | " + ip)
         if (ALERT_NEW_DEVICE):
-            _send_new_alert(mac)
+            _new_devices.append(mac)
     else:
         if (ip4 == None):
             ip4 = DB[mac]["ip"]
@@ -143,6 +145,10 @@ def create_update_device(save_to_db, mac, ip, is_online=None, description=None, 
             _send_down_alert(mac)
         print("--- Updating Existing Device ---")
         print("--- --- " + mac + " | " + vendor + " | " + description + " | " + ip)
+        
+        if (DB[mac]["alert_down"] and not is_online):
+            _down_devices.append(mac)
+
 
     DB[mac] = {"ip": ip4,
                "ip6": ip6,
@@ -247,12 +253,12 @@ def _save_db():
     return
 
 
-def _send_down_alert(mac):
+def _send_down_alert():
     print ("Sending Down Alert")
     return
 
 
-def _send_new_alert(mac):
+def _send_new_alert():
     print ("Sending New Device Alert")
     return
 
