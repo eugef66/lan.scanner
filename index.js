@@ -17,6 +17,12 @@ function ajaxGet(url, mimeType, callback) {
 
 function load() {
 
+
+
+
+
+
+
     //Load db.json
     ajaxGet("db.json", "application/json", function (response) {
         var data = JSON.parse(response);
@@ -42,24 +48,6 @@ function load() {
             };
         }
         );
-
-/*
-        $('#devices').DataTable({
-            data: _data,
-            colums:[
-                {title: 'is_online', data:"is_online"},
-                {title: 'description', data:"description"},
-                {title: 'ip'},
-                {title: 'mac'},
-                {title: 'hostname'},
-                {title: 'vendor'},
-  
-            ]
-
-
-        });
-*/
-        
         // Sort data array by IP
         _data = _data.sort(function (a, b) {
 
@@ -68,7 +56,27 @@ function load() {
         });
         console.log(_data);
 
-        refrehData();
+        //refrehData();
+
+
+
+		$('#devices').DataTable({
+
+			data: _data,
+			columns: [
+				{title: "Description", data: "description"},
+				{title: "MAC", data: "mac"},
+				{title: "ip last number", data: "ip_last", visible:false},
+				{title: "IP", data: "ip", orderData: [2]},
+				{title: "Vendor", data: "vendor"},
+				{title: "Host", data: "hostname"},
+
+				
+			]
+	
+		});
+	
+
 
     });
 

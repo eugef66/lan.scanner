@@ -2,22 +2,26 @@
 <html>
 
 <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css"/>
-    
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
+
 
 
 </head>
 
 <body onload="load()">
 
-    <table id="devices" class="display" width="100%"></table>
-
-    <table id="mainTable">
+	<div class="row">
+		<div class="col-md-8">
+			<table id="devices" class="hover"></table>
+		</div>
+		<div class="col-md-4">Details here</div>
+	</div>
+	<!--table id="mainTable">
         <thead>
             <tr>
                 <th>Status</td>
@@ -38,7 +42,7 @@
                 <th>Vendor</td>
             </tr>
         </tfoot>
-    </table>
+    </table-->
 
 </body>
 <script src="index.js"></script>
