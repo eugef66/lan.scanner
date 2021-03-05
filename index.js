@@ -22,12 +22,6 @@ function ajaxGet(url, mimeType, callback) {
 
 function load() {
 
-
-
-
-
-
-
 	//Load db.json
 	ajaxGet("db.json", "application/json", function (response) {
 		var data = JSON.parse(response);
@@ -55,45 +49,17 @@ function load() {
 		);
 		// Sort data array by IP
 		_data = _data.sort(function (a, b) {
-
-			//console.log(aip + " " + bip);
 			return (a.ip_last <= b.ip_last ? -1 : 1);
 		});
-		//console.log(_data);
 
-		//refrehData();
-
-
-
-		$('#devices').DataTable({
-
-			data: _data,
-			columns: [
-				{
-					title: "Description", data: "description", render: function (data, type, row, meta) {
-						return '<a href="device.html?mac=' + row["mac"] + '">' + data + '</a>'
-					}
-				},
-				{ title: "MAC", data: "mac" },
-				{ title: "ip last number", data: "ip_last", visible: false },
-				{ title: "IP", data: "ip", orderData: [2] },
-				{ title: "Vendor", data: "vendor" },
-				//{title: "Host", data: "hostname"},
-
-
-			]
-
-		});
-
-		loadDevice();
-
-
+		refrehDT();
 
 	});
 
 }
 
-function loadDevice() {
+
+function loadDevice(mac) {
 	$('#device').DataTable({
 		data: _device,
 		orderding: false,
@@ -104,52 +70,34 @@ function loadDevice() {
 		columns:[
 			{title: "", orderable: false},
 			{title: "", orderable: false, render: function (data, type, row, meta) {
-										return '<input type="text" class="input input-lg" value="' + data + '" />'
+										return '<input type="text" class="input input-lg" value="' + data + '" />';
 								}}
 		]
 
 	});
 }
 
-function refrehData() {
+function refrehDT() {
 
-	//console.log(_data);
-	for (var i in _data) {
-		//console.log(mac + " - " + _data[mac]["description"]);
-		var table = document.getElementById("mainTable");
-		var tr = document.createElement("TR");
-		if (_data[i]["is_new"]) tr.classList.add("table-warning");
-		var td = document.createElement("TD");
-		if (_data[i]["is_online"]) {
-			td.innerHTML = "<span class='badge badge-pill badge-success'>On-line</span>";
-		}
-		else {
-			td.innerHTML = "<span class='badge badge-pill badge-secondary'>Off-line</span>";
-		}
+	$('#devices').DataTable({
 
-		tr.appendChild(td)
-		td = document.createElement("TD");
-		if (_data[i]["is_new"]) {
-			td.innerHTML = "<span class='badge badge-pill badge-warning'>New</span>&nbsp;";
-		}
-		td.innerHTML = td.innerHTML + "<a href='device.html'>" + _data[i].description + "</a>";
-		tr.appendChild(td);
-		td = document.createElement("TD");
-		td.innerHTML = _data[i].ip;
-		tr.appendChild(td);
-		td = document.createElement("TD");
-		td.innerHTML = _data[i].mac;
-		tr.appendChild(td);
-
-		td = document.createElement("TD");
-		td.innerHTML = _data[i].hostname;
-		tr.appendChild(td);
-		td = document.createElement("TD");
-		td.innerHTML = _data[i].vendor;
-		tr.appendChild(td);
-
-		table.appendChild(tr);
-	};
+		data: _data,
+		columns: [
+			{
+				title: "Description", data: "description", render: function (data, type, row, meta) {
+					return "<a href='javascript:loadDevice(\"" + row["mac"] + "\")'>" + data + "</a>";
+				}
+			},
+			{ title: "MAC", data: "mac" },
+			{ title: "ip last number", data: "ip_last", visible: false },
+			{ title: "IP", data: "ip", orderData: [2] },
+			{ title: "Vendor", data: "vendor" },
+			//{title: "Host", data: "hostname"},
 
 
+		]
+
+	});
+
+	
 }
