@@ -26,32 +26,7 @@ function load() {
 	ajaxGet("db.json", "application/json", function (response) {
 		var data = JSON.parse(response);
 		_data = data;
-		//sort data by IP
-
-		//Convert Dict to Array
-		_data = Object.keys(_data).map(function (mac) {
-			//Get last digit of IP and convert to Number
-			var ip = _data[mac]["ip"]
-			var s = ip.lastIndexOf(".") + 1;
-			var l = ip.length;
-			var ip_last = Number(ip.substring(s, l));
-			return {
-				"mac": mac
-				, "ip": _data[mac]["ip"]
-				, "is_online": _data[mac]["is_online"]
-				, "description": _data[mac]["description"]
-				, "vendor": _data[mac]["vendor"]
-				, "ip_last": ip_last
-				, "hostname": _data[mac]["hostname"]
-				, "is_new": _data[mac]["is_new"]
-			};
-		}
-		);
-		// Sort data array by IP
-		_data = _data.sort(function (a, b) {
-			return (a.ip_last <= b.ip_last ? -1 : 1);
-		});
-
+		
 		refrehDT();
 
 	});
@@ -60,29 +35,51 @@ function load() {
 
 
 function loadDevice(mac) {
-	$('#device').DataTable({
-		data: _device,
-		orderding: false,
-		paging: false,
-		searching: false,
-		info: false,
-		processing: false,
-		columns:[
-			{title: "", orderable: false},
-			{title: "", orderable: false, render: function (data, type, row, meta) {
-										return '<input type="text" class="input input-lg" value="' + data + '" />';
-								}}
-		]
+	var _mac= document.getElementById("mac");
+	_mac.value = mac;
+	var _ip = document.getElementById("ip");
+	_ip.value=_data[mac]["ip"];
+	var _description = document.getElementById("description");
+	_description.value=_data[mac]["description"];
+	var _vendor = document.getElementById("vendor");
+	_vendor.value=_data[mac]["vendor"];
+	var _hostname = document.getElementById("hostname");
+	_hostname.value=_data[mac]["hostname"];
+	var _alert_down = document.getElementById("alert_down");
+	_alert_down.checked = _data[mac]["alert_down"];
 
-	});
 }
 
 function refrehDT() {
 
+	//Convert Dict to Array
+	var _dataDT = Object.keys(_data).map(function (mac) {
+		//Get last digit of IP and convert to Number
+		var ip = _data[mac]["ip"]
+		var s = ip.lastIndexOf(".") + 1;
+		var l = ip.length;
+		var ip_last = Number(ip.substring(s, l));
+		return {
+			"mac": mac
+			, "ip": _data[mac]["ip"]
+			, "is_online": _data[mac]["is_online"]
+			, "description": _data[mac]["description"]
+			, "vendor": _data[mac]["vendor"]
+			, "ip_last": ip_last
+			, "hostname": _data[mac]["hostname"]
+			, "is_new": _data[mac]["is_new"]
+		};
+	}
+	);
+
+
 	$('#devices').DataTable({
 
-		data: _data,
+		data: _dataDT,
+		paging: false,
+		searching:false,
 		columns: [
+			{ title: "IP", data: "ip", orderData: [3] },
 			{
 				title: "Description", data: "description", render: function (data, type, row, meta) {
 					return "<a href='javascript:loadDevice(\"" + row["mac"] + "\")'>" + data + "</a>";
@@ -90,7 +87,7 @@ function refrehDT() {
 			},
 			{ title: "MAC", data: "mac" },
 			{ title: "ip last number", data: "ip_last", visible: false },
-			{ title: "IP", data: "ip", orderData: [2] },
+			
 			{ title: "Vendor", data: "vendor" },
 			//{title: "Host", data: "hostname"},
 
