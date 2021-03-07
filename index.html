@@ -23,25 +23,34 @@
 			<div class="container">
 				<div class="form-group">
 					<label for="mac">MAC:</label>
-					<input type="text" class="form-control" id="mac">
+					<input type="text" class="form-control" id="mac" readonly>
 				</div>
 				<div class="form-group">
-					<label for="ip">IP:</label>
-					<input type="text" class="form-control" id="ip">
+					<label for="ip">Last IP:</label>
+					<input type="text" class="form-control" id="ip" readonly>
 				</div>
 				<div class="form-group">
 					<label for="description">Description:</label>
 					<input type="text" class="form-control" id="description">
 				</div>
 				<div class="form-group">
-					<div class="form-check">
+					<div class="form-check form-switch">
 					  <input class="form-check-input" type="checkbox" id="alert_down">
 					  <label class="form-check-label" for="alert_down">
 						Alert when "Down"
 					  </label>
 					</div>
 				  </div>
-				<div class="form-group">
+				  <div class="form-group">
+					<div class="form-check form-switch">
+					  <input class="form-check-input" type="checkbox" id="new_device">
+					  <label class="form-check-label" for="new_device">
+						New Device
+					  </label>
+					</div>
+				  </div>
+
+				  <div class="form-group">
 					<label for="vendor">Vendor:</label>
 					<input type="text" class="form-control" id="vendor" readonly>
 				</div>

@@ -48,6 +48,9 @@ function loadDevice(mac) {
 	var _alert_down = document.getElementById("alert_down");
 	_alert_down.checked = _data[mac]["alert_down"];
 
+	var _new_device = document.getElementById("new_device");
+	_new_device.checked = _data[mac]["new_device"];
+
 }
 
 function refrehDT() {
