@@ -1,10 +1,6 @@
 
 var _data = null;
-var _device = [
-	["Description","VZ Router"], 
-	["MAC","12:12:12:12:12:12"], 
-	["IP","192.168.1.1"]
-	];
+
 
 function ajaxGet(url, mimeType, callback) {
 	var xobj = new XMLHttpRequest();
@@ -47,10 +43,30 @@ function loadDevice(mac) {
 	_hostname.value=_data[mac]["hostname"];
 	var _alert_down = document.getElementById("alert_down");
 	_alert_down.checked = _data[mac]["alert_down"];
-
 	var _new_device = document.getElementById("new_device");
 	_new_device.checked = _data[mac]["new_device"];
 
+}
+
+function saveDevice(mac) {
+	
+	alert("save Device");
+	/*
+	var _mac= document.getElementById("mac");
+	_mac.value = mac;
+	var _ip = document.getElementById("ip");
+	_ip.value=_data[mac]["ip"];
+	var _description = document.getElementById("description");
+	_description.value=_data[mac]["description"];
+	var _vendor = document.getElementById("vendor");
+	_vendor.value=_data[mac]["vendor"];
+	var _hostname = document.getElementById("hostname");
+	_hostname.value=_data[mac]["hostname"];
+	var _alert_down = document.getElementById("alert_down");
+	_alert_down.checked = _data[mac]["alert_down"];
+	var _new_device = document.getElementById("new_device");
+	_new_device.checked = _data[mac]["new_device"];
+	*/
 }
 
 function refrehDT() {
