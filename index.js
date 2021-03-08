@@ -1,6 +1,7 @@
 
 var _data = null;
-
+var _editForm = null;
+var _alert = null;
 
 function ajaxGet(url, mimeType, callback) {
 	var xobj = new XMLHttpRequest();
@@ -27,6 +28,18 @@ function load() {
 
 	});
 
+	_editForm = new bootstrap.Modal(document.getElementById('editForm'), {backdrop:'static'});
+	_alert = document.getElementById('message');
+}
+
+function displayMessage(message, style_name)
+{
+	_alert.innerHTML = message;
+	_alert.hidden ="";
+	setTimeout(() => {  _alert.hidden ="hidden";}, 2000);
+
+	
+
 }
 
 
@@ -45,12 +58,21 @@ function loadDevice(mac) {
 	_alert_down.checked = _data[mac]["alert_down"];
 	var _new_device = document.getElementById("new_device");
 	_new_device.checked = _data[mac]["new_device"];
+	
+
+	
+    _editForm.show();
+	
+
 
 }
 
+
+
 function saveDevice(mac) {
 	
-	alert("save Device");
+	displayMessage("save Device","success");
+    _editForm.hide();
 	/*
 	var _mac= document.getElementById("mac");
 	_mac.value = mac;
