@@ -1,7 +1,8 @@
 
 var _data = null;
 var _editForm = null;
-var _alert = null;
+var  _toast = null;
+var _message=null;
 
 function ajaxGet(url, mimeType, callback) {
 	var xobj = new XMLHttpRequest();
@@ -29,16 +30,23 @@ function load() {
 	});
 
 	_editForm = new bootstrap.Modal(document.getElementById('editForm'), {backdrop:'static'});
-	_alert = document.getElementById('message');
+	_toast = document.getElementById("message");
+	
+	
+	_message = new bootstrap.Toast(_toast,{
+		animation: true,
+		autohide: true,
+		delay: 3000
+	})
+	
 }
 
 function displayMessage(message, style_name)
 {
-	_alert.innerHTML = message;
-	_alert.hidden ="";
-	setTimeout(() => {  _alert.hidden ="hidden";}, 2000);
-
 	
+	
+	document.getElementById("message_text").innerHTML=message;
+	_message.show();
 
 }
 
@@ -71,7 +79,7 @@ function loadDevice(mac) {
 
 function saveDevice(mac) {
 	
-	displayMessage("save Device","success");
+	displayMessage("Saved","success");
     _editForm.hide();
 	/*
 	var _mac= document.getElementById("mac");
