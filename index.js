@@ -66,19 +66,27 @@ function loadDevice(mac) {
 	_alert_down.checked = _data[mac]["alert_down"];
 	var _new_device = document.getElementById("new_device");
 	_new_device.checked = _data[mac]["new_device"];
-	
 
-	
     _editForm.show();
 	
 
 
 }
 
-
-
 function saveDevice(mac) {
 	
+	var mac= document.getElementById("mac").value;
+	var alert_down = document.getElementById("alert_down").checked
+	var new_device = document.getElementById("new_device").checked;
+	var description = document.getElementById("description").value;
+	
+	var device = _data[mac];
+	device["description"]=description;
+	device["alert_down"]=alert_down;
+	device["is_new"]=new_device;
+
+	//ajax call to save data
+
 	displayMessage("Saved","success");
     _editForm.hide();
 	/*
