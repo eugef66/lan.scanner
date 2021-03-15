@@ -1,5 +1,6 @@
 
 var _data = null;
+var _metadata=null;
 var _editForm = null;
 var  _toast = null;
 var _message=null;
@@ -24,14 +25,17 @@ function load() {
 	ajaxGet("db.json", "application/json", function (response) {
 		var data = JSON.parse(response);
 		_data = data;
-		
-		refrehDT();
-
+		// Load metadata
+		ajaxGet("metadata.json", "application/json", function (response) {
+			var mdata = JSON.parse(response);
+			_metadata = mdata;
+			refrehDT();
+			refreshMetaData();
+		});
 	});
 
 	_editForm = new bootstrap.Modal(document.getElementById('editForm'), {backdrop:'static'});
 	_toast = document.getElementById("message");
-	
 	
 	_message = new bootstrap.Toast(_toast,{
 		animation: true,
@@ -43,8 +47,7 @@ function load() {
 
 function displayMessage(message, style_name)
 {
-	
-	
+
 	document.getElementById("message_text").innerHTML=message;
 	_message.show();
 
@@ -52,6 +55,9 @@ function displayMessage(message, style_name)
 
 
 function loadDevice(mac) {
+
+	console.log(_metadata);
+
 	var _mac= document.getElementById("mac");
 	_mac.value = mac;
 	var _ip = document.getElementById("ip");
@@ -66,7 +72,11 @@ function loadDevice(mac) {
 	_alert_down.checked = _data[mac]["alert_down"];
 	var _new_device = document.getElementById("new_device");
 	_new_device.checked = _data[mac]["new_device"];
-	
+
+	var _location = document.getElementById("location");
+
+	//TODO: Fix to select real value
+	_location.selectedIndex = 3;
 
 	
     _editForm.show();
@@ -146,4 +156,36 @@ function refrehDT() {
 	});
 
 	
+}
+function refreshMetaData(){
+
+	var sel = document.getElementById("location");
+
+	_metadata["Location"].forEach(l => {
+		var opt = document.createElement('option');
+		opt.text=l;
+		opt.value=l;
+		sel.add(opt);
+	});
+
+	sel = document.getElementById("device_type");
+
+	_metadata["DeviceType"].forEach(l => {
+		var opt = document.createElement('option');
+		opt.text=l;
+		opt.value=l;
+		sel.add(opt);
+	});
+
+	sel = document.getElementById("owner");
+
+	_metadata["Owner"].forEach(l => {
+		var opt = document.createElement('option');
+		opt.text=l;
+		opt.value=l;
+		sel.add(opt);
+	});
+
+
+
 }

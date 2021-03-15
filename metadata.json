@@ -1,0 +1,24 @@
+{
+	"Location": [
+		"Living Room",
+		"Family Room",
+		"Kitchen",
+		"Garage"
+	],
+	"DeviceType": [
+		"Smartphone",
+		"Tablet",
+		"SBC",
+		"Virtual Assistance",
+		"Server",
+		"Laptop",
+		"Desktop",
+		"Appliance",
+		"Router"
+	],
+	"Owner": [
+		"John",
+		"Jasie",
+		"James"
+	]
+}
