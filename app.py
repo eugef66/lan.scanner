@@ -13,6 +13,8 @@ import sqlite3
 from subprocess import Popen, PIPE
 from datetime import datetime
 
+import app_config as config
+
 
 DB = None
 DHCP_RESERVATIONS = {}
@@ -47,7 +49,7 @@ def scan_network():
 
     # Step 2. Get current dhcp_lease from PIHOLE DHCP
 
-    if (PIHOLE_DHCP_ENABLED):
+    if (config.PIHOLE_DHCP_ENABLED):
         dhcp_leases = _load_DHCP_leases()
         for device in dhcp_leases:
             mac = device["mac"]
@@ -55,7 +57,7 @@ def scan_network():
             hostname = device["hostname"]
             create_update_device(False, mac=mac, ip=ip, hostname=hostname)
     # Step 3. Get current pihole network devices
-    if (PIHOLE_ENABLED):
+    if (config.PIHOLE_ENABLED):
         print("--- Scanning PIHOLE Network ---")
         clients = _load_pihole_network()
         for device in clients:
@@ -122,7 +124,7 @@ def create_update_device(save_to_db, mac, ip, is_online=None, description=None, 
             vendor = get_vendor_by_mac(mac)
         print("--- Creating New Device ---")
         print("--- --- " + mac + " | " + vendor + " | " + description + " | " + ip)
-        if (ALERT_NEW_DEVICE):
+        if (config.ALERT_NEW_DEVICE):
             _new_devices.append(mac)
     else:
         if (ip4 == None):
@@ -184,7 +186,7 @@ def _load_arp_scan():
 
 def _load_pihole_network():
     clients = []
-    conn = sqlite3.connect(PIHOLE_NETWORK_DB)
+    conn = sqlite3.connect(config.PIHOLE_NETWORK_DB)
     cur = conn.cursor()
     cur.execute(
         "SELECT hwaddr, macVendor, ip FROM network n INNER JOIN network_addresses na ON n.id=na.network_id")
@@ -200,7 +202,7 @@ def _load_pihole_network():
 
 def _load_DHCP_leases():
     dhcp_leases = []
-    with open(PIHOLE_DHCP_LEASE_FILE, "r") as dhcp_file:
+    with open(config.PIHOLE_DHCP_LEASE_FILE, "r") as dhcp_file:
         for line in dhcp_file.readlines():
             device = line.split(' ')
             dhcp_leases.append(
@@ -223,10 +225,10 @@ def _load_db():
 
     global DHCP_RESERVATIONS
     global LOCAL_DNS
-    if (PIHOLE_DHCP_ENABLED and os.path.exists(PIHOLE_DHCP_RES_FILE)):
+    if (config.PIHOLE_DHCP_ENABLED and os.path.exists(config.PIHOLE_DHCP_RES_FILE)):
         # load DHCP Reservations
 
-        with open(PIHOLE_DHCP_RES_FILE, 'r') as dres_file:
+        with open(config.PIHOLE_DHCP_RES_FILE, 'r') as dres_file:
             for line in dres_file.readlines():
                 device = line.split(",")
                 if (len(device) >= 3):
@@ -236,8 +238,8 @@ def _load_db():
                     DHCP_RESERVATIONS[mac] = {"ip": ip, "hostname": hostname}
 
     # load Local DNS custom list
-    if (os.path.exists(PIHOLE_LOCAL_DNS_FILE)):
-        with open(PIHOLE_LOCAL_DNS_FILE, 'r') as dres_file:
+    if (os.path.exists(config.PIHOLE_LOCAL_DNS_FILE)):
+        with open(config.PIHOLE_LOCAL_DNS_FILE, 'r') as dres_file:
             for line in dres_file.readlines():
                 device = line.split(" ")
                 if(len(device) >= 2):
@@ -277,17 +279,17 @@ def send_email(subject, text):
     #msg.attach (MIMEText (pText, 'plain'))
     #msg.attach (MIMEText (pHTML, 'html'))
 
-    header = "To: " + EMAIL_TO + "\nFrom: " + \
-        SMTP_USERNAME + "\n" + "Subject: " + subject
+    header = "To: " + config.EMAIL_TO + "\nFrom: " + \
+        config.SMTP_USERNAME + "\n" + "Subject: " + subject
     body = text
 
-    s = smtplib.SMTP(SMTP_SERVER, SMTP_PORT)
+    s = smtplib.SMTP(config.SMTP_SERVER, config.SMTP_PORT)
     s.ehlo()
     s.starttls()
     s.ehlo()
-    s.login(SMTP_USERNAME, SMTP_PASSWORD)
+    s.login(config.SMTP_USERNAME, config.SMTP_PASSWORD)
     # print body + "\n==================================="
-    s.sendmail(SMTP_USERNAME, EMAIL_TO, header + '\n\n' + body)
+    s.sendmail(config.SMTP_USERNAME, config.EMAIL_TO, header + '\n\n' + body)
     s.quit()
 
 

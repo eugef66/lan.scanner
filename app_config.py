@@ -1,4 +1,8 @@
 
+# Uncomment the line below to use RPI emulator and change path to emulators module
+# sys.path.append("../pi.emulators")
+
+
 PIHOLE_ENABLED = True
 PIHOLE_NETWORK_DB="/etc/pihole/pihole-FTL.db"
 
