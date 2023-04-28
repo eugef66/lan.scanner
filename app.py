@@ -9,11 +9,9 @@ import re
 import time
 import smtplib
 import sqlite3
-
 from subprocess import Popen, PIPE
 from datetime import datetime
-
-import app_config as config
+import config as config
 
 
 DB = None
@@ -24,11 +22,6 @@ _down_devices=[]
 _new_devices=[]
 
 APP_PATH = os.path.dirname(os.path.abspath(__file__))
-
-if (sys.version_info > (3, 0)):
-	exec(open(APP_PATH + "/app.conf").read())
-else:
-	execfile(APP_PATH + "/app.conf")
 
 
 # Scan for new devices
