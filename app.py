@@ -12,22 +12,20 @@ import sqlite3
 from subprocess import Popen, PIPE
 from datetime import datetime
 import config as config
+import db
 
 
 DB = None
-DHCP_RESERVATIONS = {}
-LOCAL_DNS = {}
-
 _down_devices=[]
 _new_devices=[]
 
-APP_PATH = os.path.dirname(os.path.abspath(__file__))
+
 
 
 # Scan for new devices
 def scan_network():
 	if (DB == None):
-		_load_db()
+		DB = db._load_db()
 		
 	# Step 1. Scan online devices using arp-scan
 	if (config.USE_ARP_SCAN):
@@ -37,28 +35,9 @@ def scan_network():
 			mac = device["mac"]
 			ip = device["ip"]
 			vendor = device["vendor"]
-			create_update_device(False, mac=mac, ip=ip, is_online=True, vendor=vendor)
+			db.create_update_device(False, mac=mac, ip=ip, is_online=True, vendor=vendor)
 
-
-	# Step 2. Get current dhcp_lease from PIHOLE DHCP
-	if (config.PIHOLE_DHCP_ENABLED):
-		dhcp_leases = _load_DHCP_leases()
-		for device in dhcp_leases:
-			mac = device["mac"]
-			ip = device["ip"]
-			hostname = device["hostname"]
-			create_update_device(False, mac=mac, ip=ip, hostname=hostname)
-	# Step 3. Get current pihole network devices
-	if (config.PIHOLE_ENABLED):
-		print("--- Scanning PIHOLE Network ---")
-		clients = _load_pihole_network()
-		for device in clients:
-			mac = device["mac"]
-			ip = device["ip"]
-			vendor = device["vendor"]
-			create_update_device(False, mac=mac, ip=ip, vendor=vendor)
-
-	_save_db()
+	db.save_db(DB)
 	_send_down_alert()
 	_send_new_alert()
 	return
@@ -89,75 +68,6 @@ def get_vendor_by_mac(mac):
 		return "(Vendor Lookup Error)"
 
 
-def create_update_device(save_to_db, mac, ip, is_online=None, description=None, alert_down=None, hostname=None, vendor=None, is_new=None):
-	if DB == None:
-		_load_db()
-
-	ip4 = None
-	ip6 = None
-	if (":" in ip):
-		ip6 = ip
-	else:
-		ip4 = ip
-
-	if (mac not in DB):
-		default_device_name = get_default_device_name(mac, ip)
-		if (is_new == None):
-			isnew = True
-		if (description == None):
-			description = default_device_name
-		if (hostname == None):
-			hostname = get_default_device_name(mac, ip)
-		if (alert_down == None):
-			alert_down = False
-		if (is_online == None):
-			is_online = False
-		if (vendor == None):
-			vendor = get_vendor_by_mac(mac)
-		print("--- Creating New Device ---")
-		print("--- --- " + mac + " | " + vendor + " | " + description + " | " + ip)
-		if (config.ALERT_NEW_DEVICE):
-			_new_devices.append(mac)
-	else:
-		if (ip4 == None):
-			ip4 = DB[mac]["ip"]
-		if (ip6 == None):
-			ip6 = DB[mac]["ip6"]
-		if (is_new == None):
-			isnew = DB[mac]["is_new"]
-		if (description == None):
-			description = DB[mac]["description"]
-		if (hostname == None):
-			hostname = DB[mac]["hostname"]
-		if (alert_down == None):
-			alert_down = DB[mac]["alert_down"]
-		if (is_online == None):
-			is_online = DB[mac]["is_online"]
-		if (vendor == None):
-			vendor = DB[mac]["vendor"]
-		if (DB[mac]["alert_down"] and not is_online):
-			_send_down_alert(mac)
-		print("--- Updating Existing Device ---")
-		print("--- --- " + mac + " | " + vendor + " | " + description + " | " + ip)
-		
-		if (DB[mac]["alert_down"] and not is_online):
-			_down_devices.append(mac)
-
-
-	DB[mac] = {"ip": ip4,
-			   "ip6": ip6,
-			   "is_online": is_online,
-			   "description": description,
-			   "vendor": vendor,
-			   "hostname": hostname,
-			   "alert_down": alert_down,
-			   "updateTS": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-			   "is_new": isnew
-			   }
-	if (save_to_db):
-		_save_db()
-	return
-
 
 def _load_arp_scan():
 	devices = []
@@ -174,77 +84,6 @@ def _load_arp_scan():
 						"mac": device[1],
 						"vendor": device[2]})
 	return devices
-
-
-def _load_pihole_network():
-	clients = []
-	conn = sqlite3.connect(config.PIHOLE_NETWORK_DB)
-	cur = conn.cursor()
-	cur.execute(
-		"SELECT hwaddr, macVendor, ip FROM network n INNER JOIN network_addresses na ON n.id=na.network_id")
-	rows = cur.fetchall()
-
-	for row in rows:
-		clients.append({"mac": row[0], "vendor": row[1], "ip": row[2]})
-	conn.close()
-
-	# remove mac dulicates with ipv6 addresess
-	return clients
-
-
-def _load_DHCP_leases():
-	dhcp_leases = []
-	with open(config.PIHOLE_DHCP_LEASE_FILE, "r") as dhcp_file:
-		for line in dhcp_file.readlines():
-			device = line.split(' ')
-			dhcp_leases.append(
-				{"mac": device[1], "ip": device[2], "hostname": device[3]})
-
-	return dhcp_leases
-
-
-def _load_db():
-	print("--- loading database ---")
-	global DB
-	if (os.path.exists(APP_PATH + "/db.json")):
-		with open(APP_PATH + '/db.json', 'r') as db_file:
-			DB = json.load(db_file)
-	else:
-		DB = {}
-		_save_db()
-
-	# Load MetaData
-
-	global DHCP_RESERVATIONS
-	global LOCAL_DNS
-	if (config.PIHOLE_DHCP_ENABLED and os.path.exists(config.PIHOLE_DHCP_RES_FILE)):
-		# load DHCP Reservations
-
-		with open(config.PIHOLE_DHCP_RES_FILE, 'r') as dres_file:
-			for line in dres_file.readlines():
-				device = line.split(",")
-				if (len(device) >= 3):
-					mac = device[0].replace("dhcp-host=", "").upper()
-					ip = device[1]
-					hostname = device[2].replace("\n", "")
-					DHCP_RESERVATIONS[mac] = {"ip": ip, "hostname": hostname}
-
-	# load Local DNS custom list
-	if (os.path.exists(config.PIHOLE_LOCAL_DNS_FILE)):
-		with open(config.PIHOLE_LOCAL_DNS_FILE, 'r') as dres_file:
-			for line in dres_file.readlines():
-				device = line.split(" ")
-				if(len(device) >= 2):
-					ip = _ip_last_number(device[0])
-					hostname = device[1].replace("\n", "")
-					LOCAL_DNS[ip] = hostname
-	return
-
-
-def _save_db():
-	with open(APP_PATH + "/db.json", "w+") as db_file:
-		db_file.write(json.dumps(DB, indent=4))
-	return
 
 
 def _send_down_alert():
@@ -286,7 +125,7 @@ def send_email(subject, text):
 
 
 def main():
-	_load_db()
+	DB = db.load_db()
 	scan_network()
 
 
