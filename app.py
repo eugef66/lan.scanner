@@ -4,10 +4,10 @@ import subprocess
 from subprocess import Popen, PIPE
 from datetime import datetime
 import config as config
-import db.db
-import db.metadata
+import db.db as db
+import db.metadata as metadata
 import alert
-
+import temp
 
 
 # Scan for new devices
@@ -20,11 +20,16 @@ def scan_network():
 		mac = device["mac"]
 		ip = device["ip"]
 		vendor = device["vendor"]
-		db.create_update_device(False, mac=mac, ip=ip, is_online=True, vendor=vendor)
+		if (db.mac_exists(mac)):
+			print ("MAC Exists")
+			#update MAC
+		else:
+			print ("MAC DOESNT Exists")
+			#Create MAC
 
-	db.save_db(DB)
-	alert.send_down_alert()
-	alert.send_new_alert()
+	#db.save_db(DB)
+	#alert.send_down_alert()
+	#alert.send_new_alert()
 	return
 
 
@@ -36,8 +41,8 @@ def scan_network():
 
 def _execute_arp_scan():
 	devices = []
-	arpscan_output = subprocess.check_output(
-		['sudo', 'arp-scan', '--localnet', '--ignoredups', '--retry=1'], universal_newlines=True)
+	#arpscan_output = subprocess.check_output(['sudo', 'arp-scan', '--localnet', '--ignoredups', '--retry=1'], universal_newlines=True)
+	arpscan_output = temp.check_output()
 	lineindex = 1
 	number_of_cleints = len(arpscan_output.splitlines())-2
 	for line in arpscan_output.splitlines():
@@ -52,7 +57,6 @@ def _execute_arp_scan():
 
 
 def main():
-	DB = db.load_db()
 	scan_network()
 
 
