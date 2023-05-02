@@ -1,11 +1,11 @@
 {
-	"Location": [
+	"location": [
 		"Living Room",
 		"Family Room",
 		"Kitchen",
 		"Garage"
 	],
-	"DeviceType": [
+	"device-type": [
 		"Smartphone",
 		"Tablet",
 		"SBC",
@@ -16,7 +16,7 @@
 		"Appliance",
 		"Router"
 	],
-	"Owner": [
+	"owner": [
 		"John",
 		"Jasie",
 		"James"

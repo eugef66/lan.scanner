@@ -3,7 +3,6 @@ import os
 # Uncomment the line below to use RPI emulator and change path to emulators module
 # sys.path.append("../pi.emulators")
 
-USE_ARP_SCAN = True
 ALERT_NEW_DEVICE = True
 ALERT_DOWN_DEVICE = True
 
