@@ -3,19 +3,19 @@ import smtplib
 
 
 
-def send_down_alert():
+def send_down_alert(macs):
 	print ("Sending Down Alert")
 	return
 
 
-def send_new_alert():
+def send_new_alert(macs):
 	print ("Sending New Device Alert")
 	return
 
 def send_email(subject, text):
 
 	#msg = MIMEMultipart('alternative')
-	#msg['Subject'] = 'Pi.Alert Report'
+	#msg['Subject'] = 'Pi.Scanner Report'
 	#msg['From'] = REPORT_FROM
 	#msg['To'] = REPORT_TO
 	#msg.attach (MIMEText (pText, 'plain'))

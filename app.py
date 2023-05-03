@@ -9,11 +9,10 @@ import db.metadata as metadata
 import alert
 import temp
 
-
-# Scan for new devices
+# Scan for online devices
 def scan_online_devices():
 	online_devices = _execute_arp_scan()
-	# compare output with DB to find new and trigger "offline alert"
+	new_devices = []
 	for device in online_devices:
 		mac = device["mac"]
 		ip = device["ip"]
@@ -22,20 +21,21 @@ def scan_online_devices():
 			print("--- Updating Device ---")
 			print("--- --- " + mac + " | " + vendor + " | " + ip)
 			db.update_device(mac,ip,vendor,is_online=True)
-			#update MAC
 		else:
 			print("--- Creating New Device ---")
 			print("--- --- " + mac + " | " + vendor + " | " + ip)
 			db.create_device(mac,ip,vendor,True,is_new=True,is_online=True)
-	#alert.send_down_alert()
-	#alert.send_new_alert()
+			new_devices.append(mac)
+	alert.send_new_alert(new_devices)
 	return
 
-def scan_offline_devices():
-	devices = db.get_alert_down_devices()
-	for mac in devices:
+def check_alert_down_devices():
+	alert_down_devices = db.get_alert_down_devices()
+	down_devices=[]
+	for mac in alert_down_devices:
 		if not db.is_online(mac):
-			alert.send_down_alert()
+			down_devices.append(mac)
+	alert.send_down_alert(down_devices)
 	return
 
 
@@ -57,9 +57,11 @@ def _execute_arp_scan():
 
 
 def main():
+	db.reset_online_flag()
 	scan_online_devices()
-	scan_offline_devices()
-	db.save_db()
+	check_alert_down_devices()
+	db.save()
+	
 
 
 if __name__ == '__main__':

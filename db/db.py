@@ -11,20 +11,26 @@ _db=None
 _down_devices=[]
 _new_devices=[]
 
+def reset_online_flag():
+	load()
+	for mac in _db:
+		_db[mac]["is_online"]=False
+	return
+
 def mac_exists(mac):
-	_load_db()
+	load()
 	return mac in _db
 
 def get_alert_down_devices():
-	_load_db()
+	load()
 	return dict(filter(lambda device: device[1]["alert_down"]==True,_db.items()))
 
 def is_online(mac):
-	_load_db()
+	load()
 	return _db[mac]["is_online"]
 
 def create_device(mac, ip, vendor=None, is_online=None, description=None, alert_down=None, hostname=None, is_new=None):
-	_load_db()
+	load()
 	
 	default_device_name = get_default_device_name(mac, ip)
 
@@ -41,7 +47,7 @@ def create_device(mac, ip, vendor=None, is_online=None, description=None, alert_
 	return
 
 def update_device(mac, ip, vendor=None, is_online=None, description=None, alert_down=None, hostname=None, is_new=None):
-	_load_db()
+	load()
 	_db[mac] = {"ip": ip if ":" not in ip else _db[mac]["ip"],
 		   "ip6": ip if ":" in ip else _db[mac]["ip"],
 		   "is_online": _db[mac]["is_online"] if is_online == None else is_online,
@@ -54,7 +60,7 @@ def update_device(mac, ip, vendor=None, is_online=None, description=None, alert_
 		   }
 	return
 
-def _load_db(force_reload=False):
+def load(force_reload=False):
 	global _db
 	# Check is already loaded
 	if (_db != None and force_reload==False):
@@ -66,15 +72,15 @@ def _load_db(force_reload=False):
 			_db = json.load(_db_file)
 	else:
 		_db = {}
-		save_db()
+		save()
 	return
 
 
-def save_db():
-	_load_db()
+def save():
+	load()
 	with open(config.APP_PATH + "/db/db.json", "w+") as _db_file:
 		_db_file.write(json.dumps(_db, indent=4))
 	return
 
 def __init__():
-	_load_db()
+	load()
