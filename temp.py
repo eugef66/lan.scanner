@@ -5,7 +5,7 @@
 def check_output():
 	result = "Interface: enp7s0, type: EN10MB, MAC: 7c:10:c9:40:d7:1f, IPv4: 192.168.1.5\r\n" 
 	result += "Starting arp-scan 1.9.7 with 256 hosts (https://github.com/royhills/arp-scan)\r\n" 
-	result += "192.168.1.1\t18:78:d4:36:74:3c\tVerizon\r\n" 
+	#result += "192.168.1.1\t18:78:d4:36:74:3c\tVerizon\r\n" 
 	result += "192.168.1.2\t24:4b:fe:c0:3f:f8\tASUSTek COMPUTER INC.\r\n" 
 	result += "192.168.1.3\t50:eb:f6:15:23:98\tASUSTek COMPUTER INC.\r\n" 
 	result += "192.168.1.13\t1c:f2:9a:29:c8:b3\tGoogle, Inc.\r\n" 

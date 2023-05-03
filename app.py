@@ -11,9 +11,7 @@ import temp
 
 
 # Scan for new devices
-def scan_network():
-	# Step 1. Scan online devices using arp-scan
-
+def scan_online_devices():
 	online_devices = _execute_arp_scan()
 	# compare output with DB to find new and trigger "offline alert"
 	for device in online_devices:
@@ -21,22 +19,24 @@ def scan_network():
 		ip = device["ip"]
 		vendor = device["vendor"]
 		if (db.mac_exists(mac)):
-			print ("MAC Exists")
+			print("--- Updating Device ---")
+			print("--- --- " + mac + " | " + vendor + " | " + ip)
+			db.update_device(mac,ip,vendor,is_online=True)
 			#update MAC
 		else:
-			print ("MAC DOESNT Exists")
-			#Create MAC
-
-	#db.save_db(DB)
+			print("--- Creating New Device ---")
+			print("--- --- " + mac + " | " + vendor + " | " + ip)
+			db.create_device(mac,ip,vendor,True,is_new=True,is_online=True)
 	#alert.send_down_alert()
 	#alert.send_new_alert()
 	return
 
-
-
-# Get Vendor Name by MAC
-
-
+def scan_offline_devices():
+	devices = db.get_alert_down_devices()
+	for mac in devices:
+		if not db.is_online(mac):
+			alert.send_down_alert()
+	return
 
 
 def _execute_arp_scan():
@@ -57,7 +57,9 @@ def _execute_arp_scan():
 
 
 def main():
-	scan_network()
+	scan_online_devices()
+	scan_offline_devices()
+	db.save_db()
 
 
 if __name__ == '__main__':
