@@ -20,7 +20,7 @@ def scan_online_devices():
 		if (db.mac_exists(mac)):
 			print("--- Updating Device ---")
 			print("--- --- " + mac + " | " + vendor + " | " + ip)
-			db.update_device(mac,ip,vendor,is_online=True)
+			db.update_device(mac,ip,is_online=True)
 		else:
 			print("--- Creating New Device ---")
 			print("--- --- " + mac + " | " + vendor + " | " + ip)

@@ -1,15 +1,21 @@
 import config
 import smtplib
+import db.db as db
 
 
 
 def send_down_alert(macs):
-	print ("Sending Down Alert")
+	print (" -- Sending Down Alert --")
+	message = "Following Devices are down:"
+	for mac in macs:
+		device = db.get_device(mac)
+		message += device["description"] + " : " + mac + " : " + device["ip"] + " : " + device["vendor"]
+	send_email("Devices Down Alert", message)
 	return
 
 
 def send_new_alert(macs):
-	print ("Sending New Device Alert")
+	print (" -- Sending New Device Alert --")
 	return
 
 def send_email(subject, text):

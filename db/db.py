@@ -11,6 +11,10 @@ _db=None
 _down_devices=[]
 _new_devices=[]
 
+def get_device(mac):
+	load()
+	return _db[mac]
+
 def reset_online_flag():
 	load()
 	for mac in _db:
@@ -31,14 +35,13 @@ def is_online(mac):
 
 def create_device(mac, ip, vendor=None, is_online=None, description=None, alert_down=None, hostname=None, is_new=None):
 	load()
-	
-	default_device_name = get_default_device_name(mac, ip)
+	default_device_name = get_default_device_name()
 
 	_db[mac] = {"ip": ip if ":" not in ip else None,
 		   "ip6": ip if ":" in ip else None,
 		   "is_online": False if is_online == None else is_online,
 		   "description": default_device_name if description == None else description,
-		   "vendor": get_vendor_by_mac if vendor == None else vendor,
+		   "vendor": get_vendor_by_mac() if vendor == None else vendor,
 		   "hostname": default_device_name if hostname == None else hostname,
 		   "alert_down": False if alert_down == None else alert_down,
 		   "updateTS": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),

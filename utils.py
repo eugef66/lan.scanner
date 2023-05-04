@@ -1,11 +1,8 @@
-import config
 import time
 import requests
 
 
-def get_default_device_name(mac, ip):
-	mac = mac.upper()
-	ip = _ip_last_number(ip)
+def get_default_device_name():
 	return "(new device)"
 
 def get_vendor_by_mac(mac):
