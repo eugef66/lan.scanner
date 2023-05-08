@@ -22,7 +22,7 @@
 			"name": "app.py",
 			"type": "python",
 			"request": "launch",
-			"program": "app.py",
+			"program": "back/app.py",
 			"console": "integratedTerminal"
 			//,"args": ["rv"]
 		}

@@ -1,13 +1,14 @@
 #!/usr/bin/env python
-import sys
-import subprocess
+import sys, os
+# append root folder
+sys.path.append (os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
 from subprocess import Popen, PIPE
 from datetime import datetime
-import config as config
 import db.db as db
 import db.metadata as metadata
 import alert
-import temp
+import temp as temp
 
 # Scan for online devices
 def scan_online_devices():

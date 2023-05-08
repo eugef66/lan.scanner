@@ -1,4 +1,8 @@
-import config
+import sys, os
+# append root folder
+sys.path.append (os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
+import config as config
 import smtplib
 import db.db as db
 
@@ -10,7 +14,7 @@ def send_down_alert(macs):
 	for mac in macs:
 		device = db.get_device(mac)
 		message += device["description"] + " : " + mac + " : " + device["ip"] + " : " + device["vendor"]
-	send_email("Devices Down Alert", message)
+	#send_email("Devices Down Alert", message)
 	return
 
 

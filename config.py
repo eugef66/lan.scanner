@@ -12,4 +12,3 @@ SMTP_USERNAME = 'user@gmail.com'
 SMTP_PASSWORD = 'password'
 EMAIL_TO = "user@gmail.com"
 
-APP_PATH = os.path.dirname(os.path.abspath(__file__))
