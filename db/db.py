@@ -32,7 +32,7 @@ def is_online(mac):
 	load()
 	return _db[mac]["is_online"]
 
-def create_device(mac, ip, vendor=None, is_online=False, description=None, alert_down=None, hostname=None, is_new=None):
+def create_device(mac, ip, vendor=None, is_online=False, description=None, alert_down=None, hostname=None, is_new=None,location=None, device_type=None, owner=None):
 	load()
 	default_device_name = get_default_device_name()
 
@@ -43,12 +43,15 @@ def create_device(mac, ip, vendor=None, is_online=False, description=None, alert
 		   "vendor": get_vendor_by_mac() if vendor == None else vendor,
 		   "hostname": default_device_name if hostname == None else hostname,
 		   "alert_down": False if alert_down == None else alert_down,
+		   "location": location,
+		   "device-type": device_type,
+		   "owner": owner,
 		   "updateTS": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
 		   "is_new": True if is_new == None else is_new,
 		   }
 	return
 
-def update_device(mac, ip, vendor=None, is_online=False, description=None, alert_down=None, hostname=None, is_new=None):
+def update_device(mac, ip, vendor=None, is_online=False, description=None, alert_down=None, hostname=None, is_new=None,location=None, device_type=None, owner=None):
 	load()
 	_db[mac] = {"ip": ip if ":" not in ip else None,
 		   "ip6": ip if ":" in ip else None,
@@ -57,6 +60,9 @@ def update_device(mac, ip, vendor=None, is_online=False, description=None, alert
 		   "vendor": _db[mac]["vendor"] if vendor == None else vendor,
 		   "hostname": _db[mac]["hostname"] if hostname == None else hostname,
 		   "alert_down": _db[mac]["alert_down"] if alert_down == None else alert_down,
+		   "location": _db[mac]["location"]  if location == None else location,
+		   "device-type": _db[mac]["device-type"]  if device_type == None else device_type ,
+		   "owner": _db[mac]["owner"]  if owner == None else owner,
 		   "updateTS": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
 		   "is_new": _db[mac]["is_new"] if is_new == None else is_new,
 		   }
@@ -69,8 +75,9 @@ def load(force_reload=False):
 		return _db
 
 	print("--- loading database ---")
-	if (os.path.exists(_db_path + "\\db.json")):
-		with open(_db_path + '\\db.json', 'r') as _db_file:
+	print(_db_path)
+	if (os.path.exists(_db_path + "/db.json")):
+		with open(_db_path + '/db.json', 'r') as _db_file:
 			_db = json.load(_db_file)
 	else:
 		_db = {}
@@ -80,7 +87,9 @@ def load(force_reload=False):
 
 def save():
 	load()
-	with open(_db_path + "\\db.json", "w+") as _db_file:
+	print("--- saving database ---")
+	print(_db_path + "/db.json")
+	with open(_db_path + "/db.json", "w+") as _db_file:
 		_db_file.write(json.dumps(_db, indent=4))
 	return
 

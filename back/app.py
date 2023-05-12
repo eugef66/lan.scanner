@@ -3,6 +3,7 @@ import sys, os
 # append root folder
 sys.path.append (os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+import subprocess
 from subprocess import Popen, PIPE
 from datetime import datetime
 import db.db as db
@@ -25,7 +26,7 @@ def scan_online_devices():
 		else:
 			print("--- Creating New Device ---")
 			print("--- --- " + mac + " | " + vendor + " | " + ip)
-			db.create_device(mac,ip,vendor,True,is_new=True,is_online=True)
+			db.create_device(mac,ip,vendor,True,is_new=True)
 			new_devices.append(mac)
 	alert.send_new_alert(new_devices)
 	return
@@ -42,8 +43,8 @@ def check_alert_down_devices():
 
 def _execute_arp_scan():
 	devices = []
-	#arpscan_output = subprocess.check_output(['sudo', 'arp-scan', '--localnet', '--ignoredups', '--retry=1'], universal_newlines=True)
-	arpscan_output = temp.check_output()
+	arpscan_output = subprocess.check_output(['sudo', 'arp-scan', '--localnet', '--ignoredups', '--retry=1'], universal_newlines=True)
+	#arpscan_output = temp.check_output()
 	lineindex = 1
 	number_of_cleints = len(arpscan_output.splitlines())-2
 	for line in arpscan_output.splitlines():
