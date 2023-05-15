@@ -5,42 +5,85 @@ sys.path.append (os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 import config as config
 import smtplib
 import db.db as db
+from email.mime.multipart import MIMEMultipart
+from email.mime.text import MIMEText
+
+_new_devices=[]
+_down_devices=[]
+
+# Open html Template
+_template_file = open(os.path.dirname(os.path.abspath(__file__)) + '/report_template.html', 'r') 
+_mail_html = _template_file.read() 
+_template_file.close() 
 
 
-
-def send_down_alert(macs):
-	print (" -- Sending Down Alert --")
-	message = "Following Devices are down:"
-	for mac in macs:
+def _create_down_alert_report():
+	global _mail_html
+	message =""
+	for mac in _down_devices:
 		device = db.get_device(mac)
-		message += device["description"] + " : " + mac + " : " + device["ip"] + " : " + device["vendor"]
-	#send_email("Devices Down Alert", message)
+		message += "<tr>"
+		message += "<td width=140> " + mac +" </td>"
+		message += "<td width=130> Datetime </td>"
+		message += "<td width=100> "+ device["ip"] +" </td>"
+		message += "<td width=140> "+ device["description"] +" </td>"
+		message += "<td> "+ device["vendor"] +" </td>"
+		message += "</tr>"
+	_mail_html=_mail_html.replace('<TABLE_DEVICES_DOWN>',message)
 	return
 
 
-def send_new_alert(macs):
-	print (" -- Sending New Device Alert --")
+def _create_new_alert_report():
+	global _mail_html
+	
+	message = ""
+	for mac in _new_devices:
+		device = db.get_device(mac)
+		message += "<tr>"
+		message += "<td width=140> " + mac +" </td>"
+		message += "<td width=130> Datetime </td>"
+		message += "<td width=100> "+ device["ip"] +" </td>"
+		message += "<td width=140> "+ device["description"] +" </td>"
+		message += "<td> "+ device["vendor"] +" </td>"
+		message += "</tr>"
+	_mail_html=_mail_html.replace('<TABLE_NEW_DEVICES>',message)
 	return
 
-def send_email(subject, text):
+def appent_new_device(mac):
+	_new_devices.append(mac)
+	return
 
-	#msg = MIMEMultipart('alternative')
-	#msg['Subject'] = 'Pi.Scanner Report'
-	#msg['From'] = REPORT_FROM
-	#msg['To'] = REPORT_TO
-	#msg.attach (MIMEText (pText, 'plain'))
-	#msg.attach (MIMEText (pHTML, 'html'))
+def appent_down_device(mac):
+	_down_devices.append(mac)
+	return
 
-	header = "To: " + config.EMAIL_TO + "\nFrom: " + \
-		config.SMTP_USERNAME + "\n" + "Subject: " + subject
-	body = text
+def send_alert():
+	if (config.ALERT_NEW_DEVICE and len(_new_devices)>0):
+		print (" -- Sending New Device Alert --")
+		_create_new_alert_report()
+	if (config.ALERT_DOWN_DEVICE and len(_down_devices)>0):
+		print (" -- Sending Down Alert --")
+		_create_down_alert_report()
+	subject = "pi.scanner report"
+	_send_email(subject,_mail_html)
+	return
 
-	s = smtplib.SMTP(config.SMTP_SERVER, config.SMTP_PORT)
-	s.ehlo()
-	s.starttls()
-	s.ehlo()
-	s.login(config.SMTP_USERNAME, config.SMTP_PASSWORD)
-	# print body + "\n==================================="
-	s.sendmail(config.SMTP_USERNAME, config.EMAIL_TO, header + '\n\n' + body)
-	s.quit()
+
+def _send_email (subject, HTML_message):
+    # Compose email
+    msg = MIMEMultipart('alternative')
+    msg['Subject'] = subject
+    msg['From'] = config.ALERT_FROM
+    msg['To'] = config.ALERT_TO
+    msg.attach (MIMEText (HTML_message, 'html'))
+
+    # Send mail
+    smtp_connection = smtplib.SMTP (config.SMTP_SERVER, config.SMTP_PORT)
+    smtp_connection.ehlo()
+    smtp_connection.starttls()
+    smtp_connection.ehlo()
+    smtp_connection.login (config.SMTP_USER, config.SMTP_PASS)
+    smtp_connection.sendmail (config.ALERT_FROM, config.ALERT_TO, msg.as_string())
+    smtp_connection.quit()
+
 

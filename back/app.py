@@ -27,8 +27,7 @@ def scan_online_devices():
 			print("--- Creating New Device ---")
 			print("--- --- " + mac + " | " + vendor + " | " + ip)
 			db.create_device(mac,ip,vendor,True,is_new=True)
-			new_devices.append(mac)
-	alert.send_new_alert(new_devices)
+			alert.appent_new_device(mac)
 	return
 
 def check_alert_down_devices():
@@ -36,15 +35,14 @@ def check_alert_down_devices():
 	down_devices=[]
 	for mac in alert_down_devices:
 		if not db.is_online(mac):
-			down_devices.append(mac)
-	alert.send_down_alert(down_devices)
+			alert.appent_down_device(mac)
 	return
 
 
 def _execute_arp_scan():
 	devices = []
-	arpscan_output = subprocess.check_output(['sudo', 'arp-scan', '--localnet', '--ignoredups', '--retry=1'], universal_newlines=True)
-	#arpscan_output = temp.check_output()
+	#arpscan_output = subprocess.check_output(['sudo', 'arp-scan', '--localnet', '--ignoredups', '--retry=1'], universal_newlines=True)
+	arpscan_output = temp.check_output()
 	lineindex = 1
 	number_of_cleints = len(arpscan_output.splitlines())-2
 	for line in arpscan_output.splitlines():
@@ -63,6 +61,7 @@ def main():
 	scan_online_devices()
 	check_alert_down_devices()
 	db.save()
+	alert.send_alert()
 	
 
 

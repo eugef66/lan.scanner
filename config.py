@@ -6,6 +6,9 @@ import os
 ALERT_NEW_DEVICE = True
 ALERT_DOWN_DEVICE = True
 
+ALERT_FROM = ""
+ALERT_TO =""
+
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
 SMTP_USERNAME = 'user@gmail.com'
