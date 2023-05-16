@@ -1,9 +1,12 @@
+import datetime
+import socket
 import sys, os
 # append root folder
 sys.path.append (os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import config as config
 import smtplib
+from utils import formatTS
 import db.db as db
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -24,7 +27,7 @@ def _create_down_alert_report():
 		device = db.get_device(mac)
 		message += "<tr>"
 		message += "<td width=140> " + mac +" </td>"
-		message += "<td width=130> Datetime </td>"
+		message += "<td width=130> " + device["updateTS"] + " </td>"
 		message += "<td width=100> "+ device["ip"] +" </td>"
 		message += "<td width=140> "+ device["description"] +" </td>"
 		message += "<td> "+ device["vendor"] +" </td>"
@@ -41,9 +44,7 @@ def _create_new_alert_report():
 		device = db.get_device(mac)
 		message += "<tr>"
 		message += "<td width=140> " + mac +" </td>"
-		message += "<td width=130> Datetime </td>"
 		message += "<td width=100> "+ device["ip"] +" </td>"
-		message += "<td width=140> "+ device["description"] +" </td>"
 		message += "<td> "+ device["vendor"] +" </td>"
 		message += "</tr>"
 	_mail_html=_mail_html.replace('<TABLE_NEW_DEVICES>',message)
@@ -58,14 +59,21 @@ def appent_down_device(mac):
 	return
 
 def send_alert():
+	global _mail_html
+	_send_alert=False
 	if (config.ALERT_NEW_DEVICE and len(_new_devices)>0):
 		print (" -- Sending New Device Alert --")
 		_create_new_alert_report()
+		_send_alert=True
 	if (config.ALERT_DOWN_DEVICE and len(_down_devices)>0):
 		print (" -- Sending Down Alert --")
 		_create_down_alert_report()
-	subject = "pi.scanner report"
-	_send_email(subject,_mail_html)
+		_send_alert=True
+	
+	if (_send_alert): 
+		_mail_html = _mail_html.replace ('<SERVER_NAME>', socket.gethostname() )
+		_mail_html = _mail_html.replace ('<REPORT_DATE>', formatTS(datetime.datetime.now()))
+		_send_email(config.ALERT_SUBJECT,_mail_html)
 	return
 
 
@@ -82,7 +90,7 @@ def _send_email (subject, HTML_message):
     smtp_connection.ehlo()
     smtp_connection.starttls()
     smtp_connection.ehlo()
-    smtp_connection.login (config.SMTP_USER, config.SMTP_PASS)
+    smtp_connection.login (config.SMTP_USERNAME, config.SMTP_PASSWORD)
     smtp_connection.sendmail (config.ALERT_FROM, config.ALERT_TO, msg.as_string())
     smtp_connection.quit()
 

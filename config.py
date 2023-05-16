@@ -8,6 +8,7 @@ ALERT_DOWN_DEVICE = True
 
 ALERT_FROM = ""
 ALERT_TO =""
+ALERT_SUBJECT="pi.scanner report"
 
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587
