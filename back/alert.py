@@ -15,7 +15,7 @@ _new_devices=[]
 _down_devices=[]
 
 # Open html Template
-_template_file = open(os.path.dirname(os.path.abspath(__file__)) + '/report_template.html', 'r') 
+_template_file = open(os.path.dirname(os.path.abspath(__file__)) + '/alert_template.html', 'r') 
 _mail_html = _template_file.read() 
 _template_file.close() 
 
@@ -78,20 +78,23 @@ def send_alert():
 
 
 def _send_email (subject, HTML_message):
-    # Compose email
-    msg = MIMEMultipart('alternative')
-    msg['Subject'] = subject
-    msg['From'] = config.ALERT_FROM
-    msg['To'] = config.ALERT_TO
-    msg.attach (MIMEText (HTML_message, 'html'))
+	# Compose email
+	msg = MIMEMultipart('alternative')
+	msg['Subject'] = subject
+	msg['From'] = config.ALERT_FROM
+	msg['To'] = config.ALERT_TO
+	msg.attach (MIMEText (HTML_message, 'html'))
 
-    # Send mail
-    smtp_connection = smtplib.SMTP (config.SMTP_SERVER, config.SMTP_PORT)
-    smtp_connection.ehlo()
-    smtp_connection.starttls()
-    smtp_connection.ehlo()
-    smtp_connection.login (config.SMTP_USERNAME, config.SMTP_PASSWORD)
-    smtp_connection.sendmail (config.ALERT_FROM, config.ALERT_TO, msg.as_string())
-    smtp_connection.quit()
+	# Send mail
+	if (config.EMULATE):
+		print("Emulate Send Email")
+	else:
+		smtp_connection = smtplib.SMTP (config.SMTP_SERVER, config.SMTP_PORT)
+		smtp_connection.ehlo()
+		smtp_connection.starttls()
+		smtp_connection.ehlo()
+		smtp_connection.login (config.SMTP_USERNAME, config.SMTP_PASSWORD)
+		smtp_connection.sendmail (config.ALERT_FROM, config.ALERT_TO, msg.as_string())
+		smtp_connection.quit()
 
 

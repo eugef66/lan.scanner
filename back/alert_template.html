@@ -2,7 +2,6 @@
 #  pi.scanner
 #  Open Source Network scanner
 #
-#  repot_template.html - Back module. Template to email reporting in HTML format
 #-------------------------------------------------------------------------------
 #  eugef66        eugef66@gmail.com        GNU GPLv3
 #--------------------------------------------------------------------------- -->
@@ -16,8 +15,8 @@
     <font face=sans-serif>
     <table align=center width=80% border=1 bordercolor=#909090 cellpadding=0 cellspacing=0 style="border-collapse: collapse; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.5)">
         <tr>
-        <td bgcolor=#b6d7a8  align=center style="padding: 20px 10px 10px 10px; font-size: 36px; font-weight: bold; color:#361bd4; text-shadow: 4px 4px 6px #4b31a8">
-            pi.scanner Report
+        <td bgcolor=#b6d7a8  align=center style="padding: 20px 10px 10px 10px; font-size: 36px; font-weight: bold; color:#d45f11; text-shadow: 4px 4px 6px #5c5a63">
+            pi.scanner Alerts
         </td>
         </tr>
 
@@ -36,7 +35,7 @@
         <tr>
         <td bgcolor=#F5F5F5 height=200 valign=top style="padding: 10px">
             <SECTION_NEW_DEVICES>
-            <p style="font-size: 14px; font-weight: bold; color:#361bd4; text-shadow: 2px 2px 4px #A0A0A0"> New Devices: </p> 
+            <p style="font-size: 14px; font-weight: bold; color:#d45f11; text-shadow: 2px 2px 4px #A0A0A0"> New Devices: </p> 
 
             <table width=100% border=1 bordercolor=#C0C0C0 cellpadding=3px cellspacing=0 style="border-collapse: collapse; font-size: 12px; color:#707070; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)">
                 <tr bgcolor=#909090 style="color:#F0F0F0">
@@ -51,7 +50,7 @@
             </SECTION_NEW_DEVICES>
 
             <SECTION_DEVICES_DOWN>
-            <p style="font-size: 14px; font-weight: bold; color:#361bd4; text-shadow: 2px 2px 4px #A0A0A0"> Devices Down: </p> 
+            <p style="font-size: 14px; font-weight: bold; color:#d45f11; text-shadow: 2px 2px 4px #A0A0A0"> Devices Down: </p> 
 
             <table width=100% border=1 bordercolor=#C0C0C0 cellpadding=3px cellspacing=0 style="border-collapse: collapse; font-size: 12px; color:#707070; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2)">
                 <tr bgcolor=#909090 style="color:#F0F0F0">
@@ -59,6 +58,7 @@
                     <th width=130> Datetime </th>
                     <th width=100> IP </th>
                     <th> Device Name </th>
+					<th> Vendor </th>
                 </tr>
 
                 <TABLE_DEVICES_DOWN>

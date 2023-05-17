@@ -75,7 +75,6 @@ def load(force_reload=False):
 		return _db
 
 	print("--- loading database ---")
-	print(_db_path)
 	if (os.path.exists(_db_path + "/db.json")):
 		with open(_db_path + '/db.json', 'r') as _db_file:
 			_db = json.load(_db_file)
