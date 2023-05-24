@@ -34,14 +34,16 @@ def is_online(mac):
 
 def create_device(mac, ip, vendor=None, is_online=False, description=None, alert_down=None, hostname=None, is_new=None,location=None, device_type=None, owner=None):
 	load()
-	default_device_name = get_default_device_name()
+
+	vendor_name = get_vendor_by_mac(mac) if vendor == None else vendor
+	default_device_name = (vendor_name + ' device') if description == None else description
 
 	_db[mac] = {"ip": ip if ":" not in ip else None,
 		   "ip6": ip if ":" in ip else None,
 		   "is_online": is_online,
-		   "description": default_device_name if description == None else description,
-		   "vendor": get_vendor_by_mac() if vendor == None else vendor,
-		   "hostname": default_device_name if hostname == None else hostname,
+		   "description": default_device_name, 
+		   "vendor": vendor_name,
+		   "hostname": hostname,
 		   "alert_down": False if alert_down == None else alert_down,
 		   "location": location,
 		   "device-type": device_type,
