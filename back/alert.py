@@ -55,10 +55,15 @@ def appent_new_device(mac):
 	return
 
 def appent_down_device(mac):
-	_down_devices.append(mac)
+	#skip if ALERT DOWN THRESHOLD is not met
+	if (db.get_device_down_count(mac) == config.ALERT_DOWN_THRESHOLD-1):
+		_down_devices.append(mac)
+		db.reset_device_down(mac)
+	else:
+		db.mark_device_down(mac)
 	return
 
-def send_alert():
+def send_alerts():
 	global _mail_html
 	_send_alert=False
 	if (config.ALERT_NEW_DEVICE and len(_new_devices)>0):

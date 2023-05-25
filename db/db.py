@@ -32,7 +32,17 @@ def is_online(mac):
 	load()
 	return _db[mac]["is_online"]
 
-def create_device(mac, ip, vendor=None, is_online=False, description=None, alert_down=None, hostname=None, is_new=None,location=None, device_type=None, owner=None):
+def create_device(mac, 
+					ip, 
+					vendor=None, 
+					is_online=False, 
+					description=None, 
+					alert_down=None, 
+					hostname=None, 
+					is_new=None,
+					location=None, 
+					device_type=None, 
+					owner=None):
 	load()
 
 	vendor_name = get_vendor_by_mac(mac) if vendor == None else vendor
@@ -50,10 +60,21 @@ def create_device(mac, ip, vendor=None, is_online=False, description=None, alert
 		   "owner": owner,
 		   "updateTS": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
 		   "is_new": True if is_new == None else is_new,
+		   "down_count" : 0
 		   }
 	return
 
-def update_device(mac, ip, vendor=None, is_online=False, description=None, alert_down=None, hostname=None, is_new=None,location=None, device_type=None, owner=None):
+def update_device(mac,
+					ip,
+					vendor=None,
+					is_online=False,
+					description=None,
+					alert_down=None,
+					hostname=None,
+					is_new=None,
+					location=None,
+					device_type=None,
+					owner=None):
 	load()
 	_db[mac] = {"ip": ip if ":" not in ip else None,
 		   "ip6": ip if ":" in ip else None,
@@ -66,9 +87,24 @@ def update_device(mac, ip, vendor=None, is_online=False, description=None, alert
 		   "device-type": _db[mac]["device-type"]  if device_type == None else device_type ,
 		   "owner": _db[mac]["owner"]  if owner == None else owner,
 		   "updateTS": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-		   "is_new": _db[mac]["is_new"] if is_new == None else is_new,
+		   "is_new": _db[mac]["is_new"] if is_new == None else is_new
 		   }
 	return
+
+def get_device_down_count(mac):
+	load()
+	return _db[mac]["down_count"]
+
+def mark_device_down(mac):
+	load()
+	_db[mac]["down_count"] +=1
+	return
+
+def reset_device_down(mac):
+	load()
+	_db[mac]["down_count"] = 0
+	return
+
 
 def load(force_reload=False):
 	global _db

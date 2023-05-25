@@ -43,6 +43,7 @@ def check_alert_down_devices():
 def _execute_arp_scan():
 	devices = []
 	if (config.EMULATE):
+		print("Emulating arp-scan")
 		arpscan_output = temp.check_output()
 	else:
 		arpscan_output = subprocess.check_output(['sudo', 'arp-scan', '--localnet', '--ignoredups', '--retry=1'], universal_newlines=True)
@@ -65,7 +66,7 @@ def main():
 	scan_online_devices()
 	check_alert_down_devices()
 	db.save()
-	alert.send_alert()
+	alert.send_alerts()
 	
 
 
