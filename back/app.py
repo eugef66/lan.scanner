@@ -15,7 +15,6 @@ import config
 # Scan for online devices
 def scan_online_devices():
 	online_devices = _execute_arp_scan()
-	new_devices_count = 0
 	for device in online_devices:
 		mac = device["mac"]
 		ip = device["ip"]
@@ -23,20 +22,20 @@ def scan_online_devices():
 		if (db.mac_exists(mac)):
 			db.update_device(mac,ip,is_online=True)
 		else:
-			new_devices_count += 1
 			db.create_device(mac,ip,vendor,True,is_new=True)
 			alert.appent_new_device(mac)
-	print(str(new_devices_count) + " new devices")
+			device = db.get_device(mac)
+			print("NEW -- " + device["ip"] + " : " + device["vendor"])
 	return
 
 def check_alert_down_devices():
 	alert_down_devices = db.get_alert_down_devices()
-	down_devices_count=0
 	for mac in alert_down_devices:
 		if not db.is_online(mac):
-			down_devices_count += 1
 			alert.appent_down_device(mac)
-	print(str(down_devices_count) + " down devices")
+			device = db.get_device(mac)
+			print("DOWN -- " + device["ip"] + " : " + device["description"])
+			
 	return
 
 
@@ -63,7 +62,9 @@ def _execute_arp_scan():
 
 def main():
 	db.reset_online_flag()
+	print ("-- Scaning Online Devices --")
 	scan_online_devices()
+	print ("-- Scaning Down Devices --")
 	check_alert_down_devices()
 	db.save()
 	alert.send_alerts()

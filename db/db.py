@@ -125,7 +125,7 @@ def load(force_reload=False):
 def save():
 	load()
 	print("--- saving database ---")
-	print(_db_path + "/db.json")
+	#print(_db_path + "/db.json")
 	with open(_db_path + "/db.json", "w+") as _db_file:
 		_db_file.write(json.dumps(_db, indent=4))
 	return
