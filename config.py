@@ -13,9 +13,9 @@ ALERT_NEW_DEVICE = True
 ALERT_DOWN_DEVICE = True
 ALERT_DOWN_THRESHOLD = 2  # Number of consecutive down indications before sending alert e.g. run 1 - device down no alert, run 2 - device down send alert
 
-ALERT_FROM = "pi.scanner alert"
+ALERT_FROM = "lan.scanner alert"
 ALERT_TO =""
-ALERT_SUBJECT="pi.scanner report"
+ALERT_SUBJECT="lan.scanner report"
 
 SMTP_SERVER = 'smtp.gmail.com'
 SMTP_PORT = 587

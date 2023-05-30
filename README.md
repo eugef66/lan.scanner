@@ -1,9 +1,8 @@
-# pi.scanner
+# lan.scanner
 
-pi.Scannner is an pi-hole companion that scans local newtwork for: 
+lan.scanner is an linux tool that scans local newtwork using arp-scan for: 
  
  * new devices (with alert via email)
- * devices ip changes
  * devices online status (on-line/off-line)
  * off-line alert via email
  
