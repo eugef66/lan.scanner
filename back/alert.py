@@ -78,6 +78,8 @@ def send_alerts():
 	if (_send_alert): 
 		_mail_html = _mail_html.replace ('<SERVER_NAME>', socket.gethostname() )
 		_mail_html = _mail_html.replace ('<REPORT_DATE>', formatTS(datetime.datetime.now()))
+		_mail_html = _mail_html.replace ('<VERSION>', config.VERSION)
+		_mail_html = _mail_html.replace ('<VERSION_DATE>', config.VERSION_DATE)
 		_send_email(config.ALERT_SUBJECT,_mail_html)
 	return
 
