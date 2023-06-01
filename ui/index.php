@@ -8,7 +8,7 @@
 	<!-- Bootstrap CSS -->
 	<link rel="stylesheet" href="css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
-	
+
 
 
 
@@ -18,7 +18,7 @@
 
 
 
-<!-- Toast Message-->
+	<!-- Toast Message-->
 	<div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 5">
 		<div class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
 			aria-atomic="true" id="message">
@@ -31,13 +31,43 @@
 			</div>
 		</div>
 	</div>
-<!-- Devices list -->
+	<!-- Cards -->
+	<div class="row">
+
+		<div class="col-md-4">
+
+		</div>
+		<div class="col-md-4">
+			<button type="button" class="btn btn-outline-primary btn-lg">
+				All Devices <span class="badge badge-light" id="all_count">1111</span>
+			</button>
+			<button type="button" class="btn btn-outline-success btn-lg">
+				New Devices <span class="badge badge-light" id="new_count">11111</span>
+			</button>
+			<button type="button" class="btn btn-outline-danger btn-lg">
+				Down Devices <span class="badge badge-light" id="down_count">11111</span>
+			</button>
+		</div>
+		<div class="col-md-4">
+
+		</div>
+
+
+
+
+
+
+
+
+
+	</div>
+	<!-- Devices list -->
 	<div class="row">
 		<div class="col-md-12">
 			<table id="devices" class="table table-bordered hover"></table>
 		</div>
 	</div>
-<!-- Pop-up Modal-->
+	<!-- Pop-up Modal-->
 	<div class="modal fade" tabindex="-1" role="dialog" id="editForm">
 		<div class="modal-dialog">
 			<div class="modal-content">
@@ -56,21 +86,21 @@
 					<div class="form-group">
 						<label for="description">Location:</label>
 						<select class="form-select" aria-label="Default select example" id="location">
-						  </select>
+						</select>
 					</div>
 
 					<div class="form-group">
 						<label for="description">Device Type:</label>
 						<select class="form-select" aria-label="Default select example" id="device_type">
-						  </select>
+						</select>
 					</div>
 
 					<div class="form-group">
 						<label for="description">Owner:</label>
 						<select class="form-select" aria-label="Default select example" id="owner">
-						  </select>
+						</select>
 					</div>
-					
+
 
 					<div class="form-group">
 						<div class="form-check form-switch">
@@ -92,12 +122,12 @@
 						<label for="ip">Last IP:</label>
 						<input type="text" class="form-control form-control-sm" id="ip" readonly>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="vendor">Vendor:</label>
 						<input type="text" class="form-control form-control-sm" id="vendor" readonly>
 					</div>
-					
+
 					<div class="form-group">
 						<label for="hostname">Hostname:</label>
 						<input type="text" class="form-control form-control-sm" id="hostname" readonly>

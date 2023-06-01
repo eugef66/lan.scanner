@@ -22,11 +22,11 @@ function ajaxGet(url, mimeType, callback) {
 function load() {
 
 	//Load db.json
-	ajaxGet("db.json", "application/json", function (response) {
+	ajaxGet("../db/db.json", "application/json", function (response) {
 		var data = JSON.parse(response);
 		_data = data;
 		// Load metadata
-		ajaxGet("metadata.json", "application/json", function (response) {
+		ajaxGet("../db/metadata.json", "application/json", function (response) {
 			var mdata = JSON.parse(response);
 			_metadata = mdata;
 			refrehDT();
@@ -76,7 +76,7 @@ function loadDevice(mac) {
 	var _location = document.getElementById("location");
 
 	//TODO: Fix to select real value
-	_location.selectedIndex = 3;
+	_location.selectedIndex = 0;
 
     _editForm.show();
 	
@@ -96,26 +96,10 @@ function saveDevice(mac) {
 	device["alert_down"]=alert_down;
 	device["is_new"]=new_device;
 
-	//ajax call to save data
+	//TODO: ajax call to save data
 
 	displayMessage("Saved","success");
     _editForm.hide();
-	/*
-	var _mac= document.getElementById("mac");
-	_mac.value = mac;
-	var _ip = document.getElementById("ip");
-	_ip.value=_data[mac]["ip"];
-	var _description = document.getElementById("description");
-	_description.value=_data[mac]["description"];
-	var _vendor = document.getElementById("vendor");
-	_vendor.value=_data[mac]["vendor"];
-	var _hostname = document.getElementById("hostname");
-	_hostname.value=_data[mac]["hostname"];
-	var _alert_down = document.getElementById("alert_down");
-	_alert_down.checked = _data[mac]["alert_down"];
-	var _new_device = document.getElementById("new_device");
-	_new_device.checked = _data[mac]["new_device"];
-	*/
 }
 
 function refrehDT() {
@@ -139,60 +123,83 @@ function refrehDT() {
 		};
 	}
 	);
-
-
+	//Populate DataTable
 	$('#devices').DataTable({
 
 		data: _dataDT,
 		paging: false,
 		searching:false,
 		columns: [
-			{ title: "IP", data: "ip", orderData: [3] },
+			{ title: "IP Addres", data: "ip", orderData: [3] },
 			{
 				title: "Description", data: "description", render: function (data, type, row, meta) {
 					return "<a href='javascript:loadDevice(\"" + row["mac"] + "\")'>" + data + "</a>";
 				}
 			},
-			{ title: "MAC", data: "mac" },
+			{ title: "MAC Address", data: "mac" },
 			{ title: "ip last number", data: "ip_last", visible: false },
 			
 			{ title: "Vendor", data: "vendor" },
 			//{title: "Host", data: "hostname"},
-
-
 		]
-
 	});
+
+	//Refresh counters
+	
+	var devices = Object.entries(_data);
+
+	//console.log(devices[0][1].ip);
+
+
+	var all_count = document.getElementById("all_count");
+	var new_count = document.getElementById("new_count");
+	var down_count = document.getElementById("down_count");
+	
+	all_count.innerText = devices.length;
+	new_count.innerText = devices.filter(([mac,device]) => device.is_new).length;
+	down_count.innerText = devices.filter(([mac,device]) => device.alert_down && !device.is_online).length;
+
 
 	
 }
 function refreshMetaData(){
 
-	var sel = document.getElementById("location");
+	// Location 
+	var sel_location = document.getElementById("location");
+	var sel_deviceType = document.getElementById("device_type");
+	var sel_owner = document.getElementById("owner");
+	
 
-	_metadata["Location"].forEach(l => {
-		var opt = document.createElement('option');
+	//Add empty value to all lists
+	var opt = null;
+	
+	sel_location.add(Object.assign(document.createElement('option'),{text:"", value:""}));
+	sel_deviceType.add(Object.assign(document.createElement('option'),{text:"", value:""}));
+	sel_owner.add(Object.assign(document.createElement('option'),{text:"", value:""}));
+	
+
+	//Location
+	_metadata["location"].forEach(l => {
+		opt = document.createElement('option')
 		opt.text=l;
 		opt.value=l;
-		sel.add(opt);
+		sel_location.add(opt);
 	});
 
-	sel = document.getElementById("device_type");
-
-	_metadata["DeviceType"].forEach(l => {
-		var opt = document.createElement('option');
+	// Device Type
+	_metadata["device-type"].forEach(l => {
+		opt = document.createElement('option');
 		opt.text=l;
 		opt.value=l;
-		sel.add(opt);
+		sel_deviceType.add(opt);
 	});
 
-	sel = document.getElementById("owner");
-
-	_metadata["Owner"].forEach(l => {
-		var opt = document.createElement('option');
+	//Owner
+	_metadata["owner"].forEach(l => {
+		opt = document.createElement('option');
 		opt.text=l;
 		opt.value=l;
-		sel.add(opt);
+		sel_owner.add(opt);
 	});
 
 
