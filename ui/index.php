@@ -31,21 +31,21 @@
 			</div>
 		</div>
 	</div>
-	<!-- Cards -->
+	<!-- Top Buttons -->
 	<div class="row">
 
 		<div class="col-md-4">
 
 		</div>
 		<div class="col-md-4">
-			<button type="button" class="btn btn-outline-primary btn-lg">
-				All Devices <span class="badge badge-light" id="all_count">1111</span>
+			<button type="button" class="btn btn-outline-primary btn-lg" onclick="filterReset()">
+				All Devices <span class="badge badge-light" id="all_count">N/A</span>
 			</button>
-			<button type="button" class="btn btn-outline-success btn-lg">
-				New Devices <span class="badge badge-light" id="new_count">11111</span>
+			<button type="button" class="btn btn-outline-success btn-lg" onclick="filterNewDevices()">
+				New Devices <span class="badge badge-light" id="new_count">N/A</span>
 			</button>
-			<button type="button" class="btn btn-outline-danger btn-lg">
-				Down Devices <span class="badge badge-light" id="down_count">11111</span>
+			<button type="button" class="btn btn-outline-danger btn-lg" onclick="filterDownDevices()">
+				Down Devices <span class="badge badge-light" id="down_count">N/A</span>
 			</button>
 		</div>
 		<div class="col-md-4">

@@ -102,8 +102,30 @@ function saveDevice(mac) {
     _editForm.hide();
 }
 
-function refrehDT() {
+function filterNewDevices(){
+	var table = $('#devices').DataTable();
 
+
+	var filteredData = table
+    	.column(7)
+    	.data()
+    	.filter( function ( value, index ) {
+ 	       return value == "true" ? true : false;
+	    } );
+
+	table.data = filteredData;
+
+
+
+}
+function filterDownDevices(){
+	alert ("Filter Down Devices");
+}
+function filterReset(){
+	alert ("Reset Filter");
+}
+
+function refrehDT() {
 	//Convert Dict to Array
 	var _dataDT = Object.keys(_data).map(function (mac) {
 		//Get last digit of IP and convert to Number
@@ -115,6 +137,7 @@ function refrehDT() {
 			"mac": mac
 			, "ip": _data[mac]["ip"]
 			, "is_online": _data[mac]["is_online"]
+			, "alert_down": _data[mac]["alert_down"]
 			, "description": _data[mac]["description"]
 			, "vendor": _data[mac]["vendor"]
 			, "ip_last": ip_last
@@ -125,7 +148,6 @@ function refrehDT() {
 	);
 	//Populate DataTable
 	$('#devices').DataTable({
-
 		data: _dataDT,
 		paging: false,
 		searching:false,
@@ -140,7 +162,9 @@ function refrehDT() {
 			{ title: "ip last number", data: "ip_last", visible: false },
 			
 			{ title: "Vendor", data: "vendor" },
-			//{title: "Host", data: "hostname"},
+			{ title: "is online", data: "is_online", visible: true },
+			{ title: "alert down", data: "alert_down", visible: true },
+			{ title: "new device", data: "is_new", visible: true },
 		]
 	});
 
