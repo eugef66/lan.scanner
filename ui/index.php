@@ -38,13 +38,13 @@
 
 		</div>
 		<div class="col-md-4">
-			<a type="button" class="btn btn-outline-primary btn-md" href="index.php">
+			<a class="btn btn-outline-primary btn-md" href="index.php">
 				All Devices <span class="badge badge-light" id="all_count">N/A</span>
 			</a>
-			<a type="button" class="btn btn-outline-success btn-md" href="index.php?filter=new">
+			<a class="btn btn-outline-success btn-md" href="index.php?filter=new">
 				New Devices <span class="badge badge-light" id="new_count">N/A</span>
 			</a>
-			<a type="button" class="btn btn-outline-danger btn-md" href="index.php?filter=down">
+			<a class="btn btn-outline-danger btn-md" href="index.php?filter=down">
 				Down Devices <span class="badge badge-light" id="down_count">N/A</span>
 			</a>
 		</div>
@@ -67,83 +67,6 @@
 			<table id="devices" class="table table-bordered hover"></table>
 		</div>
 	</div>
-	<!-- Pop-up Modal-->
-	<div class="modal fade" tabindex="-1" role="dialog" id="editForm">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">Device Details</div>
-				<div class="modal-body">
-
-					<div class="form-group">
-						<label for="mac">MAC:</label>
-						<input type="text" class="form-control" id="mac" readonly>
-					</div>
-					<div class="form-group">
-						<label for="description">Description:</label>
-						<input type="text" class="form-control" id="description">
-					</div>
-
-					<div class="form-group">
-						<label for="description">Location:</label>
-						<select class="form-select" aria-label="Default select example" id="location">
-						</select>
-					</div>
-
-					<div class="form-group">
-						<label for="description">Device Type:</label>
-						<select class="form-select" aria-label="Default select example" id="device_type">
-						</select>
-					</div>
-
-					<div class="form-group">
-						<label for="description">Owner:</label>
-						<select class="form-select" aria-label="Default select example" id="owner">
-						</select>
-					</div>
-
-
-					<div class="form-group">
-						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" id="alert_down">
-							<label class="form-check-label" for="alert_down">
-								Alert when "Down"
-							</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<div class="form-check form-switch">
-							<input class="form-check-input" type="checkbox" id="new_device">
-							<label class="form-check-label" for="new_device">
-								New Device
-							</label>
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="ip">Last IP:</label>
-						<input type="text" class="form-control form-control-sm" id="ip" readonly>
-					</div>
-
-					<div class="form-group">
-						<label for="vendor">Vendor:</label>
-						<input type="text" class="form-control form-control-sm" id="vendor" readonly>
-					</div>
-
-					<div class="form-group">
-						<label for="hostname">Hostname:</label>
-						<input type="text" class="form-control form-control-sm" id="hostname" readonly>
-					</div>
-
-					<div class="form-group">
-						<input type="button" class="btn btn-lg btn-primary" id="save" value="Save"
-							onclick="saveDevice();" />
-						<input type="button" class="btn btn-lg btn-default" id="cancel" value="Cancel"
-							onclick="_editForm.hide();" />
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
 </body>
 <script src="index.js"></script>
 <script type="text/javascript" src="DataTables/datatables.min.js"></script>

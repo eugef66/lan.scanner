@@ -1,7 +1,7 @@
 
 var _data = null;
 var _metadata=null;
-var _editForm = null;
+
 var  _toast = null;
 var _message=null;
 
@@ -34,7 +34,7 @@ function load() {
 		});
 	});
 
-	_editForm = new bootstrap.Modal(document.getElementById('editForm'), {backdrop:'static'});
+
 	_toast = document.getElementById("message");
 	
 	_message = new bootstrap.Toast(_toast,{
@@ -52,54 +52,6 @@ function displayMessage(message, style_name)
 
 }
 
-
-function loadDevice(mac) {
-
-	console.log(_metadata);
-
-	var _mac= document.getElementById("mac");
-	_mac.value = mac;
-	var _ip = document.getElementById("ip");
-	_ip.value=_data[mac]["ip"];
-	var _description = document.getElementById("description");
-	_description.value=_data[mac]["description"];
-	var _vendor = document.getElementById("vendor");
-	_vendor.value=_data[mac]["vendor"];
-	var _hostname = document.getElementById("hostname");
-	_hostname.value=_data[mac]["hostname"];
-	var _alert_down = document.getElementById("alert_down");
-	_alert_down.checked = _data[mac]["alert_down"];
-	var _new_device = document.getElementById("new_device");
-	_new_device.checked = _data[mac]["new_device"];
-
-	var _location = document.getElementById("location");
-
-	//TODO: Fix to select real value
-	_location.selectedIndex = 0;
-
-    _editForm.show();
-	
-
-
-}
-
-function saveDevice(mac) {
-	
-	var mac= document.getElementById("mac").value;
-	var alert_down = document.getElementById("alert_down").checked
-	var new_device = document.getElementById("new_device").checked;
-	var description = document.getElementById("description").value;
-	
-	var device = _data[mac];
-	device["description"]=description;
-	device["alert_down"]=alert_down;
-	device["is_new"]=new_device;
-
-	//TODO: ajax call to save data
-
-	displayMessage("Saved","success");
-    _editForm.hide();
-}
 
 
 function initializeDataTable() {
@@ -160,7 +112,7 @@ function initializeDataTable() {
 			{ title: "IP Addres", data: "ip", orderData: [3] },
 			{
 				title: "Description", data: "description", render: function (data, type, row, meta) {
-					return "<a href='javascript:loadDevice(\"" + row["mac"] + "\")'>" + data + "</a>";
+					return "<a href='device.php?mac=" + row["mac"] + "'>" + data + "</a>";
 				}
 			},
 			{ title: "MAC Address", data: "mac" },
