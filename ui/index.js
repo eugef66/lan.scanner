@@ -29,7 +29,7 @@ function load() {
 		ajaxGet("../db/metadata.json", "application/json", function (response) {
 			var mdata = JSON.parse(response);
 			_metadata = mdata;
-			refrehDT();
+			initializeDataTable();
 			refreshMetaData();
 		});
 	});
@@ -42,7 +42,6 @@ function load() {
 		autohide: true,
 		delay: 3000
 	})
-	
 }
 
 function displayMessage(message, style_name)
@@ -102,37 +101,23 @@ function saveDevice(mac) {
     _editForm.hide();
 }
 
-function filterNewDevices(){
-	var table = $('#devices').DataTable();
 
-
-	var filteredData = table
-    	.column(7)
-    	.data()
-    	.filter( function ( value, index ) {
- 	       return value == "true" ? true : false;
-	    } );
-
-	table.data = filteredData;
-
-
-
-}
-function filterDownDevices(){
-	alert ("Filter Down Devices");
-}
-function filterReset(){
-	alert ("Reset Filter");
-}
-
-function refrehDT() {
+function initializeDataTable() {
 	//Convert Dict to Array
-	var _dataDT = Object.keys(_data).map(function (mac) {
+
+	var _device_count =0;
+	var _new_count = 0;
+	var _down_count = 0;
+
+	var _dataArray = Object.keys(_data).map(function (mac) {
 		//Get last digit of IP and convert to Number
 		var ip = _data[mac]["ip"]
 		var s = ip.lastIndexOf(".") + 1;
 		var l = ip.length;
 		var ip_last = Number(ip.substring(s, l));
+		_device_count++;
+		if (_data[mac]["is_new"]) _new_count++;
+		if (_data[mac]["alert_down"] && !_data[mac]["is_online"]) _down_count++;
 		return {
 			"mac": mac
 			, "ip": _data[mac]["ip"]
@@ -143,12 +128,32 @@ function refrehDT() {
 			, "ip_last": ip_last
 			, "hostname": _data[mac]["hostname"]
 			, "is_new": _data[mac]["is_new"]
+			, "is_down": (_data[mac]["alert_down"] && !_data[mac]["is_online"])
 		};
 	}
 	);
-	//Populate DataTable
+
+		
+
+	//Filter based on query string 
+	const _filter = (new URLSearchParams(location.search)).get("filter");
+
+	switch (_filter)
+	{
+		case "down":
+			_dataArray = _dataArray.filter(device => device.is_down);
+			break;
+		case "new":
+			_dataArray = _dataArray.filter(device => device.is_new);
+			break;
+	}
+
+	
+
+
+	//initializae Data Table
 	$('#devices').DataTable({
-		data: _dataDT,
+		data: _dataArray,
 		paging: false,
 		searching:false,
 		columns: [
@@ -162,26 +167,25 @@ function refrehDT() {
 			{ title: "ip last number", data: "ip_last", visible: false },
 			
 			{ title: "Vendor", data: "vendor" },
-			{ title: "is online", data: "is_online", visible: true },
-			{ title: "alert down", data: "alert_down", visible: true },
-			{ title: "new device", data: "is_new", visible: true },
+			{ title: "is online", data: "is_online", visible: false },
+			{ title: "alert down", data: "alert_down", visible: false },
+			{ title: "new device", data: "is_new", visible: false, searchable: true},
+			{ title: "down device", data: "is_down", visible: false, searchable: true },
 		]
 	});
 
+	
+
+		
 	//Refresh counters
 	
-	var devices = Object.entries(_data);
-
-	//console.log(devices[0][1].ip);
-
-
 	var all_count = document.getElementById("all_count");
 	var new_count = document.getElementById("new_count");
 	var down_count = document.getElementById("down_count");
 	
-	all_count.innerText = devices.length;
-	new_count.innerText = devices.filter(([mac,device]) => device.is_new).length;
-	down_count.innerText = devices.filter(([mac,device]) => device.alert_down && !device.is_online).length;
+	all_count.innerText = _device_count;
+	new_count.innerText = _new_count;
+	down_count.innerText = _down_count;
 
 
 	

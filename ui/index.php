@@ -38,15 +38,15 @@
 
 		</div>
 		<div class="col-md-4">
-			<button type="button" class="btn btn-outline-primary btn-lg" onclick="filterReset()">
+			<a type="button" class="btn btn-outline-primary btn-md" href="index.php">
 				All Devices <span class="badge badge-light" id="all_count">N/A</span>
-			</button>
-			<button type="button" class="btn btn-outline-success btn-lg" onclick="filterNewDevices()">
+			</a>
+			<a type="button" class="btn btn-outline-success btn-md" href="index.php?filter=new">
 				New Devices <span class="badge badge-light" id="new_count">N/A</span>
-			</button>
-			<button type="button" class="btn btn-outline-danger btn-lg" onclick="filterDownDevices()">
+			</a>
+			<a type="button" class="btn btn-outline-danger btn-md" href="index.php?filter=down">
 				Down Devices <span class="badge badge-light" id="down_count">N/A</span>
-			</button>
+			</a>
 		</div>
 		<div class="col-md-4">
 
