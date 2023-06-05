@@ -1,20 +1,6 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
+<?php include("header.php")?>
 
 
-
-
-</head>
-
-<body onload="load()">
 
 
 
@@ -34,43 +20,39 @@
 	<!-- Top Buttons -->
 	<div class="row">
 
-		<div class="col-md-4">
+		<div class="col-sm-3">
 
 		</div>
-		<div class="col-md-4">
+		<div class="col-sm-2">
 			<a class="btn btn-outline-primary btn-md" href="index.php">
 				All Devices <span class="badge badge-light" id="all_count">N/A</span>
 			</a>
+		</div>
+		<div class="col-sm-2">
 			<a class="btn btn-outline-success btn-md" href="index.php?filter=new">
 				New Devices <span class="badge badge-light" id="new_count">N/A</span>
 			</a>
+		</div>
+		<div class="col-sm-2">
 			<a class="btn btn-outline-danger btn-md" href="index.php?filter=down">
 				Down Devices <span class="badge badge-light" id="down_count">N/A</span>
 			</a>
 		</div>
-		<div class="col-md-4">
+		</div>
+		<div class="col-sm-3">
 
 		</div>
-
-
-
-
-
-
-
-
-
 	</div>
 	<!-- Devices list -->
 	<div class="row">
-		<div class="col-md-12">
+	<div class="col-sm-1">
+	</div>
+		<div class="col-sm-10">
 			<table id="devices" class="table table-bordered hover"></table>
 		</div>
 	</div>
+	<div class="col-sm-1">
+	</div>
 </body>
-<script src="index.js"></script>
-<script type="text/javascript" src="DataTables/datatables.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
 
-
-</html>
+<?php include("footer.php")?>

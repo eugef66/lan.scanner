@@ -1,21 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-	<!-- Bootstrap CSS -->
-	<link rel="stylesheet" href="css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="DataTables/datatables.min.css" />
-
-
-
-
-</head>
-
-<body onload="load()">
-
+<?php include("header.php")?>
 
 
 <form id="editForm">
@@ -86,13 +69,4 @@
 </form>
 			
 
-
-
-
-</body>
-<script src="device.js"></script>
-<script type="text/javascript" src="DataTables/datatables.min.js"></script>
-<script type="text/javascript" src="js/bootstrap.min.js"></script>
-
-
-</html>
+<?php include("footer.php")?>

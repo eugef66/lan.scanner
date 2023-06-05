@@ -6,7 +6,7 @@ VERSION_DATE = "June 1st, 2023"
 # Uncomment the line below to use RPI emulator and change path to emulators module
 # sys.path.append("../pi.emulators")
 
-# Emulate some functionality(not supported by DEV environment) for development only. Set to False in PROD
+# Emulate some functionality(not supported by DEV environment) for development only (such as Sending Email and arp-scan on Windows dev machine). Set to False in PROD
 EMULATE=True
 
 ALERT_NEW_DEVICE = True
