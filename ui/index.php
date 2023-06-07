@@ -1,58 +1,144 @@
-<?php include("header.php")?>
+<!-- ---------------------------------------------------------------------------
+#  lan.scanner
+#  Open Source Network scanner 
+#
+#  devices.php - Front module. Devices list page
+#-------------------------------------------------------------------------------
+#  eugef 2023        eugef66@gmail.com        GNU GPLv3
+#--------------------------------------------------------------------------- -->
 
+<?php
+require 'header.php';
+?>
 
+<script src="index.js"></script>
 
+<script>
+	load();
+</script>
+<!-- Page ------------------------------------------------------------------ -->
+<div class="content-wrapper">
 
+	<!-- Content header--------------------------------------------------------- -->
+	<section class="content-header">
+		<h1 id="pageTitle">
+			Devices
+		</h1>
+	</section>
 
-	<!-- Toast Message-->
-	<div class="position-fixed top-0 start-50 translate-middle-x p-3" style="z-index: 5">
-		<div class="toast align-items-center text-white bg-success border-0" role="alert" aria-live="assertive"
-			aria-atomic="true" id="message">
-			<div class="d-flex">
-				<div class="toast-body" id="message_text">
-					Hello, world! This is a toast message.
-				</div>
-				<button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"
-					aria-label="Close"></button>
+	<!-- Main content ---------------------------------------------------------- -->
+	<section class="content">
+
+		<!-- top small box 1 ------------------------------------------------------- -->
+		<div class="row">
+
+			<div class="col-lg-2 col-sm-4 col-xs-6">
+				<a href="index.php?filter=all" >
+					<div class="small-box bg-green pa-small-box-green pa-small-box-2">
+						<div class="inner">
+							<h3 id="all_count"> -- </h3>
+						</div>
+						<div class="icon"> <i class="fa fa-laptop text-green-20"></i> </div>
+						<div class="small-box-footer pa-small-box-footer"> All Devices <i
+								class="fa fa-arrow-circle-right"></i> </div>
+					</div>
+				</a>
+			</div>
+
+			<!-- top small box 2 ------------------------------------------------------- -->
+			<div class="col-lg-2 col-sm-4 col-xs-6">
+				<a href="index.php?filter=new">
+					<div class="small-box bg-yellow pa-small-box-yellow pa-small-box-2">
+						<div class="inner">
+							<h3 id="new_count"> -- </h3>
+						</div>
+						<div class="icon"> <i class="ion ion-plus-round text-yellow-20"></i> </div>
+						<div class="small-box-footer pa-small-box-footer"> New Devices <i
+								class="fa fa-arrow-circle-right"></i> </div>
+					</div>
+				</a>
+			</div>
+
+			<!-- top small box 3 ------------------------------------------------------- -->
+			<div class="col-lg-2 col-sm-4 col-xs-6">
+				<a href="index.php?filter=down">
+					<div class="small-box bg-red pa-small-box-red pa-small-box-2">
+						<div class="inner">
+							<h3 id="down_count"> -- </h3>
+						</div>
+						<div class="icon"> <i class="fa fa-warning text-red-20"></i> </div>
+						<div class="small-box-footer pa-small-box-footer"> Down Devices <i
+								class="fa fa-arrow-circle-right"></i> </div>
+					</div>
+				</a>
 			</div>
 		</div>
-	</div>
-	<!-- Top Buttons -->
-	<div class="row">
+		<!-- /.row -->
 
-		<div class="col-sm-3">
+		<!-- datatable ------------------------------------------------------------- -->
+		<div class="row">
+			<div class="col-xs-12">
+				<div id="tableDevicesBox" class="box">
 
-		</div>
-		<div class="col-sm-2">
-			<a class="btn btn-outline-primary btn-md" href="index.php">
-				All Devices <span class="badge badge-light" id="all_count">N/A</span>
-			</a>
-		</div>
-		<div class="col-sm-2">
-			<a class="btn btn-outline-success btn-md" href="index.php?filter=new">
-				New Devices <span class="badge badge-light" id="new_count">N/A</span>
-			</a>
-		</div>
-		<div class="col-sm-2">
-			<a class="btn btn-outline-danger btn-md" href="index.php?filter=down">
-				Down Devices <span class="badge badge-light" id="down_count">N/A</span>
-			</a>
-		</div>
-		</div>
-		<div class="col-sm-3">
+					<!-- box-header -->
+					<div class="box-header">
+						<h3 id="tableDevicesTitle" class="box-title text-gray">Devices</h3>
+					</div>
 
-		</div>
-	</div>
-	<!-- Devices list -->
-	<div class="row">
-	<div class="col-sm-1">
-	</div>
-		<div class="col-sm-10">
-			<table id="devices" class="table table-bordered hover"></table>
-		</div>
-	</div>
-	<div class="col-sm-1">
-	</div>
-</body>
+					<!-- table -->
+					<div class="box-body table-responsive">
+						<table id="devices" class="table table-bordered table-hover table-striped">
+							<thead>
+								<tr>
+									<th>Name</th>
+									<th>Last IP</th>
+									<th>MAC</th>
+									<th>Status</th>
+									<th>Owner</th>
+									<th>Type</th>
+									<!--th>Favorite</th-->
+									<!--th>Group</th-->
+									<!--th>First Session</th-->
+									<!--th>Last Session</th-->
+									<!--th>Last IP Order</th-->
+									<!--th>Rowid</th-->
+								</tr>
+							</thead>
+						</table>
+					</div>
+					<!-- /.box-body -->
 
-<?php include("footer.php")?>
+				</div>
+				<!-- /.box -->
+			</div>
+			<!-- /.col -->
+		</div>
+		<!-- /.row -->
+
+		<!-- ----------------------------------------------------------------------- -->
+	</section>
+	<!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+
+
+<!-- ----------------------------------------------------------------------- -->
+<?php
+require 'footer.php';
+?>
+
+
+<!-- ----------------------------------------------------------------------- -->
+<!-- Datatable -->
+<link rel="stylesheet" href="lib/AdminLTE/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css">
+<script src="lib/AdminLTE/bower_components/datatables.net/js/jquery.dataTables.min.js"></script>
+<script src="lib/AdminLTE/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js"></script>
+
+
+
+
+
+
+
+
+

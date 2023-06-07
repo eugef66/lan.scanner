@@ -33,10 +33,7 @@ function load() {
 			refreshMetaData();
 		});
 	});
-
-
 	_toast = document.getElementById("message");
-	
 	_message = new bootstrap.Toast(_toast,{
 		animation: true,
 		autohide: true,
@@ -126,7 +123,6 @@ function initializeDataTable() {
 		]
 	});
 
-	
 
 		
 	//Refresh counters
@@ -138,6 +134,8 @@ function initializeDataTable() {
 	all_count.innerText = _device_count;
 	new_count.innerText = _new_count;
 	down_count.innerText = _down_count;
+
+	
 
 
 	
