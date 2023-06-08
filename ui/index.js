@@ -2,8 +2,6 @@
 var _data = null;
 var _metadata=null;
 
-var  _toast = null;
-var _message=null;
 
 function ajaxGet(url, mimeType, callback) {
 	var xobj = new XMLHttpRequest();
@@ -30,24 +28,12 @@ function load() {
 			var mdata = JSON.parse(response);
 			_metadata = mdata;
 			initializeDataTable();
-			refreshMetaData();
 		});
 	});
-	_toast = document.getElementById("message");
-	_message = new bootstrap.Toast(_toast,{
-		animation: true,
-		autohide: true,
-		delay: 3000
-	})
+	
 }
 
-function displayMessage(message, style_name)
-{
 
-	document.getElementById("message_text").innerHTML=message;
-	_message.show();
-
-}
 
 
 
@@ -57,6 +43,7 @@ function initializeDataTable() {
 	var _device_count =0;
 	var _new_count = 0;
 	var _down_count = 0;
+	var _online_count=0;
 
 	var _dataArray = Object.keys(_data).map(function (mac) {
 		//Get last digit of IP and convert to Number
@@ -67,6 +54,7 @@ function initializeDataTable() {
 		_device_count++;
 		if (_data[mac]["is_new"]) _new_count++;
 		if (_data[mac]["alert_down"] && !_data[mac]["is_online"]) _down_count++;
+		if (_data[mac]["is_online"]) _online_count++;
 		return {
 			"mac": mac
 			, "ip": _data[mac]["ip"]
@@ -78,6 +66,8 @@ function initializeDataTable() {
 			, "hostname": _data[mac]["hostname"]
 			, "is_new": _data[mac]["is_new"]
 			, "is_down": (_data[mac]["alert_down"] && !_data[mac]["is_online"])
+			, "owner": _data[mac]["owner"]
+			, "location": _data[mac]["location"]
 		};
 	}
 	);
@@ -94,6 +84,9 @@ function initializeDataTable() {
 			break;
 		case "new":
 			_dataArray = _dataArray.filter(device => device.is_new);
+			break;
+		case "online":
+			_dataArray = _dataArray.filter(device => device.is_online);
 			break;
 	}
 
@@ -120,66 +113,22 @@ function initializeDataTable() {
 			{ title: "alert down", data: "alert_down", visible: false },
 			{ title: "new device", data: "is_new", visible: false, searchable: true},
 			{ title: "down device", data: "is_down", visible: false, searchable: true },
+			{ title: "Owner", data: "owner" },
+			{ title: "Location", data: "location" }
 		]
 	});
 
 
 		
 	//Refresh counters
-	
-	var all_count = document.getElementById("all_count");
-	var new_count = document.getElementById("new_count");
-	var down_count = document.getElementById("down_count");
-	
-	all_count.innerText = _device_count;
-	new_count.innerText = _new_count;
-	down_count.innerText = _down_count;
+	console.log(_online_count);
 
+	$('#all_count').text(_device_count);
+	$('#new_count').text(_new_count);
+	$('#down_count').text(_down_count);
+	$('#online_count').text(_online_count);
 	
 
 
 	
-}
-function refreshMetaData(){
-
-	// Location 
-	var sel_location = document.getElementById("location");
-	var sel_deviceType = document.getElementById("device_type");
-	var sel_owner = document.getElementById("owner");
-	
-
-	//Add empty value to all lists
-	var opt = null;
-	
-	sel_location.add(Object.assign(document.createElement('option'),{text:"", value:""}));
-	sel_deviceType.add(Object.assign(document.createElement('option'),{text:"", value:""}));
-	sel_owner.add(Object.assign(document.createElement('option'),{text:"", value:""}));
-	
-
-	//Location
-	_metadata["location"].forEach(l => {
-		opt = document.createElement('option')
-		opt.text=l;
-		opt.value=l;
-		sel_location.add(opt);
-	});
-
-	// Device Type
-	_metadata["device-type"].forEach(l => {
-		opt = document.createElement('option');
-		opt.text=l;
-		opt.value=l;
-		sel_deviceType.add(opt);
-	});
-
-	//Owner
-	_metadata["owner"].forEach(l => {
-		opt = document.createElement('option');
-		opt.text=l;
-		opt.value=l;
-		sel_owner.add(opt);
-	});
-
-
-
 }

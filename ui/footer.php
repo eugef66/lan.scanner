@@ -20,7 +20,7 @@
     <!-- To the right -->
     <div class="pull-right no-hidden-xs">
 
-    <!-- Pi.Alert  2.50  <small>(2019-12-30)</small> -->
+    
     <?php
       $conf_file = '../version.conf';
       $conf_data = parse_ini_file($conf_file);
@@ -57,8 +57,6 @@
 <!-- FastClick -->
   <!-- <script src="lib/AdminLTE/bower_components/fastclick/lib/fastclick.js"></script>  -->
 
-<!-- Pi.Alert -------------------------------------------------------------- -->
-  <script src="js/lanscanner_common.js"></script>
 
 </body>
 </html>

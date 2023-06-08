@@ -49,8 +49,7 @@
   <!-- Google Font -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-  <!-- Page Icon -->
-  <link rel="icon" type="image/png" sizes="160x160" href="img/pialertLogoGray80.png" />
+  
 
   <!-- Favicon -->
 
@@ -65,7 +64,7 @@
 
 <!-- ----------------------------------------------------------------------- -->
 <!-- Layout Boxed green -->
-<body class="hold-transition skin-green-light layout-boxed sidebar-mini" style="background-image: url('img/background.png');">
+<body class="hold-transition skin-green-light layout-boxed sidebar-mini">
 <!-- Site wrapper -->
 <div class="wrapper">
 
@@ -96,15 +95,13 @@
           <li class="dropdown user user-menu">
             <!-- Menu Toggle Button -->
             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <!-- The user image in the navbar-->
-              <img src="img/pialertLogoWhite.png" class="user-image" style="border-radius: initial" alt="lan.scanner Logo">
+              
               <!-- hidden-xs hides the username on small devices so only the image appears. -->
               <span class="hidden-xs">lan.scanner</span>
             </a>
             <ul class="dropdown-menu">
               <!-- The user image in the menu -->
               <li class="user-header">
-                <img src="img/pialertLogoWhite.png" class="img-circle" alt="lan.scanner Logo" style="border-color:transparent">
                 <p>
                   Open Source Network Guard
                   <small>Designed for Raspberry Pi</small>

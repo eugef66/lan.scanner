@@ -61,6 +61,20 @@ require 'header.php';
 
 			<!-- top small box 3 ------------------------------------------------------- -->
 			<div class="col-lg-2 col-sm-4 col-xs-6">
+				<a href="index.php?filter=online">
+					<div class="small-box bg-aqua pa-small-box-aqua pa-small-box-2">
+						<div class="inner">
+							<h3 id="online_count"> -- </h3>
+						</div>
+						<div class="icon"> <i class="fa fa-plug text-aqua-20"></i> </div>
+						<div class="small-box-footer pa-small-box-footer"> On-line Devices<i
+								class="fa fa-arrow-circle-right"></i> </div>
+					</div>
+				</a>
+			</div>
+
+			<!-- top small box 4 ------------------------------------------------------- -->
+			<div class="col-lg-2 col-sm-4 col-xs-6">
 				<a href="index.php?filter=down">
 					<div class="small-box bg-red pa-small-box-red pa-small-box-2">
 						<div class="inner">
@@ -87,24 +101,7 @@ require 'header.php';
 
 					<!-- table -->
 					<div class="box-body table-responsive">
-						<table id="devices" class="table table-bordered table-hover table-striped">
-							<thead>
-								<tr>
-									<th>Name</th>
-									<th>Last IP</th>
-									<th>MAC</th>
-									<th>Status</th>
-									<th>Owner</th>
-									<th>Type</th>
-									<!--th>Favorite</th-->
-									<!--th>Group</th-->
-									<!--th>First Session</th-->
-									<!--th>Last Session</th-->
-									<!--th>Last IP Order</th-->
-									<!--th>Rowid</th-->
-								</tr>
-							</thead>
-						</table>
+						<table id="devices" class="table table-bordered table-hover table-striped"/>
 					</div>
 					<!-- /.box-body -->
 
