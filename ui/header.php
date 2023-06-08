@@ -103,8 +103,7 @@
               <!-- The user image in the menu -->
               <li class="user-header">
                 <p>
-                  Open Source Network Guard
-                  <small>Designed for Raspberry Pi</small>
+                  Open Source Network Scanner
                 </p>
               </li>
 

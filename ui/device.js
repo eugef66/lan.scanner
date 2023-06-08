@@ -25,7 +25,7 @@ function load() {
 		ajaxGet("../db/metadata.json", "application/json", function (response) {
 			var mdata = JSON.parse(response);
 			_metadata = mdata;
-			refreshMetaData();
+			//TODO: Temp comment refreshMetaData();
 
 			const _mac = (new URLSearchParams(location.search)).get("mac");
 			loadDevice(_mac);
@@ -41,21 +41,13 @@ function loadDevice(mac) {
 
 	console.log(_metadata);
 
-	var _mac= document.getElementById("mac");
-	_mac.value = mac;
-	var _ip = document.getElementById("ip");
-	_ip.value=_data[mac]["ip"];
-	var _description = document.getElementById("description");
-	_description.value=_data[mac]["description"];
-	var _vendor = document.getElementById("vendor");
-	_vendor.value=_data[mac]["vendor"];
-	var _hostname = document.getElementById("hostname");
-	_hostname.value=_data[mac]["hostname"];
-	var _alert_down = document.getElementById("alert_down");
-	_alert_down.checked = _data[mac]["alert_down"];
-	var _new_device = document.getElementById("new_device");
-	_new_device.checked = _data[mac]["is_new"];
-
+	(document.getElementById("mac")).value = mac;
+	(document.getElementById("ip")).value=_data[mac]["ip"];
+	(document.getElementById("description")).value=_data[mac]["description"];
+	(document.getElementById("vendor")).value=_data[mac]["vendor"];
+	(document.getElementById("hostname")).value=_data[mac]["hostname"];
+	(document.getElementById("alert_down")).checked = _data[mac]["alert_down"];
+	(document.getElementById("new_device")).checked = _data[mac]["is_new"];
 	var _location = document.getElementById("location");
 
 	//TODO: Fix to select real value
