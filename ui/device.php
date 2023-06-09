@@ -1,5 +1,6 @@
-<?php
-require 'header.php';
+<?php 
+require 'header.php'; 
+require 'notification.php';
 ?>
 
 
@@ -79,8 +80,8 @@ require 'header.php';
 									<label class="col-sm-3 control-label">MAC</label>
 									<div class="col-sm-9">
 										<input class="form-control" id="mac" type="text" readonly value="--">
-										<span id="iconRandomMACinactive" data-toggle="tooltip" data-placement="right" title="Random MAC is Inactive">
-											<i style="font-size: 15px;" class="text-gray glyphicon glyphicon-random"></i>
+										<span data-toggle="tooltip" data-placement="right" title="Random MAC">
+											<i  id="isMacRandom" style="font-size: 15px;" class="glyphicon glyphicon-random"></i>
 										</span>
 									</div>
 								</div>
@@ -233,13 +234,12 @@ require 'header.php';
 						<div class="col-xs-12">
 							<div class="pull-right">
 							<button type="button" class="btn btn-success pa-btn" style="margin-left:6px; "
-									id="btnSave" onclick="setDeviceData()"> Save </button>
+									id="btnSave" onclick="saveButton_click()"> Save </button>
 								<button type="button" class="btn btn-danger pa-btn"
-									style="margin-left:0px;" id="btnDelete" onclick="askDeleteDevice()"> Delete Device
+									style="margin-left:0px;" id="btnDelete" onclick="deleteButton_click()"> Delete Device
 								</button>
 								<a  class="btn btn-default pa-btn" style="margin-left:6px;"
 									id="btnCancel" href="index.php"> Cancel </a>
-								
 							</div>
 						</div>
 

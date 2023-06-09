@@ -21,21 +21,21 @@
 </div>
           
 
-<!-- Modal warning -->
-<div class="modal modal-warning fade" id="modal-warning" style="display: none;">
+<!-- Modal danger -->
+<div class="modal modal-danger fade" id="modal-danger" style="display: none;">
   <div class="modal-dialog">
     <div class="modal-content">
 
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 id="modal-warning-title" class="modal-title"> Modal Title </h4>
+        <h4 id="modal-danger-title" class="modal-title"> Modal Title </h4>
       </div>
 
-      <div id="modal-warning-message" class="modal-body"> Modal message </div>
+      <div id="modal-danger-message" class="modal-body"> Modal message </div>
 
       <div class="modal-footer">
-        <button id="modal-warning-cancel" type="button" class="btn btn-outline pull-left" style="min-width: 80px;" data-dismiss="modal">       Cancel </button>
-        <button id="modal-warning-OK"     type="button" class="btn btn-outline"           style="min-width: 80px;" onclick="modalWarningOK()"> OK     </button>
+        <button id="modal-danger-cancel" type="button" class="btn btn-outline pull-left" style="min-width: 80px;" data-dismiss="modal">       Cancel </button>
+        <button id="modal-danger-OK"     type="button" class="btn btn-outline"           style="min-width: 80px;" onclick="modalDangerOK()"> OK     </button>
       </div>
 
     </div>
@@ -44,8 +44,10 @@
 
 
 <!-- Alert float -->
-<div id="notification" class="alert alert-dimissible pa_alert_notification">
+<div id="notification" class="alert alert-dimissible alert-warning  pa_alert_notification">
   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
   <div id="alert-message"> Alert message </div>
 </div>
+
+<script src="notification.js"></script>
 
