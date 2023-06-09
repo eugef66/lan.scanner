@@ -2,11 +2,6 @@
 require 'header.php';
 ?>
 
-<script src="device.js"></script>
-
-<script>
-	load();
-</script>
 
 <!-- Page ------------------------------------------------------------------ -->
 <div class="content-wrapper">
@@ -83,14 +78,10 @@ require 'header.php';
 								<div class="form-group">
 									<label class="col-sm-3 control-label">MAC</label>
 									<div class="col-sm-9">
-										<input class="form-control" id="mac" type="text" readonly value="--"><span
-											id="iconRandomMACinactive" data-toggle="tooltip" data-placement="right"
-											title="Random MAC is Inactive">
-											<i style="font-size: 24px;"
-												class="text-gray glyphicon glyphicon-random"></i> &nbsp &nbsp </span><a
-											href="https://github.com/pucherot/Pi.Alert/blob/main/docs/RAMDOM_MAC.md"
-											target="_blank" style="color: #777;">
-											<i class="fa fa-info-circle"></i> </a>
+										<input class="form-control" id="mac" type="text" readonly value="--">
+										<span id="iconRandomMACinactive" data-toggle="tooltip" data-placement="right" title="Random MAC is Inactive">
+											<i style="font-size: 15px;" class="text-gray glyphicon glyphicon-random"></i>
+										</span>
 									</div>
 								</div>
 
@@ -111,17 +102,20 @@ require 'header.php';
 								</div>
 
 
+
+
 								<!-- Owner -->
 								<div class="form-group">
 									<label class="col-sm-3 control-label">Owner</label>
 									<div class="col-sm-9">
 										<div class="input-group">
-											<input class="form-control" id="owner" type="text" value="--">
+											<input class="form-control" id="owner_value" readonly type="text" value="--">
 											<div class="input-group-btn">
 												<button type="button" class="btn btn-info dropdown-toggle"
 													data-toggle="dropdown" aria-expanded="false">
 													<span class="fa fa-caret-down"></span></button>
-												<ul id="dropdownOwner" class="dropdown-menu dropdown-menu-right">
+												<ul id="owner" class="dropdown-menu dropdown-menu-right">
+													
 												</ul>
 											</div>
 										</div>
@@ -133,23 +127,12 @@ require 'header.php';
 									<label class="col-sm-3 control-label">Type</label>
 									<div class="col-sm-9">
 										<div class="input-group">
-											<input class="form-control" id="device_type" type="text" value="--">
+											<input class="form-control" id="device_type_value" readonly type="text" value="--">
 											<div class="input-group-btn">
 												<button type="button" class="btn btn-info dropdown-toggle"
 													data-toggle="dropdown" aria-expanded="false">
 													<span class="fa fa-caret-down"></span></button>
-												<ul id="dropdownDeviceType" class="dropdown-menu dropdown-menu-right">
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtDeviceType','Smartphone')">
-															Smartphone </a></li>
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtDeviceType','Laptop')"> Laptop
-														</a></li>
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtDeviceType','PC')"> PC </a></li>
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtDeviceType','Others')"> Others
-														</a></li>
+												<ul id="device_type" class="dropdown-menu dropdown-menu-right">
 												</ul>
 											</div>
 										</div>
@@ -163,30 +146,12 @@ require 'header.php';
 									<label class="col-sm-3 control-label">Location</label>
 									<div class="col-sm-9">
 										<div class="input-group">
-											<input class="form-control" id="location" type="text" value="--">
+											<input class="form-control" id="location_value" readonly type="text" value="--">
 											<div class="input-group-btn">
 												<button type="button" class="btn btn-info dropdown-toggle"
 													data-toggle="dropdown" aria-expanded="false">
 													<span class="fa fa-caret-down"></span></button>
-												<ul id="dropdownLocation" class="dropdown-menu dropdown-menu-right">
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtLocation','Bathroom')">
-															Bathroom</a></li>
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtLocation','Bedroom')"> Bedroom</a>
-													</li>
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtLocation','Hall')"> Hall</a></li>
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtLocation','Kitchen')"> Kitchen</a>
-													</li>
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtLocation','Living room')"> Living
-															room</a></li>
-													<li class="divider"></li>
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtLocation','Others')"> Others</a>
-													</li>
+												<ul id="location" class="dropdown-menu dropdown-menu-right">
 												</ul>
 											</div>
 										</div>
@@ -197,7 +162,7 @@ require 'header.php';
 								<div class="form-group">
 									<label class="col-sm-3 control-label">Comments</label>
 									<div class="col-sm-9">
-										<textarea class="form-control" rows="3" id="txtComments"></textarea>
+										<textarea class="form-control" rows="3" id="comments"></textarea>
 									</div>
 								</div>
 
@@ -213,7 +178,7 @@ require 'header.php';
 								<div class="form-group">
 									<label class="col-sm-5 control-label">Status</label>
 									<div class="col-sm-7">
-										<input class="form-control" id="txtStatus" type="text" readonly value="--">
+										<input class="form-control" id="status" type="text" readonly value="--">
 									</div>
 								</div>
 
@@ -234,91 +199,21 @@ require 'header.php';
 							<h4 class="bottom-border-aqua">Events & Alerts config</h4>
 							<div class="box-body form-horizontal">
 
-								<!-- Scan Cycle -->
-								<div class="form-group">
-									<label class="col-sm-5 control-label">Scan Cycle</label>
-									<div class="col-sm-7">
-										<div class="input-group">
-											<input class="form-control" id="txtScanCycle" type="text" value="--"
-												readonly style="background-color: #fff;">
-											<div class="input-group-btn">
-												<button type="button" class="btn btn-info dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false"
-													id="dropdownButtonScanCycle">
-													<span class="fa fa-caret-down"></span></button>
-												<ul id="dropdownScanCycle" class="dropdown-menu dropdown-menu-right">
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtScanCycle','1 min')"> Scan 1 min
-															every 5 min</a></li>
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtScanCycle','15 min');"> Scan 12
-															min every 15 min</a></li>
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtScanCycle','0 min');"> Don't
-															Scan</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<!-- Alert events -->
-								<div class="form-group">
-									<label class="col-sm-5 control-label">Alert All Events</label>
-									<div class="col-sm-7" style="padding-top:6px;">
-										<input class="checkbox blue hidden" id="chkAlertEvents" type="checkbox">
-									</div>
-								</div>
 
 								<!-- Alert Down -->
 								<div class="form-group">
 									<label class="col-sm-5 control-label">Alert Down</label>
 									<div class="col-sm-7" style="padding-top:6px;">
-										<input class="checkbox red hidden" id="chkAlertDown" type="checkbox">
+										<input class="checkbox red" id="alert_down" type="checkbox">
 									</div>
 								</div>
 
-								<!-- Skip Notifications -->
-								<div class="form-group">
-									<label class="col-sm-5 control-label"
-										style="padding-top: 0px; padding-left: 0px;">Skip repeated notifications
-										during</label>
-									<div class="col-sm-7">
-										<div class="input-group">
-											<input class="form-control" id="txtSkipRepeated" type="text" value="--"
-												readonly style="background-color: #fff;">
-											<div class="input-group-btn">
-												<button type="button" class="btn btn-info dropdown-toggle"
-													data-toggle="dropdown" aria-expanded="false"
-													id="dropdownButtonSkipRepeated">
-													<span class="fa fa-caret-down"></span></button>
-												<ul id="dropdownSkipRepeated" class="dropdown-menu dropdown-menu-right">
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtSkipRepeated','0 h (notify all events)');">
-															0 h (notify all events)</a></li>
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtSkipRepeated','1 h');"> 1 h</a>
-													</li>
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtSkipRepeated','8 h');"> 8 h</a>
-													</li>
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtSkipRepeated','24 h');"> 24 h</a>
-													</li>
-													<li><a href="javascript:void(0)"
-															onclick="setTextValue('txtSkipRepeated','168 h (one week)');">
-															168 h (one week)</a></li>
-												</ul>
-											</div>
-										</div>
-									</div>
-								</div>
 
 								<!-- New Device -->
 								<div class="form-group">
 									<label class="col-sm-5 control-label">New Device:</label>
 									<div class="col-sm-7" style="padding-top:6px;">
-										<input class="checkbox orange hidden" id="chkNewDevice" type="checkbox">
+										<input class="checkbox orange " id="is_new" type="checkbox">
 									</div>
 								</div>
 
@@ -326,29 +221,10 @@ require 'header.php';
 								<div class="form-group">
 									<label class="col-sm-5 control-label">Archived:</label>
 									<div class="col-sm-7" style="padding-top:6px;">
-										<input class="checkbox blue hidden" id="chkArchived" type="checkbox">
+										<input class="checkbox blue " id="chkArchived" type="checkbox">
 									</div>
 								</div>
 
-								<!-- Randomized MAC -->
-								<div class="form-group">
-									<label class="col-sm-5 control-label">Random MAC:</label>
-									<div class="col-sm-7" style="padding-top:6px;">
-										<span id="iconRandomMACinactive" data-toggle="tooltip" data-placement="right"
-											title="Random MAC is Inactive">
-											<i style="font-size: 24px;"
-												class="text-gray glyphicon glyphicon-random"></i> &nbsp &nbsp </span>
-
-										<span id="iconRandomMACactive" data-toggle="tooltip" data-placement="right"
-											title="Random MAC is Active" class="hidden">
-											<i style="font-size: 24px;"
-												class="text-yellow glyphicon glyphicon-random"></i> &nbsp &nbsp </span>
-
-										<a href="https://github.com/pucherot/Pi.Alert/blob/main/docs/RAMDOM_MAC.md"
-											target="_blank" style="color: #777;">
-											<i class="fa fa-info-circle"></i> </a>
-									</div>
-								</div>
 
 							</div>
 						</div>
@@ -356,13 +232,14 @@ require 'header.php';
 						<!-- Buttons -->
 						<div class="col-xs-12">
 							<div class="pull-right">
-								<button type="button" class="btn btn-default pa-btn pa-btn-delete"
+							<button type="button" class="btn btn-success pa-btn" style="margin-left:6px; "
+									id="btnSave" onclick="setDeviceData()"> Save </button>
+								<button type="button" class="btn btn-danger pa-btn"
 									style="margin-left:0px;" id="btnDelete" onclick="askDeleteDevice()"> Delete Device
 								</button>
-								<button type="button" class="btn btn-default pa-btn" style="margin-left:6px;"
-									id="btnRestore" onclick="getDeviceData(true)"> Reset Changes </button>
-								<button type="button" disabled class="btn btn-primary pa-btn" style="margin-left:6px; "
-									id="btnSave" onclick="setDeviceData()"> Save </button>
+								<a  class="btn btn-default pa-btn" style="margin-left:6px;"
+									id="btnCancel" href="index.php"> Cancel </a>
+								
 							</div>
 						</div>
 
@@ -376,10 +253,9 @@ require 'header.php';
 			<!-- ----------------------------------------------------------------------- -->
 		</section>
 		<!-- /.content -->
+	</section>
 </div>
 <!-- /.content-wrapper -->
-
-
 <!-- ----------------------------------------------------------------------- -->
 <?php
 require 'footer.php';
@@ -401,3 +277,8 @@ require 'footer.php';
 <link rel="stylesheet" href="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.print.min.css" media="print">
 <script src="lib/AdminLTE/bower_components/moment/moment.js"></script>
 <script src="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
+<script src="device.js"></script>
+
+<script>
+	load();
+</script>

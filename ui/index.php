@@ -12,12 +12,11 @@ require 'header.php';
 ?>
 
 <script src="index.js"></script>
-
 <script>
-	load();
+load();
 </script>
-<!-- Page ------------------------------------------------------------------ -->
-<div class="content-wrapper">
+
+
 
 	<!-- Content header--------------------------------------------------------- -->
 	<section class="content-header">
@@ -101,7 +100,7 @@ require 'header.php';
 
 					<!-- table -->
 					<div class="box-body table-responsive">
-						<table id="devices" class="table table-bordered table-hover table-striped"/>
+						<table id="devices" class="table table-bordered table-hover table-striped"></table>
 					</div>
 					<!-- /.box-body -->
 
@@ -115,15 +114,13 @@ require 'header.php';
 		<!-- ----------------------------------------------------------------------- -->
 	</section>
 	<!-- /.content -->
-</div>
-<!-- /.content-wrapper -->
 
 
 <!-- ----------------------------------------------------------------------- -->
+
 <?php
 require 'footer.php';
 ?>
-
 
 <!-- ----------------------------------------------------------------------- -->
 <!-- Datatable -->

@@ -6,6 +6,7 @@
 #  eugef 2023        eugef66@gmail.com        GNU GPLv3
 #--------------------------------------------------------------------------- -->
 
+
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- Default to the left -->
@@ -33,8 +34,8 @@
   <!-- Control Sidebar -->
     <!-- DELETED -->
 
-</div>
-<!-- ./wrapper -->
+	</div>
+<!-- /.Site-wrapper -->
 
 <!-- ----------------------------------------------------------------------- -->
 <!-- REQUIRED JS SCRIPTS -->
@@ -47,16 +48,6 @@
 
 <!-- AdminLTE App -->
   <script src="lib/AdminLTE/dist/js/adminlte.min.js"></script>
-
-<!-- Optionally, you can add Slimscroll and FastClick plugins.
-     Both of these plugins are recommended to enhance the
-     user experience. -->
-
-<!-- SlimScroll -->
-  <!-- <script src="lib/AdminLTE/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script> -->
-<!-- FastClick -->
-  <!-- <script src="lib/AdminLTE/bower_components/fastclick/lib/fastclick.js"></script>  -->
-
-
+  
 </body>
 </html>

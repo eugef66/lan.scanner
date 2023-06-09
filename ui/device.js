@@ -25,7 +25,10 @@ function load() {
 		ajaxGet("../db/metadata.json", "application/json", function (response) {
 			var mdata = JSON.parse(response);
 			_metadata = mdata;
-			//TODO: Temp comment refreshMetaData();
+			initializeDropdown("owner", "owner", "owner_value");
+			initializeDropdown("device-type", "device_type", "device_type_value");
+			initializeDropdown("location", "location", "location_value");
+			initializeiCheckBoxes();
 
 			const _mac = (new URLSearchParams(location.search)).get("mac");
 			loadDevice(_mac);
@@ -39,84 +42,91 @@ function load() {
 
 function loadDevice(mac) {
 
-	console.log(_metadata);
-
 	(document.getElementById("mac")).value = mac;
-	(document.getElementById("ip")).value=_data[mac]["ip"];
-	(document.getElementById("description")).value=_data[mac]["description"];
-	(document.getElementById("vendor")).value=_data[mac]["vendor"];
-	(document.getElementById("hostname")).value=_data[mac]["hostname"];
-	(document.getElementById("alert_down")).checked = _data[mac]["alert_down"];
-	(document.getElementById("new_device")).checked = _data[mac]["is_new"];
-	var _location = document.getElementById("location");
-
-	//TODO: Fix to select real value
-	_location.selectedIndex = 0;
-
-	
+	(document.getElementById("ip")).value = _data[mac]["ip"];
+	(document.getElementById("description")).value = _data[mac]["description"];
+	(document.getElementById("vendor")).value = _data[mac]["vendor"];
+	(document.getElementById("status")).value = (_data[mac]["is_online"] ? "On-line" : "Offline");
+	$("#alert_down").iCheck((_data[mac]["alert_down"]?'check':'uncheck'));
+	$("#is_new").iCheck((_data[mac]["is_new"]?'check':'uncheck'));
+	(document.getElementById("location_value")).value = (_data[mac]["location"] == null ? " -- " : _data[mac]["location"]);
+	(document.getElementById("owner_value")).value = (_data[mac]["owner"] == null ? " -- " : _data[mac]["owner"]);
+	(document.getElementById("device_type_value")).value = (_data[mac]["device-type"] == null ? " -- " : _data[mac]["device-type"]);
+	(document.getElementById("comments")).value = _data[mac]["comments"];
 
 
 }
 
 function saveDevice(mac) {
-	
-	var mac= document.getElementById("mac").value;
+
+	var mac = document.getElementById("mac").value;
 	var alert_down = document.getElementById("alert_down").checked
 	var new_device = document.getElementById("new_device").checked;
 	var description = document.getElementById("description").value;
-	
+
 	var device = _data[mac];
-	device["description"]=description;
-	device["alert_down"]=alert_down;
-	device["is_new"]=new_device;
+	device["description"] = description;
+	device["alert_down"] = alert_down;
+	device["is_new"] = new_device;
 
 	//TODO: ajax call to save data
 
-	displayMessage("Saved","success");
-    _editForm.hide();
+	displayMessage("Saved", "success");
+	_editForm.hide();
 }
 
 
-function refreshMetaData(){
+function initializeDropdown(meta_attribute, dropdown_name, textbox_name) {
 
-	// Location 
-	var sel_location = document.getElementById("location");
-	var sel_deviceType = document.getElementById("device_type");
-	var sel_owner = document.getElementById("owner");
-	
+	var sel_owner = document.getElementById(dropdown_name);
+	sel_owner.innerHTML = "<li><a href='javascript:void(0)' onclick=setTextValue('" + textbox_name + "',' -- ')> -- </a></li>";
+	_metadata[meta_attribute].forEach(l => {
+		sel_owner.innerHTML += "<li><a href='javascript:void(0)' onclick=setTextValue('" + textbox_name + "','" + l + "')>" + l + "</a></li>";
+	});
+}
 
-	//Add empty value to all lists
-	var opt = null;
-	
-	sel_location.add(Object.assign(document.createElement('option'),{text:"", value:""}));
-	sel_deviceType.add(Object.assign(document.createElement('option'),{text:"", value:""}));
-	sel_owner.add(Object.assign(document.createElement('option'),{text:"", value:""}));
-	
-
-	//Location
-	_metadata["location"].forEach(l => {
-		opt = document.createElement('option')
-		opt.text=l;
-		opt.value=l;
-		sel_location.add(opt);
+// -----------------------------------------------------------------------------
+function initializeiCheckBoxes() {
+	// Blue
+	$('input[type="checkbox"].blue').iCheck({
+		checkboxClass: 'icheckbox_flat-blue',
+		radioClass: 'iradio_flat-blue',
+		increaseArea: '20%'
 	});
 
-	// Device Type
-	_metadata["device-type"].forEach(l => {
-		opt = document.createElement('option');
-		opt.text=l;
-		opt.value=l;
-		sel_deviceType.add(opt);
+	// Orange
+	$('input[type="checkbox"].orange').iCheck({
+		checkboxClass: 'icheckbox_flat-orange',
+		radioClass: 'iradio_flat-orange',
+		increaseArea: '20%'
 	});
 
-	//Owner
-	_metadata["owner"].forEach(l => {
-		opt = document.createElement('option');
-		opt.text=l;
-		opt.value=l;
-		sel_owner.add(opt);
+	// Red
+	$('input[type="checkbox"].red').iCheck({
+		checkboxClass: 'icheckbox_flat-red',
+		radioClass: 'iradio_flat-red',
+		increaseArea: '20%'
 	});
 
+	// When toggle iCheck
+	$('input').on('ifToggled', function (event) {
+		// Hide / Show Events
+		if (event.currentTarget.id == 'chkHideConnectionEvents') {
+			getDeviceEvents();
+			setParameter(parEventsHide, event.currentTarget.checked);
+		} else {
+			// Activate save & restore
+			//   activateSaveRestoreData();
+
+			// Ask skip notifications
+			// if (event.currentTarget.id == 'chkArchived' ) {
+			//   askSkipNotifications();
+			// }
+		}
+	});
+}
 
 
+function setTextValue(textElement, textValue) {
+	$('#' + textElement).val(textValue);
 }
