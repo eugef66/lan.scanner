@@ -38,11 +38,11 @@ def create_device(mac,
 					is_online=False, 
 					description=None, 
 					alert_down=None, 
-					hostname=None, 
 					is_new=None,
 					location=None, 
 					device_type=None, 
-					owner=None):
+					owner=None,
+					comments=None):
 	load()
 
 	vendor_name = get_vendor_by_mac(mac) if vendor == None else vendor
@@ -53,14 +53,14 @@ def create_device(mac,
 		   "is_online": is_online,
 		   "description": default_device_name, 
 		   "vendor": vendor_name,
-		   "hostname": hostname,
 		   "alert_down": False if alert_down == None else alert_down,
 		   "location": location,
 		   "device-type": device_type,
 		   "owner": owner,
 		   "updateTS": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
 		   "is_new": True if is_new == None else is_new,
-		   "down_count" : 0
+		   "down_count" : 0,
+		   "comments" : comments
 		   }
 	return
 
@@ -70,24 +70,24 @@ def update_device(mac,
 					is_online=False,
 					description=None,
 					alert_down=None,
-					hostname=None,
 					is_new=None,
 					location=None,
 					device_type=None,
-					owner=None):
+					owner=None,
+					comments=None):
 	load()
 	_db[mac] = {"ip": ip if ":" not in ip else None,
 		   "ip6": ip if ":" in ip else None,
 		   "is_online": is_online,
 		   "description": _db[mac]["description"] if description == None else description,
 		   "vendor": _db[mac]["vendor"] if vendor == None else vendor,
-		   "hostname": _db[mac]["hostname"] if hostname == None else hostname,
 		   "alert_down": _db[mac]["alert_down"] if alert_down == None else alert_down,
 		   "location": _db[mac]["location"]  if location == None else location,
 		   "device-type": _db[mac]["device-type"]  if device_type == None else device_type ,
 		   "owner": _db[mac]["owner"]  if owner == None else owner,
 		   "updateTS": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
-		   "is_new": _db[mac]["is_new"] if is_new == None else is_new
+		   "is_new": _db[mac]["is_new"] if is_new == None else is_new,
+		   "comments": _db[mac]["comments"] if comments == None else comments
 		   }
 	return
 
