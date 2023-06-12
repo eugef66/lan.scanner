@@ -87,7 +87,8 @@ def update_device(mac,
 		   "owner": _db[mac]["owner"]  if owner == None else owner,
 		   "updateTS": datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
 		   "is_new": _db[mac]["is_new"] if is_new == None else is_new,
-		   "comments": _db[mac]["comments"] if comments == None else comments
+		   "comments": _db[mac]["comments"] if comments == None else comments,
+		   "down_count": 0 if is_online else _db[mac]["down_count"]
 		   }
 	return
 

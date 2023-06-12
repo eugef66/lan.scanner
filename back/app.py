@@ -1,16 +1,18 @@
 #!/usr/bin/env python
+import datetime
 import sys, os
 # append root folder
 sys.path.append (os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import subprocess
 from subprocess import Popen, PIPE
-from datetime import datetime
+
 import db.db as db
 import db.metadata as metadata
 import alert
 import emulator as temp
 import config
+from utils import formatTS
 
 # Scan for online devices
 def scan_online_devices():
@@ -61,6 +63,7 @@ def _execute_arp_scan():
 
 
 def main():
+	print (" -- Process Started [" + formatTS(datetime.datetime.now()) + "] --")
 	db.reset_online_flag()
 	print ("-- Scaning Online Devices --")
 	scan_online_devices()
@@ -68,6 +71,7 @@ def main():
 	check_alert_down_devices()
 	db.save()
 	alert.send_alerts()
+	print (" -- Process Finished [" + formatTS(datetime.datetime.now()) + "] --")
 	
 
 
