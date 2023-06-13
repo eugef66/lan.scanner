@@ -1,5 +1,5 @@
-<?php 
-require 'header.php'; 
+<?php
+require 'header.php';
 require 'notification.php';
 ?>
 
@@ -64,7 +64,8 @@ require 'notification.php';
 
 			</div>
 			<!-- /.row -->
-
+<!-- form -->
+<form action="saveDevice.php" method='POST'>
 			<!-- tab control------------------------------------------------------------ -->
 			<div class="row">
 				<div class="col-lg-12 col-sm-12 col-xs-12">
@@ -79,9 +80,10 @@ require 'notification.php';
 								<div class="form-group">
 									<label class="col-sm-3 control-label">MAC</label>
 									<div class="col-sm-9">
-										<input class="form-control" id="mac" type="text" readonly value="--">
+										<input class="form-control" id="mac" name="mac" type="text" readonly value="--">
 										<span data-toggle="tooltip" data-placement="right" title="Random MAC">
-											<i  id="isMacRandom" style="font-size: 15px;" class="glyphicon glyphicon-random"></i>
+											<i id="isMacRandom" style="font-size: 15px;"
+												class="glyphicon glyphicon-random"></i>
 										</span>
 									</div>
 								</div>
@@ -90,7 +92,7 @@ require 'notification.php';
 								<div class="form-group">
 									<label class="col-sm-3 control-label">Vendor</label>
 									<div class="col-sm-9">
-										<input class="form-control" id="vendor" type="text" readonly value="--">
+										<input class="form-control" id="vendor" name="vendor" type="text" readonly value="--">
 									</div>
 								</div>
 
@@ -98,7 +100,7 @@ require 'notification.php';
 								<div class="form-group">
 									<label class="col-sm-3 control-label">Description</label>
 									<div class="col-sm-9">
-										<input class="form-control" id="description" type="text" value="--">
+										<input class="form-control" id="description" name="description" type="text" value="--">
 									</div>
 								</div>
 
@@ -110,13 +112,14 @@ require 'notification.php';
 									<label class="col-sm-3 control-label">Owner</label>
 									<div class="col-sm-9">
 										<div class="input-group">
-											<input class="form-control" id="owner_value" readonly type="text" value="--">
+											<input class="form-control" id="owner_value" name="owner_value" readonly type="text"
+												value="--">
 											<div class="input-group-btn">
 												<button type="button" class="btn btn-info dropdown-toggle"
 													data-toggle="dropdown" aria-expanded="false">
 													<span class="fa fa-caret-down"></span></button>
 												<ul id="owner" class="dropdown-menu dropdown-menu-right">
-													
+
 												</ul>
 											</div>
 										</div>
@@ -128,7 +131,8 @@ require 'notification.php';
 									<label class="col-sm-3 control-label">Type</label>
 									<div class="col-sm-9">
 										<div class="input-group">
-											<input class="form-control" id="device_type_value" readonly type="text" value="--">
+											<input class="form-control" id="device_type_value" name="device_type" readonly type="text"
+												value="--">
 											<div class="input-group-btn">
 												<button type="button" class="btn btn-info dropdown-toggle"
 													data-toggle="dropdown" aria-expanded="false">
@@ -147,7 +151,8 @@ require 'notification.php';
 									<label class="col-sm-3 control-label">Location</label>
 									<div class="col-sm-9">
 										<div class="input-group">
-											<input class="form-control" id="location_value" readonly type="text" value="--">
+											<input class="form-control" id="location_value" name="location" readonly type="text"
+												value="--">
 											<div class="input-group-btn">
 												<button type="button" class="btn btn-info dropdown-toggle"
 													data-toggle="dropdown" aria-expanded="false">
@@ -163,7 +168,7 @@ require 'notification.php';
 								<div class="form-group">
 									<label class="col-sm-3 control-label">Comments</label>
 									<div class="col-sm-9">
-										<textarea class="form-control" rows="3" id="comments"></textarea>
+										<textarea class="form-control" rows="3" id="comments" name="comments"></textarea>
 									</div>
 								</div>
 
@@ -179,7 +184,7 @@ require 'notification.php';
 								<div class="form-group">
 									<label class="col-sm-5 control-label">Status</label>
 									<div class="col-sm-7">
-										<input class="form-control" id="status" type="text" readonly value="--">
+										<input class="form-control" id="status" name="status" type="text" readonly value="--">
 									</div>
 								</div>
 
@@ -187,7 +192,7 @@ require 'notification.php';
 								<div class="form-group">
 									<label class="col-sm-5 control-label">IP Address</label>
 									<div class="col-sm-7">
-										<input class="form-control" id="ip" type="text" readonly value="--">
+										<input class="form-control" id="ip" name="ip" type="text" readonly value="--">
 									</div>
 								</div>
 
@@ -205,7 +210,7 @@ require 'notification.php';
 								<div class="form-group">
 									<label class="col-sm-5 control-label">Alert Down</label>
 									<div class="col-sm-7" style="padding-top:6px;">
-										<input class="checkbox red" id="alert_down" type="checkbox">
+										<input class="checkbox red" id="alert_down" name="alert_down" type="checkbox">
 									</div>
 								</div>
 
@@ -214,7 +219,7 @@ require 'notification.php';
 								<div class="form-group">
 									<label class="col-sm-5 control-label">New Device:</label>
 									<div class="col-sm-7" style="padding-top:6px;">
-										<input class="checkbox orange " id="is_new" type="checkbox">
+										<input class="checkbox orange " id="is_new" name="is_new" type="checkbox">
 									</div>
 								</div>
 
@@ -222,7 +227,7 @@ require 'notification.php';
 								<div class="form-group">
 									<label class="col-sm-5 control-label">Archived:</label>
 									<div class="col-sm-7" style="padding-top:6px;">
-										<input class="checkbox blue " id="chkArchived" type="checkbox">
+										<input class="checkbox blue " id="archived" name="archived" type="checkbox">
 									</div>
 								</div>
 
@@ -233,13 +238,13 @@ require 'notification.php';
 						<!-- Buttons -->
 						<div class="col-xs-12">
 							<div class="pull-right">
-							<button type="button" class="btn btn-success pa-btn" style="margin-left:6px; "
-									id="btnSave" onclick="saveButton_click()"> Save </button>
-								<button type="button" class="btn btn-danger pa-btn"
-									style="margin-left:0px;" id="btnDelete" onclick="deleteButton_click()"> Delete Device
-								</button>
-								<a  class="btn btn-default pa-btn" style="margin-left:6px;"
-									id="btnCancel" href="index.php"> Cancel </a>
+								<button type="submit" class="btn btn-success pa-btn" style="margin-left:6px; "
+									id="btnSave" name="action" value="save" onclick="saveButton_click()"> Save </button> 
+								<button type="submit" class="btn btn-danger pa-btn" style="margin-left:0px;"
+									id="btnDelete" name="action" value="delete" onclick="deleteButton_click()"> Delete Device
+								</button> 
+								<a class="btn btn-default pa-btn" style="margin-left:6px;" id="btnCancel"
+									href="index.php"> Cancel </a>
 							</div>
 						</div>
 
@@ -249,7 +254,8 @@ require 'notification.php';
 				<!-- /.col -->
 			</div>
 			<!-- /.row -->
-
+</form>
+<!-- /.form -->
 			<!-- ----------------------------------------------------------------------- -->
 		</section>
 		<!-- /.content -->
