@@ -65,7 +65,7 @@ require 'notification.php';
 			</div>
 			<!-- /.row -->
 <!-- form -->
-<form action="saveDevice.php" method='POST'>
+<form action="saveDevice.php" method='POST' id="deviceForm">
 			<!-- tab control------------------------------------------------------------ -->
 			<div class="row">
 				<div class="col-lg-12 col-sm-12 col-xs-12">
@@ -112,7 +112,7 @@ require 'notification.php';
 									<label class="col-sm-3 control-label">Owner</label>
 									<div class="col-sm-9">
 										<div class="input-group">
-											<input class="form-control" id="owner_value" name="owner_value" readonly type="text"
+											<input class="form-control" id="owner_value" name="owner" readonly type="text"
 												value="--">
 											<div class="input-group-btn">
 												<button type="button" class="btn btn-info dropdown-toggle"
@@ -239,8 +239,8 @@ require 'notification.php';
 						<div class="col-xs-12">
 							<div class="pull-right">
 								<button type="submit" class="btn btn-success pa-btn" style="margin-left:6px; "
-									id="btnSave" name="action" value="save" onclick="saveButton_click()"> Save </button> 
-								<button type="submit" class="btn btn-danger pa-btn" style="margin-left:0px;"
+									id="btnSave" name="action" value="save"> Save </button> 
+								<button type="button" class="btn btn-danger pa-btn" style="margin-left:0px;"
 									id="btnDelete" name="action" value="delete" onclick="deleteButton_click()"> Delete Device
 								</button> 
 								<a class="btn btn-default pa-btn" style="margin-left:6px;" id="btnCancel"

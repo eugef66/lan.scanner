@@ -75,35 +75,13 @@ function deleteButton_click()
 
 function deleteDevice()
 {
-	alert("Deleted");
+	var _form = $("#deviceForm");
+	_form.append('<input type="hidden" name="action" value="delete" />');
+	_form.submit();
+	
 	
 }
 
-function saveButton_click()
-{
-	//saveDevice();
-
-	showMessage("Success");
-
-}
-
-function saveDevice(mac) {
-
-	var mac = document.getElementById("mac").value;
-	var alert_down = document.getElementById("alert_down").checked
-	var new_device = document.getElementById("new_device").checked;
-	var description = document.getElementById("description").value;
-
-	var device = _data[mac];
-	device["description"] = description;
-	device["alert_down"] = alert_down;
-	device["is_new"] = new_device;
-
-	//TODO: ajax call to save data
-
-	displayMessage("Saved", "success");
-	_editForm.hide();
-}
 
 
 function initializeDropdown(meta_attribute, dropdown_name, textbox_name) {
@@ -111,7 +89,8 @@ function initializeDropdown(meta_attribute, dropdown_name, textbox_name) {
 	var sel_owner = document.getElementById(dropdown_name);
 	sel_owner.innerHTML = "<li><a href='javascript:void(0)' onclick=setTextValue('" + textbox_name + "',' -- ')> -- </a></li>";
 	_metadata[meta_attribute].forEach(l => {
-		sel_owner.innerHTML += "<li><a href='javascript:void(0)' onclick=setTextValue('" + textbox_name + "','" + l + "')>" + l + "</a></li>";
+		console.log (l);
+		sel_owner.innerHTML += "<li><a href='javascript:void(0)' onclick='setTextValue(\"" + textbox_name + "\",\"" + l + "\")'>" + l + "</a></li>";
 	});
 }
 
