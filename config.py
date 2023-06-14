@@ -1,7 +1,7 @@
 import os
 
-VERSION = "0.1.0"
-VERSION_DATE = "June 1st, 2023"
+VERSION = "1.0.0"
+VERSION_DATE = "June 14st, 2023"
 
 # Uncomment the line below to use RPI emulator and change path to emulators module
 # sys.path.append("../pi.emulators")
