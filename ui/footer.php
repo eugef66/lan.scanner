@@ -13,7 +13,7 @@
 
     <!-- &copy; 2023 eugef -->
     <?php
-      $conf_file = '../version.conf';
+      $conf_file = '../version.py';
       $conf_data = parse_ini_file($conf_file);
       echo '<span style="display:inline-block; transform: rotate(180deg)">&copy;</span> '. $conf_data['VERSION_YEAR'] .' eugef';
     ?>
@@ -23,7 +23,7 @@
 
     
     <?php
-      $conf_file = '../version.conf';
+      $conf_file = '../version.py';
       $conf_data = parse_ini_file($conf_file);
       echo 'lan.scanner&nbsp&nbsp'. $conf_data['VERSION'] .'&nbsp&nbsp<small>('. $conf_data['VERSION_DATE'] .')</small>';
     ?>

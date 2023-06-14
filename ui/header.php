@@ -198,14 +198,14 @@
 						class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('admin.php'))) {
 							echo 'active';
 						} ?>">
-						<a href="#"><i class="fa fa-flash"></i> <span>Administration(tbd)</span></a>
+						<a href="#"><i class="fa fa-flash"></i> <span>Administration</span></a>
 					</li>
 
 					<li
 						class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('settings.php'))) {
 							echo 'active';
 						} ?>">
-						<a href="#"><i class="fa fa-list-ul"></i> <span>Settings(tbd)</span></a>
+						<a href="#"><i class="fa fa-list-ul"></i> <span>Settings</span></a>
 					</li>
 
 				</ul>

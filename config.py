@@ -1,11 +1,5 @@
 import os
 
-VERSION = "1.0.0"
-VERSION_DATE = "June 14st, 2023"
-
-# Uncomment the line below to use RPI emulator and change path to emulators module
-# sys.path.append("../pi.emulators")
-
 # Emulate some functionality(not supported by DEV environment) for development only (such as Sending Email and arp-scan on Windows dev machine). Set to False in PROD
 EMULATE=True
 

@@ -5,6 +5,7 @@ import sys, os
 sys.path.append (os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import config as config
+import version as version
 import smtplib
 from utils import formatTS
 import db.db as db
@@ -78,8 +79,8 @@ def send_alerts():
 	if (_send_alert): 
 		_mail_html = _mail_html.replace ('<SERVER_NAME>', socket.gethostname() )
 		_mail_html = _mail_html.replace ('<REPORT_DATE>', formatTS(datetime.datetime.now()))
-		_mail_html = _mail_html.replace ('<VERSION>', config.VERSION)
-		_mail_html = _mail_html.replace ('<VERSION_DATE>', config.VERSION_DATE)
+		_mail_html = _mail_html.replace ('<VERSION>', version.VERSION)
+		_mail_html = _mail_html.replace ('<VERSION_DATE>', version.VERSION_DATE)
 		_send_email(config.ALERT_SUBJECT,_mail_html)
 	return
 
