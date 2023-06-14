@@ -95,7 +95,7 @@
 }
 
 .content-wrapper, .right-side, .main-footer {
-  margin-left: 0px;
+  margin-left: 150px;
 }
 
 @media (max-width: 767px) {

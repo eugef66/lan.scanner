@@ -89,8 +89,8 @@ function initializeDropdown(meta_attribute, dropdown_name, textbox_name) {
 	var sel_owner = document.getElementById(dropdown_name);
 	sel_owner.innerHTML = "<li><a href='javascript:void(0)' onclick=setTextValue('" + textbox_name + "',' -- ')> -- </a></li>";
 	_metadata[meta_attribute].forEach(l => {
-		console.log (l);
-		sel_owner.innerHTML += "<li><a href='javascript:void(0)' onclick='setTextValue(\"" + textbox_name + "\",\"" + l + "\")'>" + l + "</a></li>";
+		var _value=escapeString(l);
+		sel_owner.innerHTML += "<li><a href=\"javascript:void(0)\" onclick=\"setTextValue(\'" + textbox_name + "\',\'" + _value + "\')\">" + l + "</a></li>";
 	});
 }
 

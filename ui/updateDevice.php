@@ -22,6 +22,6 @@ fclose($db_file);
 
 //Redirect to index.php
 header("Location: index.php");
-exit();
+
 
 ?>

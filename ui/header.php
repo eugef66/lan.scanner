@@ -87,7 +87,7 @@
     <!-- Logo -->
     <a href="." class="logo">
       <!-- mini logo for sidebar mini 50x50 pixels -->
-      <span class="logo-mini">P<b>a</b></span>
+      <span class="logo-mini">l<b>.s</b></span>
       <!-- logo for regular state and mobile devices -->
       <span class="logo-lg">lan<b>.scanner</b></span>
     </a>
@@ -95,7 +95,10 @@
 <!-- ----------------------------------------------------------------------- -->
     <!-- Header Navbar -->
     <nav class="navbar navbar-static-top" role="navigation">
-      
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
       <!-- Navbar Right Menu -->
       <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
@@ -148,3 +151,47 @@
     </nav>
   </header>
 
+<!-- ----------------------------------------------------------------------- -->
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+
+<!-- sidebar: style can be found in sidebar.less -->
+<section class="sidebar">
+
+  <!-- Sidebar user panel (optional) -->
+  <div class="user-panel">
+	<a href="." class="logo">
+	  <img src="img/Logo.png" class="img-responsive" alt="lan.scanner Logo"/>
+	</a>
+  </div>
+
+  <!-- search form (Optional) -->
+	<!-- DELETED -->
+
+  <!-- Sidebar Menu -->
+  <ul class="sidebar-menu" data-widget="tree">
+<!--
+	<li class="header">MAIN MENU</li>
+-->
+
+	<li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('index.php', 'device.php') ) ){ echo 'active'; } ?>">
+	  <a href="index.php"><i class="fa fa-laptop"></i> <span>Devices</span></a>
+	</li>
+	
+<!--
+	 <li><a href="devices.php?status=favorites"><i class="fa fa-star"></i> <span>Favorites Devices</span></a></li>
+-->
+	<li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('presence.php') ) ){ echo 'active'; } ?>">
+	  <a href="#"><i class="fa fa-flash"></i> <span>Administarion</span></a>
+	</li>
+
+	<li class=" <?php if (in_array (basename($_SERVER['SCRIPT_NAME']), array('events.php') ) ){ echo 'active'; } ?>">
+	  <a href="#"><i class="fa fa-list-ul"></i> <span>Settings</span></a>
+	</li>
+
+  </ul>
+
+  <!-- /.sidebar-menu -->
+</section>
+<!-- /.sidebar -->
+</aside>

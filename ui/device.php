@@ -65,7 +65,7 @@ require 'notification.php';
 			</div>
 			<!-- /.row -->
 <!-- form -->
-<form action="saveDevice.php" method='POST' id="deviceForm">
+<form action="updateDevice.php" method='POST' id="deviceForm">
 			<!-- tab control------------------------------------------------------------ -->
 			<div class="row">
 				<div class="col-lg-12 col-sm-12 col-xs-12">
@@ -284,6 +284,7 @@ require 'footer.php';
 <script src="lib/AdminLTE/bower_components/moment/moment.js"></script>
 <script src="lib/AdminLTE/bower_components/fullcalendar/dist/fullcalendar.min.js"></script>
 <script src="device.js"></script>
+<script src="utils.js"></script>
 
 <script>
 	load();
