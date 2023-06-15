@@ -27,7 +27,7 @@ def _create_down_alert_report():
 	for mac in _down_devices:
 		device = db.get_device(mac)
 		message += "<tr>"
-		message += "<td width=140> " + mac +" </td>"
+		message += "<td width=140> <a href=\"" + config.WEB_ADMIN_DEVICE_URL + mac + "\">" + mac +"</a></td>"
 		message += "<td width=130> " + device["updateTS"] + " </td>"
 		message += "<td width=100> "+ device["ip"] +" </td>"
 		message += "<td width=140> "+ device["description"] +" </td>"
@@ -44,7 +44,7 @@ def _create_new_alert_report():
 	for mac in _new_devices:
 		device = db.get_device(mac)
 		message += "<tr>"
-		message += "<td width=140> " + mac +" </td>"
+		message += "<td width=140><a href=\"" + config.WEB_ADMIN_DEVICE_URL + mac + "\">" + mac +"</a></td>"
 		message += "<td width=100> "+ device["ip"] +" </td>"
 		message += "<td> "+ device["vendor"] +" </td>"
 		message += "</tr>"

@@ -17,3 +17,5 @@ SMTP_USERNAME = 'user@example.com'
 SMTP_PASSWORD = 'password'
 EMAIL_TO = "user@mailserver.com"
 
+WEB_ADMIN_DEVICE_URL = "http://192.168.1.31/lanscanner/ui/device.php?mac="
+
