@@ -34,19 +34,6 @@ require 'notification.php';
 					</a>
 				</div>
 
-				<!-- top small box 2 ------------------------------------------------------- -->
-				<div class="col-lg-3 col-sm-6 col-xs-6">
-					<a href="#" onclick="javascript: $('#tabSessions').trigger('click');">
-						<div class="small-box bg-aqua pa-small-box-aqua pa-small-box-2">
-							<div class="inner">
-								<h3 id="deviceSessions"> -- </h3>
-							</div>
-							<div class="icon"> <i class="fa fa-plug"></i> </div>
-							<div class="small-box-footer pa-small-box-footer"> Online <i
-									class="fa fa-arrow-circle-right"></i> </div>
-						</div>
-					</a>
-				</div>
 
 				<!--  top small box 4 ------------------------------------------------------ -->
 				<div class="col-lg-3 col-sm-6 col-xs-6">
