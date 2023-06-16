@@ -1,25 +1,25 @@
 {
-	"location": [
-		"Living Room",
-		"Family Room",
-		"Kitchen",
-		"Garage",
-		"Ron's Room"
-	],
-	"device-type": [
-		"Smartphone",
-		"Tablet",
-		"SBC",
-		"Virtual Assistance",
-		"Server",
-		"Laptop",
-		"Desktop",
-		"Appliance",
-		"Router"
-	],
-	"owner": [
-		"John",
-		"Jasie",
-		"James"
-	]
+    "location": [
+        "Living Room",
+        "Family Room",
+        "Kitchen",
+        "Garage",
+        "Ron's Room"
+    ],
+    "device-type": [
+        "Smartphone",
+        "Tablet",
+        "SBC",
+        "Virtual Assistance",
+        "Server",
+        "Laptop",
+        "Desktop",
+        "Appliance",
+        "Router"
+    ],
+    "owner": [
+        "John",
+        "Jasie",
+        "James"
+    ]
 }

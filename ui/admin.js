@@ -1,0 +1,56 @@
+function ajaxGet(url, mimeType, callback) {
+	var xobj = new XMLHttpRequest();
+	xobj.overrideMimeType(mimeType);
+	xobj.open('GET', url);
+	xobj.setRequestHeader('Cache-Control', 'no-cache');
+	xobj.onreadystatechange = function () {
+		if (xobj.readyState == 4 && xobj.status == "200") {
+			if (callback != null) callback(xobj.responseText);
+		}
+	}
+	xobj.send(null);
+}
+
+function load() {
+
+	//Load db.json
+	ajaxGet("../db/metadata.json", "application/json", function (response) {
+		var mdata = JSON.parse(response);
+		_metadata = mdata;
+		initializeDropdown("owner", "owner", "owner_value");
+		initializeDropdown("device-type", "device_type", "device_type_value");
+		initializeDropdown("location", "location", "location_value");
+		initializeiCheckBoxes();
+	});
+
+}
+
+function initializeDropdown(meta_attribute, dropdown_name, textbox_name) {
+
+	var sel_owner = document.getElementById(dropdown_name);
+	sel_owner.innerHTML = "<li><a href='javascript:void(0)' onclick=setTextValue('" + textbox_name + "','')>{new}</a></li>";
+	_metadata[meta_attribute].forEach(l => {
+		var _value = escapeString(l);
+		sel_owner.innerHTML += "<li><a href=\"javascript:void(0)\" onclick=\"setTextValue(\'" + textbox_name + "\',\'" + _value + "\')\">" + l + "</a></li>";
+	});
+}
+
+function setTextValue(textElement, textValue) {
+	$('#' + textElement).val(textValue);
+	$('#' + textElement).prop("readonly", !(textValue == ''));
+
+	//TODO: Add condition to check which dropdown is clicked
+	if (textElement == "device_type_value") {
+		$("#btnTypeSave").prop("disabled", !(textValue == ''));
+		$("#btnTypeDelete").prop("disabled", (textValue == ''));
+	}
+	if (textElement == "owner_value") {
+		$("#btnOwnerSave").prop("disabled", !(textValue == ''));
+		$("#btnOwnerDelete").prop("disabled", (textValue == ''));
+	}
+	if (textElement == "location_value") {
+		$("#btnLocationSave").prop("disabled", !(textValue == ''));
+		$("#btnLocationDelete").prop("disabled", (textValue == ''));
+	}
+
+}
