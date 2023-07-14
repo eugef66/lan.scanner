@@ -2,28 +2,17 @@ var _mac=null;
 var _data = null;
 var _edit_form = null;
 
-function ajaxGet(url, mimeType, callback) {
-	var xobj = new XMLHttpRequest();
-	xobj.overrideMimeType(mimeType);
-	xobj.open('GET', url);
-	xobj.setRequestHeader('Cache-Control', 'no-cache');
-	xobj.onreadystatechange = function () {
-		if (xobj.readyState == 4 && xobj.status == "200") {
-			if (callback != null) callback(xobj.responseText);
-		}
-	}
-	xobj.send(null);
-}
+
 
 
 function load() {
 
 	//Load db.json
-	ajaxGet("../db/db.json", "application/json", function (response) {
+	ajaxCall("GET","../db/db.json", "application/json", function (response) {
 		var data = JSON.parse(response);
 		_data = data;
 		// Load metadata
-		ajaxGet("../db/metadata.json", "application/json", function (response) {
+		ajaxCall("GET","../db/metadata.json", "application/json", function (response) {
 			var mdata = JSON.parse(response);
 			_metadata = mdata;
 			initializeDropdown("owner", "owner", "owner_value");

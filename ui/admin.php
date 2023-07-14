@@ -1,6 +1,7 @@
 <?php
 require 'header.php';
 require 'notification.php';
+
 ?>
 
 
@@ -114,18 +115,18 @@ require 'notification.php';
 													data-toggle="dropdown" aria-expanded="false">
 													<span class="fa fa-caret-down"></span></button>
 												<ul id="skin" class="dropdown-menu dropdown-menu-right">
-													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-black-light.min.css')">Black Light</a></li>
-													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-black.min.css')">Black</a></li>
-													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-blue-light.min.css')">Blue Light</a></li>
-													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-blue.min.css')">Blue</a></li>
-													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-green-light.min.css')">Green Light</a></li>
-													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-green.min.css')">Green</a></li>
-													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-purple-light.min.css')">Purple Light</a></li>
-													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-purple.min.css')">Purple</a></li>
-													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-red-light.min.css')">Red Light</a></li>
-													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-red.min.css')">Red</a></li>
-													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-yellow-light.min.css')">Yellow Light</a></li>
-													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-yellow.min.css')">Yellow</a></li>
+													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-black-light')">Black Light</a></li>
+													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-black')">Black</a></li>
+													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-blue-light')">Blue Light</a></li>
+													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-blue')">Blue</a></li>
+													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-green-light')">Green Light</a></li>
+													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-green')">Green</a></li>
+													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-purple-light')">Purple Light</a></li>
+													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-purple')">Purple</a></li>
+													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-red-light')">Red Light</a></li>
+													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-red')">Red</a></li>
+													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-yellow-light')">Yellow Light</a></li>
+													<li><a href="javascript:void(0)" onclick="setTextValue('skin_value','skin-yellow')">Yellow</a></li>
 												</ul>
 												<button type=button class="btn btn-primary" id="btnSkinApply"><i class="fa fa-check "></i> Apply</button>
 												

@@ -1,3 +1,6 @@
+<?php
+require 'config.php';
+?>
 <!-- ---------------------------------------------------------------------------
 #  lan.scanner
 #  Open Source Network Guard / WIFI & LAN intrusion detector 
@@ -81,7 +84,7 @@
 <!-- ----------------------------------------------------------------------- -->
 <!-- Layout Boxed green -->
 
-<body class="hold-transition skin-green-light layout-boxed sidebar-mini">
+<body class="hold-transition <?=$skin?> layout-boxed sidebar-mini">
 	<!-- Site wrapper -->
 	<div class="wrapper">
 
