@@ -35,7 +35,7 @@
 	<!-- AdminLTE Skins. We have chosen the skin-blue for this starter
 		page. However, you can choose any other skin. Make sure you
 		apply the skin class to the body tag so the changes take effect. -->
-	<link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/skin-green-light.min.css">
+	<link rel="stylesheet" href="lib/AdminLTE/dist/css/skins/_all-skins.min.css">
 
 	<!-- lan.scanner CSS -->
 	<link rel="stylesheet" href="css/lanscanner.css">
@@ -46,6 +46,8 @@
 	<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 	<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+
+	
 
 	<!-- Google Font -->
 	<link rel="stylesheet"
@@ -194,18 +196,12 @@
 					<!--
 	 <li><a href="devices.php?status=favorites"><i class="fa fa-star"></i> <span>Favorites Devices</span></a></li>
 -->
+
 					<li
 						class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('admin.php'))) {
 							echo 'active';
 						} ?>">
-						<a href="#"><i class="fa fa-flash"></i> <span>Administration</span></a>
-					</li>
-
-					<li
-						class=" <?php if (in_array(basename($_SERVER['SCRIPT_NAME']), array('settings.php'))) {
-							echo 'active';
-						} ?>">
-						<a href="#"><i class="fa fa-list-ul"></i> <span>Settings</span></a>
+						<a href="admin.php"><i class="fa fa-list-ul"></i> <span>Configurations</span></a>
 					</li>
 
 				</ul>

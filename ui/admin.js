@@ -13,6 +13,8 @@ function ajaxGet(url, mimeType, callback) {
 
 function load() {
 
+	//$('#theme_color').colorpicker();
+
 	//Load db.json
 	ajaxGet("../db/metadata.json", "application/json", function (response) {
 		var mdata = JSON.parse(response);
@@ -20,8 +22,11 @@ function load() {
 		initializeDropdown("owner", "owner", "owner_value");
 		initializeDropdown("device-type", "device_type", "device_type_value");
 		initializeDropdown("location", "location", "location_value");
-		initializeiCheckBoxes();
+		
+		
 	});
+
+	
 
 }
 
@@ -41,15 +46,12 @@ function setTextValue(textElement, textValue) {
 
 	//TODO: Add condition to check which dropdown is clicked
 	if (textElement == "device_type_value") {
-		$("#btnTypeSave").prop("disabled", !(textValue == ''));
 		$("#btnTypeDelete").prop("disabled", (textValue == ''));
 	}
 	if (textElement == "owner_value") {
-		$("#btnOwnerSave").prop("disabled", !(textValue == ''));
 		$("#btnOwnerDelete").prop("disabled", (textValue == ''));
 	}
 	if (textElement == "location_value") {
-		$("#btnLocationSave").prop("disabled", !(textValue == ''));
 		$("#btnLocationDelete").prop("disabled", (textValue == ''));
 	}
 
