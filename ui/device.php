@@ -9,7 +9,7 @@ require 'notification.php';
 
 	<!-- Content header--------------------------------------------------------- -->
 	<section class="content-header">
-		<?php require 'notification.php'; ?>
+		
 
 		<h1 id="pageTitle">
 			Device Details
@@ -195,7 +195,7 @@ require 'notification.php';
 
 								<!-- Alert Down -->
 								<div class="form-group">
-									<label class="col-sm-5 control-label">Alert Down</label>
+									<label class="col-sm-5 control-label">Alert Down:</label>
 									<div class="col-sm-7" style="padding-top:6px;">
 										<input class="checkbox red" id="alert_down" name="alert_down" type="checkbox">
 									</div>

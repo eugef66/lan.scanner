@@ -11,7 +11,7 @@ function load() {
 		initializeDropdown("owner", "owner", "owner_value");
 		initializeDropdown("device-type", "device_type", "device_type_value");
 		initializeDropdown("location", "location", "location_value");
-		
+		initializeiCheckBoxes();
 		
 	});
 
@@ -19,15 +19,6 @@ function load() {
 
 }
 
-function initializeDropdown(meta_attribute, dropdown_name, textbox_name) {
-
-	var sel_owner = document.getElementById(dropdown_name);
-	sel_owner.innerHTML = "<li><a href='javascript:void(0)' onclick=setTextValue('" + textbox_name + "','')>{new}</a></li>";
-	_metadata[meta_attribute].forEach(l => {
-		var _value = escapeString(l);
-		sel_owner.innerHTML += "<li><a href=\"javascript:void(0)\" onclick=\"setTextValue(\'" + textbox_name + "\',\'" + _value + "\')\">" + l + "</a></li>";
-	});
-}
 
 function setTextValue(textElement, textValue) {
 	$('#' + textElement).val(textValue);
