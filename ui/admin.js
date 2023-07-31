@@ -20,19 +20,3 @@ function load() {
 }
 
 
-function setTextValue(textElement, textValue) {
-	$('#' + textElement).val(textValue);
-	$('#' + textElement).prop("readonly", !(textValue == ''));
-
-	//TODO: Add condition to check which dropdown is clicked
-	if (textElement == "device_type_value") {
-		$("#btnTypeDelete").prop("disabled", (textValue == ''));
-	}
-	if (textElement == "owner_value") {
-		$("#btnOwnerDelete").prop("disabled", (textValue == ''));
-	}
-	if (textElement == "location_value") {
-		$("#btnLocationDelete").prop("disabled", (textValue == ''));
-	}
-
-}

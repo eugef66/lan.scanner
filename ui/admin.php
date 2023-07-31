@@ -196,7 +196,7 @@ require 'notification.php';
 						<!-- /.row -->
 						<div class="row">
 							<!-- column 1 -->
-							<div class="col-lg-6 col-sm-6 col-xs-12">
+							<div class="col-lg-12 col-sm-12 col-xs-12">
 								<h4 class="bottom-border-aqua">Server Configurations</h4>
 								<div class="box-body form-horizontal">
 
@@ -205,7 +205,7 @@ require 'notification.php';
 								<div class="form-group">
 									<label class="col-sm-3 control-label">Down Device Alert Enabled:</label>
 									<div class="col-sm-9" style="padding-top:6px;">
-										<input class="checkbox blue" id="alert_down" name="alert_down" type="checkbox">
+										<input class="checkbox red" id="ALERT_DOWN_DEVICE" name="ALERT_DOWN_DEVICE" type="checkbox">
 									</div>
 								</div>
 
@@ -214,7 +214,7 @@ require 'notification.php';
 								<div class="form-group">
 									<label class="col-sm-3 control-label">New Device Alert Enabled:</label>
 									<div class="col-sm-9" style="padding-top:6px;">
-										<input class="checkbox blue " id="is_new" name="is_new" type="checkbox">
+										<input class="checkbox blue " id="ALERT_NEW_DEVICE" name="ALERT_NEW_DEVICE" type="checkbox">
 									</div>
 								</div>
 
@@ -225,7 +225,7 @@ require 'notification.php';
 										<label class="col-sm-3 control-label">Alert Down Threshlod:</label>
 										<div class="col-sm-9">
 											<div class="input-group">
-												<input class="form-control" id="location_value" name="location"
+												<input class="form-control" id="ALERT_DOWN_THRESHOLD" name="ALERT_DOWN_THRESHOLD"
 													type="text" value="">
 											</div>
 										</div>
@@ -236,7 +236,7 @@ require 'notification.php';
 										<label class="col-sm-3 control-label">Alert Email From Name:</label>
 										<div class="col-sm-9">
 											<div class="input-group">
-												<input class="form-control" id="location_value" name="location"
+												<input class="form-control" id="ALERT_FROM" name="ALERT_FROM"
 													type="text" value="">
 											</div>
 										</div>
@@ -247,7 +247,7 @@ require 'notification.php';
 										<label class="col-sm-3 control-label">Alert Email Subject:</label>
 										<div class="col-sm-9">
 											<div class="input-group">
-												<input class="form-control" id="location_value" name="location"
+												<input class="form-control" id="ALERT_SUBJECT" name="ALERT_SUBJECT"
 													type="text" value="">
 											</div>
 										</div>
@@ -258,8 +258,62 @@ require 'notification.php';
 										<label class="col-sm-3 control-label">Alert To Email:</label>
 										<div class="col-sm-9">
 											<div class="input-group">
-												<input class="form-control" id="location_value" name="location"
+												<input class="form-control" id="ALERT_TO" name="ALERT_TO"
 													type="text" value="">
+											</div>
+										</div>
+									</div>
+									<!-- Web Admin URL -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label">Device Details URL:</label>
+										<div class="col-sm-9">
+											<div class="input-group">
+												<input class="form-control" id="WEB_ADMIN_DEVICE_URL" name="WEB_ADMIN_DEVICE_URL"
+													type="text" value="">
+											</div>
+										</div>
+									</div>
+
+									<!-- SMTP -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label">SMTP Server:</label>
+										<div class="col-sm-9">
+											<div class="input-group">
+												<input class="form-control" id="SMTP_SERVER" name="SMTP_SERVER"
+													type="text" value="">
+											</div>
+										</div>
+									</div>
+
+									<!-- Web Admin URL -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label">SMTP Port:</label>
+										<div class="col-sm-9">
+											<div class="input-group">
+												<input class="form-control" id="SMTP_PORT" name="SMTP_PORT"
+													type="text" value="">
+											</div>
+										</div>
+									</div>
+
+									<!-- Web Admin URL -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label">SMTP Username:</label>
+										<div class="col-sm-9">
+											<div class="input-group">
+												<input class="form-control" id="SMTP_USERNAME" name="SMTP_USERNAME"
+													type="text" value="">
+											</div>
+										</div>
+									</div>
+
+									<!-- Web Admin URL -->
+									<div class="form-group">
+										<label class="col-sm-3 control-label">SMTP Password:</label>
+										<div class="col-sm-9">
+											<div class="input-group">
+												<input class="form-control" id="SMTP_PASSWORD" name="SMTP_PASSWORD"
+													type="password" value="">
 											</div>
 										</div>
 									</div>

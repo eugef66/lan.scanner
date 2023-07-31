@@ -68,6 +68,7 @@ function initializeDataTable() {
 			, "is_down": (_data[mac]["alert_down"] && !_data[mac]["is_online"])
 			, "owner": _data[mac]["owner"]
 			, "location": _data[mac]["location"]
+			, "device-type": _data[mac]["device-type"]
 		};
 	}
 	);
@@ -114,7 +115,8 @@ function initializeDataTable() {
 			{ title: "new device", data: "is_new", visible: false, searchable: true},
 			{ title: "down device", data: "is_down", visible: false, searchable: true },
 			{ title: "Owner", data: "owner" },
-			{ title: "Location", data: "location" }
+			{ title: "Location", data: "location" },
+			{ title: "Type", data: "device-type" }
 		]
 	});
 
