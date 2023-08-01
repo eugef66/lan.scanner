@@ -1,5 +1,5 @@
 
-function ajaxCall(http_method, url, mimeType, callback) {
+function ajaxCall(http_method, url, mimeType, body, callback) {
 	var xobj = new XMLHttpRequest();
 	xobj.overrideMimeType(mimeType);
 	xobj.open(http_method, url);
@@ -9,7 +9,7 @@ function ajaxCall(http_method, url, mimeType, callback) {
 			if (callback != null) callback(xobj.responseText);
 		}
 	}
-	xobj.send(null);
+	xobj.send(body);
 }
 
 

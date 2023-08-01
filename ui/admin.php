@@ -24,7 +24,7 @@ require 'notification.php';
 		<section class="content">
 
 			<!-- form -->
-			<form  method='POST' id="adminForm">
+			<form  id="adminForm">
 				<!-- tab control------------------------------------------------------------ -->
 				<div class="row">
 					<div class="col-lg-12 col-sm-12 col-xs-12">
@@ -48,7 +48,7 @@ require 'notification.php';
 														<span class="fa fa-caret-down"></span></button>
 													<ul id="owner" class="dropdown-menu dropdown-menu-right"></ul>
 													<button type=button class="btn btn-success" id="btnOwnerSave"><i
-															class="fa fa-floppy-o "></i></button>
+															class="fa fa-floppy-o " onclick="upsertMetadata('owner_value')"></i></button>
 													<button type=button class="btn btn-danger" disabled
 														id="btnOwnerDelete"><i class="fa fa-trash"></i></button>
 												</div>
@@ -314,6 +314,22 @@ require 'notification.php';
 											<div class="input-group">
 												<input class="form-control" id="SMTP_PASSWORD" name="SMTP_PASSWORD"
 													type="password" value="">
+											</div>
+										</div>
+									</div>
+
+									<!-- Buttons -->
+
+
+									<!-- Web Admin URL -->
+									<div class="form-group">
+										<div class="col-sm-9">
+											<div class="input-group pull-left">
+											<button type="button" class="btn btn-success pa-btn"
+																style="margin-left:6px; " id="btnSave" name="action"
+																value="save" onclick="saveServerConfigs();"> Save </button>
+															<a class="btn btn-default pa-btn" style="margin-left:6px;"
+																id="btnCancel" href="admin.php"> Cancel </a>
 											</div>
 										</div>
 									</div>

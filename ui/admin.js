@@ -5,7 +5,7 @@ function load() {
 	//$('#theme_color').colorpicker();
 
 	//Load db.json
-	ajaxCall("GET","../db/metadata.json", "application/json", function (response) {
+	ajaxCall("GET","../db/metadata.json", "application/json", null, function (response) {
 		var mdata = JSON.parse(response);
 		_metadata = mdata;
 		initializeDropdown("owner", "owner", "owner_value");
@@ -14,9 +14,18 @@ function load() {
 		initializeiCheckBoxes();
 		
 	});
+}
 
-	
+function updateAppirence(){
+	alert("update Appirence");
+}
 
+function upsertMetadata(metadataInputId){
+	alert("upsert Metadata:" + metadataInputId);
+}
+
+function saveServerConfigs(){
+	alert ("Save Server Config");
 }
 
 

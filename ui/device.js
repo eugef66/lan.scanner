@@ -8,11 +8,11 @@ var _edit_form = null;
 function load() {
 
 	//Load db.json
-	ajaxCall("GET","../db/db.json", "application/json", function (response) {
+	ajaxCall("GET","../db/db.json", "application/json", null, function (response) {
 		var data = JSON.parse(response);
 		_data = data;
 		// Load metadata
-		ajaxCall("GET","../db/metadata.json", "application/json", function (response) {
+		ajaxCall("GET","../db/metadata.json", "application/json", null, function (response) {
 			var mdata = JSON.parse(response);
 			_metadata = mdata;
 			initializeDropdown("owner", "owner", "owner_value");
