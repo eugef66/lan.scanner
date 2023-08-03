@@ -160,8 +160,7 @@ require 'notification.php';
 																onclick="setTextValue('skin_value','skin-yellow')">Yellow</a>
 														</li>
 													</ul>
-													<button type=button class="btn btn-primary" id="btnSkinApply"><i
-															class="fa fa-check "></i> Apply</button>
+													
 
 												</div>
 											</div>
@@ -175,6 +174,14 @@ require 'notification.php';
 											<input class="form-control" id="ip" name="ip" type="text" readonly
 												value="--">
 										</div>
+									</div>
+									<!-- Logo -->
+									<div class="form-group">
+									<div class="col-sm-5 control-label"></div>
+									<div class="col-sm-7">
+									<button type=button class=" btn btn-primary" id="btnSkinApply"><i
+															class="fa fa-check "></i> Apply</button>
+									</div>
 									</div>
 
 
@@ -325,11 +332,12 @@ require 'notification.php';
 									<div class="form-group">
 										<div class="col-sm-9">
 											<div class="input-group pull-left">
-											<button type="button" class="btn btn-success pa-btn"
+											<button type="button" class="btn btn-primary pa-btn"
 																style="margin-left:6px; " id="btnSave" name="action"
-																value="save" onclick="saveServerConfigs();"> Save </button>
-															<a class="btn btn-default pa-btn" style="margin-left:6px;"
-																id="btnCancel" href="admin.php"> Cancel </a>
+																value="apply" onclick="saveServerConfigs();"><i
+															class="fa fa-check "></i> Apply </button>
+															<!-- a class="btn btn-default pa-btn" style="margin-left:6px;"
+																id="btnCancel" href="admin.php"> Cancel </a -->
 											</div>
 										</div>
 									</div>
