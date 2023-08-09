@@ -40,7 +40,7 @@ function saveMetadata(){
 function saveServerConfigurations()
 {
 	$hbody = json_decode((file_get_contents('php://input')), true);
-	//echo ($hbody["ALERT_NEW_DEVICE"]== 1?"True":"False");
+	
 
 	$config ="
 import os
@@ -50,19 +50,20 @@ EMULATE=True
 ALERT_NEW_DEVICE = " . ($hbody["ALERT_NEW_DEVICE"]== 1?"True":"False") . "
 ALERT_DOWN_DEVICE = ". ($hbody["ALERT_DOWN_DEVICE"]== 1?"True":"False") ."
 ALERT_DOWN_THRESHOLD = " . $hbody["ALERT_DOWN_THRESHOLD"] . "
-
-ALERT_FROM = 'lan.scanner alert'
-ALERT_SUBJECT='lan.scanner report'
-ALERT_TO =''
-SMTP_SERVER = 'smtp.mailserver.com'
-SMTP_PORT = 587
-SMTP_USERNAME = 'user@example.com'
-SMTP_PASSWORD = 'password'
-WEB_ADMIN_DEVICE_URL = 'http://192.168.1.31/lanscanner/ui/device.php?mac='";
+ALERT_FROM = '" . $hbody["ALERT_FROM"] . "'
+ALERT_SUBJECT='" . $hbody["ALERT_SUBJECT"] . "'
+ALERT_TO ='" . $hbody["ALERT_TO"] . "'
+SMTP_SERVER = '" . $hbody["SMTP_SERVER"] . "'
+SMTP_PORT = " . $hbody["SMTP_PORT"] . "
+SMTP_USERNAME = '" . $hbody["SMTP_USERNAME"] . "'
+SMTP_PASSWORD = '" . $hbody["SMTP_PASSWORD"] . "'
+WEB_ADMIN_DEVICE_URL = '" . $hbody["WEB_ADMIN_DEVICE_URL"] . "'";
 
 	$config_file = fopen('../back/config.py', 'w');
 	fwrite($config_file, $config);
 	fclose($config_file);
+
+	echo $config;
 }
 
 ?>

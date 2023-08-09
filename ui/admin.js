@@ -3,8 +3,24 @@
 function load() {
 
 	//$('#theme_color').colorpicker();
+	loadMetadata();
+	loadAppirence();
+	loadServerConfigs();
+	
+	
+}
+function loadAppirence()
+{
+	console.log("load Appirence ");
+}
 
-	//Load db.json
+function updateAppirence() {
+	alert("update Appirence");
+}
+
+
+function loadMetadata()
+{
 	ajaxCall("GET", "../db/metadata.json", "application/json", null, function (response) {
 		var mdata = JSON.parse(response);
 		_metadata = mdata;
@@ -16,12 +32,14 @@ function load() {
 	});
 }
 
-function updateAppirence() {
-	alert("update Appirence");
-}
 
 function upsertMetadata(metadataInputId) {
 	alert("upsert Metadata:" + metadataInputId);
+}
+
+function loadServerConfigs()
+{
+	console.log("load Server Configs");
 }
 
 function saveServerConfigs() {
@@ -40,9 +58,9 @@ function saveServerConfigs() {
 		WEB_ADMIN_DEVICE_URL: document.getElementById("WEB_ADMIN_DEVICE_URL").value
 	};
 
-	console.log(_body);
+	//console.log(JSON.stringify(_body));
 
-	ajaxCall("PUT", "updateAdmin.php?action=serverConfig", "application/json", _body, function (response) {
+	ajaxCall("PUT", "updateAdmin.php?action=serverConfig", "application/json", JSON.stringify(_body), function (response) {
 		showMessage("Success");
 	});
 }
