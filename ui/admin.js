@@ -37,9 +37,31 @@ function upsertMetadata(metadataInputId) {
 	alert("upsert Metadata:" + metadataInputId);
 }
 
+// ************ Server Configurations ****************//
+
 function loadServerConfigs()
 {
-	console.log("load Server Configs");
+	ajaxCall("GET"
+				,"server/admin.php?action=serverConfig"
+				,"application/json"
+				,null
+				,function (response){
+
+					server_config = JSON.parse(response);
+					for (var key in server_config)
+					{
+						//console.log(key);
+						//console.log(server_config[key]);
+						element = document.getElementById(key);
+						if (element) element.value=server_config[key];
+					}
+
+					
+
+
+
+
+				});
 }
 
 function saveServerConfigs() {
