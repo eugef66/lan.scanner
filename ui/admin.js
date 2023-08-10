@@ -60,7 +60,7 @@ function saveServerConfigs() {
 
 	//console.log(JSON.stringify(_body));
 
-	ajaxCall("PUT", "updateAdmin.php?action=serverConfig", "application/json", JSON.stringify(_body), function (response) {
+	ajaxCall("PATCH", "server/admin.php?action=serverConfig", "application/json", JSON.stringify(_body), function (response) {
 		showMessage("Success");
 	});
 }

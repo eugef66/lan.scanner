@@ -57,7 +57,7 @@ require 'config.php';
 		href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
 	<!-- Page Icon -->
-	<link rel="icon" type="image/png" sizes="160x160" href="img/Logo.png" />
+	<link rel="icon" type="image/png" sizes="160x160" href="img/<?=$logo ?>" />
 
 	<!-- Favicon -->
 

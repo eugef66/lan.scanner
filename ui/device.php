@@ -52,7 +52,7 @@ require 'notification.php';
 			</div>
 			<!-- /.row -->
 <!-- form -->
-<form action="updateDevice.php" method='POST' id="deviceForm">
+<form action="server/device.php" method='POST' id="deviceForm">
 			<!-- tab control------------------------------------------------------------ -->
 			<div class="row">
 				<div class="col-lg-12 col-sm-12 col-xs-12">
