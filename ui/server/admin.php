@@ -14,26 +14,39 @@ if (isset($_GET["action"])) {
 			if ($http_method == "GET")
 				loadServerConfigurations();
 			break;
+		case "metadata":
+			if ($http_method=="GET") loadMetadata();
+			if ($http_method=="POST") saveMetadata("insert");
+			if ($http_method=="DELETE") saveMetadata("delete");
 	}
 }
 
 
-
-
-
-
-
-
-
-
 // ******* Metadata **************//
-
-
-function saveMetadata()
+function loadMetadata()
 {
-	//Read db
+	$md = file_get_contents('../../db/metadata.json');
+	header('Content-Type: application/json');
+	echo ($md);
+}
+
+
+
+function saveMetadata($action)
+{
+
+	// Read HTTP Body
+	$hbody = json_decode((file_get_contents('php://input')), true);
+
+	//Open DB file
 	$db = json_decode(file_get_contents('../../db/metadata.json'), true);
 
+	foreach($hbody as $key => $value)
+	{
+		if ($action=="insert" && !array_search($value, $db[$key])) array_push($db[$key],$value);
+		if ($action=="delete" && $del_key = array_search($value, $db[$key])) unset($db[$key][$del_key]);
+	}
+	//Write to db
 	$db_file = fopen('../../db/metadata.json', 'w');
 	fwrite($db_file, json_encode($db, JSON_PRETTY_PRINT));
 	fclose($db_file);
@@ -58,6 +71,7 @@ function loadServerConfigurations()
 		}
 	}
 	$server_config = json_encode($server_config_array);
+	fclose($config_file);
 	header('Content-Type: application/json');
 	echo ($server_config);
 

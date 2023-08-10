@@ -4,7 +4,8 @@
         "Family Room",
         "Kitchen",
         "Garage",
-        "Ron's Room"
+        "Ron's Room",
+        "Backyard"
     ],
     "device-type": [
         "Smartphone",
@@ -15,11 +16,14 @@
         "Laptop",
         "Desktop",
         "Appliance",
-        "Router"
+        "Router",
+        "Fridge"
     ],
     "owner": [
         "John",
         "Jasie",
-        "James"
+        "James",
+        "Eugene",
+        "Sveta"
     ]
 }

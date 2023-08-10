@@ -21,7 +21,7 @@ function updateAppirence() {
 
 function loadMetadata()
 {
-	ajaxCall("GET", "../db/metadata.json", "application/json", null, function (response) {
+	ajaxCall("GET", "server/admin.php?action=metadata", "application/json", null, function (response) {
 		var mdata = JSON.parse(response);
 		_metadata = mdata;
 		initializeDropdown("owner", "owner", "owner_value");
