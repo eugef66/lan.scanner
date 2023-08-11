@@ -37,7 +37,7 @@ require 'notification.php';
 										<label class="col-sm-3 control-label">Owner</label>
 										<div class="col-sm-9">
 											<div class="input-group">
-												<input class="form-control" id="owner_value" name="owner" type="text"
+												<input class="form-control" id="owner_value" name="owner_value" type="text"
 													value="">
 												<div class="input-group-btn">
 													<button type="button" class="btn btn-info dropdown-toggle"
@@ -45,9 +45,9 @@ require 'notification.php';
 														<span class="fa fa-caret-down"></span></button>
 													<ul id="owner" class="dropdown-menu dropdown-menu-right"></ul>
 													<button type=button class="btn btn-success" id="btnOwnerSave"><i
-															class="fa fa-floppy-o " onclick="upsertMetadata('owner_value')"></i></button>
+															class="fa fa-floppy-o " onclick="saveMetadata('owner_value','insert')"></i></button>
 													<button type=button class="btn btn-danger" disabled
-														id="btnOwnerDelete"><i class="fa fa-trash"></i></button>
+														id="btnOwnerDelete"><i class="fa fa-trash" onclick="saveMetadata('owner_value','delete')"></i></button>
 												</div>
 											</div>
 										</div>

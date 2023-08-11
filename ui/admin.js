@@ -33,8 +33,33 @@ function loadMetadata()
 }
 
 
-function upsertMetadata(metadataInputId) {
-	alert("upsert Metadata:" + metadataInputId);
+function saveMetadata(metadataInputId, action) {
+
+	_body ={};
+
+	_idToKeyMap = {
+		"owner_value":"owner",
+		"device_type_value":"device-type",
+		"location_value": "location"
+	}
+	_httpMethodMap = {
+		"insert":"POST",
+		"delete":"DELETE"
+	}
+
+	_key =_idToKeyMap[metadataInputId];
+	_value = document.getElementById(metadataInputId).value;
+	_body[_key]=_value;
+
+	console.log(JSON.stringify(_body));
+
+	ajaxCall(_httpMethodMap[action], "server/admin.php?action=metadata", "application/json", JSON.stringify(_body), function (response) {
+		loadMetadata();
+		showMessage("Success");
+	});
+
+
+	
 }
 
 // ************ Server Configurations ****************//
