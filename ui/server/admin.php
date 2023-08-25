@@ -88,7 +88,7 @@ function saveServerConfigurations()
 	$config = "
 import os
 
-EMULATE=True
+EMULATE=False
 
 ALERT_NEW_DEVICE = " . ($hbody["ALERT_NEW_DEVICE"] == 1 ? "True" : "False") . "
 ALERT_DOWN_DEVICE = " . ($hbody["ALERT_DOWN_DEVICE"] == 1 ? "True" : "False") . "
