@@ -1,4 +1,5 @@
 <?php
+require '../config.php';
 
 $http_method = $_SERVER['REQUEST_METHOD'];
 
@@ -61,19 +62,24 @@ function loadServerConfigurations()
 	$config_file = fopen('../../back/config.py', 'r');
 
 	while (!feof($config_file)) {
-		$line = explode("=", fgets($config_file));
+		$line = explode(" = ", fgets($config_file));
+
+		
 
 		if (count($line) > 1) {
+			//echo ($line[1]);
 			$key = str_replace("'", "", $line[0]);
 			$value = str_replace("'", "", $line[1]);
 			$server_config_array[trim($key)] = trim($value);
 			
 		}
 	}
+	
 	$server_config = json_encode($server_config_array);
 	fclose($config_file);
 	header('Content-Type: application/json');
 	echo ($server_config);
+	
 
 
 
@@ -82,20 +88,23 @@ function loadServerConfigurations()
 
 function saveServerConfigurations()
 {
+
+	global $emulator;
+
 	$hbody = json_decode((file_get_contents('php://input')), true);
 
 
 	$config = "
 import os
 
-EMULATE=False
+EMULATE = ". $emulator ."
 
 ALERT_NEW_DEVICE = " . ($hbody["ALERT_NEW_DEVICE"] == 1 ? "True" : "False") . "
 ALERT_DOWN_DEVICE = " . ($hbody["ALERT_DOWN_DEVICE"] == 1 ? "True" : "False") . "
 ALERT_DOWN_THRESHOLD = " . $hbody["ALERT_DOWN_THRESHOLD"] . "
 ALERT_FROM = '" . $hbody["ALERT_FROM"] . "'
-ALERT_SUBJECT='" . $hbody["ALERT_SUBJECT"] . "'
-ALERT_TO ='" . $hbody["ALERT_TO"] . "'
+ALERT_SUBJECT = '" . $hbody["ALERT_SUBJECT"] . "'
+ALERT_TO = '" . $hbody["ALERT_TO"] . "'
 SMTP_SERVER = '" . $hbody["SMTP_SERVER"] . "'
 SMTP_PORT = " . $hbody["SMTP_PORT"] . "
 SMTP_USERNAME = '" . $hbody["SMTP_USERNAME"] . "'
@@ -105,8 +114,7 @@ WEB_ADMIN_DEVICE_URL = '" . $hbody["WEB_ADMIN_DEVICE_URL"] . "'";
 	$config_file = fopen('../../back/config.py', 'w');
 	fwrite($config_file, $config);
 	fclose($config_file);
-
-	echo $config;
+	echo ("SUCCESS");
 }
 
 ?>
