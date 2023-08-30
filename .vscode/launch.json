@@ -23,8 +23,8 @@
 			"type": "python",
 			"request": "launch",
 			"program": "back/app.py",
+			"args": ["15"],
 			"console": "integratedTerminal"
-			//,"args": ["rv"]
 		}
 	]
 }

@@ -109,7 +109,7 @@ function initializeDataTable() {
 
 		
 	//Refresh counters
-	console.log(_online_count);
+	//console.log(_online_count);
 
 	$('#all_count').text(_device_count);
 	$('#new_count').text(_new_count);

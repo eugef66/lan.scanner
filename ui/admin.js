@@ -51,7 +51,7 @@ function saveMetadata(metadataInputId, action) {
 	_value = document.getElementById(metadataInputId).value;
 	_body[_key]=_value;
 
-	console.log(JSON.stringify(_body));
+	//console.log(JSON.stringify(_body));
 
 	ajaxCall(_httpMethodMap[action], "server/admin.php?action=metadata", "application/json", JSON.stringify(_body), function (response) {
 		loadMetadata();
