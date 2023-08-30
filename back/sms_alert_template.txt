@@ -1,0 +1,2 @@
+New Device Joined: <VENDOR> - <IP> - <MAC>
+Down Device <DEVICE_NAME> - <MAC> <IP>

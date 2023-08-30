@@ -16,7 +16,7 @@ _new_devices=[]
 _down_devices=[]
 
 # Open html Template
-_template_file = open(os.path.dirname(os.path.abspath(__file__)) + '/alert_template.html', 'r') 
+_template_file = open(os.path.dirname(os.path.abspath(__file__)) + '/email_alert_template.html', 'r') 
 _mail_html = _template_file.read() 
 _template_file.close() 
 
